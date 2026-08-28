@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/favicon2.png" type="image/png">
+    <title>New-To-Dev — Chapter 1</title>
+    <style>
+        /* ========== CSS VARIABLES (10-Shade Palette) ========== */
+        :root {
+            --color-1: #F1F2F4;
+            --color-2: #D7DAE0;
+            --color-3: #BDC2CC;
+            --color-4: #8991A4;
+            --color-5: #6F7990;
+            --color-6: #5B6476;
+            --color-7: #3F4552;
+            --color-8: #333842;
+            --color-9: #1F2228;
+            --color-10: #0B0C0E;
+
+            /* Light Theme (default) */
+            --bg: var(--color-1);
+            --text: var(--color-10);
+            --card-bg: var(--color-2);
+            --border: var(--color-4);
+            --code-bg: var(--color-2);
+            --toggle-bg: var(--color-4);
+            --toggle-dot: var(--color-1);
+            --shadow: rgba(11, 12, 14, 0.08);
+            --accent: var(--color-6);
+            --btn-bg: var(--color-10);
+            --btn-text: var(--color-1);
+            --btn-hover-bg: var(--color-1);
+            --btn-hover-text: var(--color-10);
+            --scrollbar-track: var(--color-2);
+            --scrollbar-thumb: var(--color-4);
+            --scrollbar-thumb-hover: var(--color-5);
+            --toc-hover: var(--color-3);
+            --video-border: var(--color-4);
+            --video-bg: var(--color-9);
+        }
+
+        /* ========== DARK THEME ========== */
+        [data-theme="dark"] {
+            --bg: var(--color-10);
+            --text: var(--color-1);
+            --card-bg: var(--color-9);
+            --border: var(--color-6);
+            --code-bg: var(--color-8);
+            --toggle-bg: var(--color-6);
+            --toggle-dot: var(--color-10);
+            --shadow: rgba(241, 242, 244, 0.04);
+            --accent: var(--color-4);
+            --btn-bg: var(--color-1);
+            --btn-text: var(--color-10);
+            --btn-hover-bg: var(--color-10);
+            --btn-hover-text: var(--color-1);
+            --scrollbar-track: var(--color-9);
+            --scrollbar-thumb: var(--color-6);
+            --scrollbar-thumb-hover: var(--color-5);
+            --toc-hover: var(--color-8);
+            --video-border: var(--color-6);
+            --video-bg: var(--color-10);
+        }
+
+        /* ========== CUSTOM SCROLLBARS ========== */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        }
+
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+
+        /* ========== RESET & BASE ========== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.8;
+            padding: 2rem 1.5rem;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 880px;
+            width: 100%;
+            margin: 0 auto;
+        }
+
+        /* ========== HEADINGS ========== */
+        h1, h2, h3, h4 {
+            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
+            font-weight: 700;
+            font-style: italic;
+            letter-spacing: -0.02em;
+            line-height: 1.2;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            background: linear-gradient(135deg, var(--text), var(--color-5));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: inline-block;
+            margin-top: 0.5rem;
+            margin-bottom: 0.3rem;
+        }
+
+        h1 .sub {
+            font-size: 1.1rem;
+            font-family: 'Comic Sans MS', cursive;
+            font-weight: 400;
+            font-style: normal;
+            background: none;
+            -webkit-text-fill-color: var(--color-5);
+            display: block;
+            margin-top: 0.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--border);
+            padding-bottom: 0.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .chapter-number {
+            font-size: 1rem;
+            color: var(--color-5);
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ========== PARAGRAPHS & LINKS ========== */
+        p {
+            margin-bottom: 1rem;
+            font-size: 1.05rem;
+        }
+
+        a {
+            color: var(--text);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            text-decoration-thickness: 2px;
+            text-decoration-color: var(--color-5);
+            font-weight: 600;
+            transition: text-decoration-color 0.2s ease;
+        }
+
+        a:hover {
+            text-decoration-color: var(--text);
+        }
+
+        /* ========== CODE ========== */
+        code, pre {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--code-bg);
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border: 1px solid var(--border);
+            word-break: break-all;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: var(--text);
+            font-size: 0.85rem;
+        }
+
+        /* ========== CARDS ========== */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .card p:last-child,
+        .card ul:last-child {
+            margin-bottom: 0;
+        }
+
+        .card ul {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .card li {
+            margin-bottom: 0.4rem;
+        }
+
+        /* ========== TOGGLE SWITCH ========== */
+        .theme-toggle-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .theme-toggle {
+            width: 52px;
+            height: 28px;
+            background: var(--toggle-bg);
+            border-radius: 40px;
+            border: 2px solid var(--border);
+            cursor: pointer;
+            position: relative;
+            transition: background 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .theme-toggle .dot {
+            width: 20px;
+            height: 20px;
+            background: var(--toggle-dot);
+            border-radius: 50%;
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            transition: transform 0.3s ease, background 0.3s ease;
+            border: 1px solid var(--border);
+        }
+
+        [data-theme="dark"] .theme-toggle .dot {
+            transform: translateX(24px);
+        }
+
+        .theme-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-5);
+        }
+
+        /* ========== BUTTONS ========== */
+        .btn-primary {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 2px solid var(--btn-bg);
+            padding: 0.7rem 2rem;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-block;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .btn-primary:hover {
+            background: var(--btn-hover-bg);
+            color: var(--btn-hover-text);
+            transform: scale(1.03);
+            border-color: var(--border);
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+        }
+
+        /* ========== IMAGES ========== */
+        .chapter-image {
+            margin: 1.5rem 0;
+            text-align: center;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--code-bg);
+            padding: 0.75rem;
+        }
+
+        .chapter-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .chapter-image .caption {
+            font-size: 0.85rem;
+            color: var(--color-5);
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* ===== IMAGE FLOATING RIGHT ===== */
+        .image-float-right {
+            float: right;
+            width: 250px;
+            max-width: 100%;
+            margin: 0 0 1rem 1.5rem;
+            padding: 0;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: transparent;
+            overflow: hidden;
+        }
+
+        .image-float-right img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .image-float-right .caption {
+            font-size: 0.7rem;
+            color: var(--color-5);
+            padding: 0.3rem 0.4rem 0.4rem 0.4rem;
+            font-style: italic;
+            text-align: center;
+            background: var(--code-bg);
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* Clearfix for floated images */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* ===== IMAGE CENTERED ===== */
+        .img-centered {
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== VIDEO PLAYER ========== */
+        .video-wrapper {
+            margin: 2rem 0;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 2px solid var(--video-border);
+            background: var(--video-bg);
+            position: relative;
+        }
+
+        .video-wrapper .video-stage {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background: #000;
+        }
+
+        .video-wrapper .video-stage iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* ===== ATTRIBUTION OVERLAY ===== */
+        .attribution-overlay {
+            position: absolute;
+            bottom: 12px;
+            right: 16px;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(11, 12, 14, 0.8);
+            backdrop-filter: blur(6px);
+            padding: 6px 14px 6px 10px;
+            border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+            opacity: 0.75;
+            cursor: default;
+            font-size: 0.7rem;
+            color: #e8e8e8;
+            pointer-events: none;
+        }
+
+        .attribution-overlay:hover {
+            opacity: 1;
+            transform: scale(1.03);
+            background: rgba(11, 12, 14, 0.92);
+            pointer-events: auto;
+        }
+
+        .attribution-overlay .attribution-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 4px;
+            background: #ff0000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            color: #fff;
+            flex-shrink: 0;
+            font-weight: 700;
+        }
+
+        .attribution-overlay .attribution-text {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.3;
+        }
+
+        .attribution-overlay .attribution-text .channel {
+            font-weight: 600;
+            font-size: 0.75rem;
+            color: #fff;
+        }
+
+        .attribution-overlay .attribution-text .channel a {
+            color: #8ab4f8;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .attribution-overlay .attribution-text .channel a:hover {
+            text-decoration: underline;
+        }
+
+        .attribution-overlay .attribution-text .message {
+            font-size: 0.6rem;
+            color: #b8b8b8;
+            max-width: 240px;
+        }
+
+        .attribution-overlay .attribution-text .message .email {
+            color: #8ab4f8;
+            font-weight: 500;
+        }
+
+        /* ========== NAVIGATION BUTTONS ========== */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 3px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons .btn-primary {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        /* ========== FLOATING TOC OVERLAY ========== */
+        .hamburger-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 2px solid var(--btn-bg);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px var(--shadow);
+            font-family: 'Comic Sans MS', cursive;
+            line-height: 1;
+        }
+
+        .hamburger-menu:hover {
+            background: var(--btn-hover-bg);
+            color: var(--btn-hover-text);
+            transform: scale(1.05);
+            border-color: var(--border);
+        }
+
+        .hamburger-menu:active {
+            transform: scale(0.95);
+        }
+
+        .toc-overlay {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            z-index: 999;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            max-width: 280px;
+            max-height: 60vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px var(--shadow);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .toc-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .toc-overlay .toc-title {
+            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.3rem;
+        }
+
+        .toc-overlay ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-overlay ul li {
+            margin-bottom: 0.15rem;
+        }
+
+        .toc-overlay ul li a {
+            display: block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: background 0.2s ease;
+            border-left: 3px solid transparent;
+            font-size: 0.85rem;
+        }
+
+        .toc-overlay ul li a:hover {
+            background: var(--toc-hover);
+            border-left-color: var(--color-5);
+            text-decoration: none;
+        }
+
+        /* ========== RESPONSIVE ========== */
+        @media (max-width: 700px) {
+            body {
+                padding: 1.25rem 0.75rem;
+            }
+            h1 {
+                font-size: 2rem;
+            }
+            h1 .sub {
+                font-size: 0.9rem;
+            }
+            h2 {
+                font-size: 1.4rem;
+            }
+            .card {
+                padding: 1.25rem;
+            }
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-buttons .btn-primary {
+                width: 100%;
+            }
+            .hamburger-menu {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+                bottom: 15px;
+                left: 15px;
+            }
+            .toc-overlay {
+                left: 10px;
+                right: 10px;
+                max-width: none;
+                bottom: 70px;
+            }
+            ::-webkit-scrollbar {
+                width: 4px;
+                height: 4px;
+            }
+            .chapter-image {
+                padding: 0.5rem;
+            }
+            .img-centered {
+                max-width: 100%;
+            }
+            .image-float-right {
+                float: none;
+                width: 100%;
+                margin: 1.5rem 0;
+            }
+            .attribution-overlay {
+                bottom: 6px;
+                right: 8px;
+                padding: 4px 10px 4px 8px;
+                font-size: 0.55rem;
+                opacity: 0.9;
+                gap: 6px;
+            }
+            .attribution-overlay .attribution-text .message {
+                display: none;
+            }
+            .attribution-overlay .attribution-icon {
+                width: 18px;
+                height: 18px;
+                font-size: 9px;
+            }
+        }
+
+        @media (max-width: 400px) {
+            body {
+                padding: 0.75rem;
+            }
+            h1 {
+                font-size: 1.6rem;
+            }
+            .card {
+                padding: 1rem;
+            }
+            .code-block {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
+            }
+            .hamburger-menu {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+                bottom: 12px;
+                left: 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <!-- ===== THEME TOGGLE ===== -->
+        <div class="theme-toggle-wrapper">
+            <span class="theme-label" id="themeLabel">☀️ Light</span>
+            <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <!-- ===== HEADER ===== -->
+        <h1>
+            <span class="chapter-number">Chapter 1</span>
+            Introducing You to This Amazing but Complex World
+        </h1>
+
+        <!-- ===== INTRO ===== -->
+        <p>
+            When you enter the world of programming, you might think you just need to learn a programming language and immediately start earning thousands of dollars. But it's actually the opposite — when you learn a language, you also need to learn some libraries with it. A language cannot contain every specific feature you might need; you could build everything yourself, but that's months or even years of work. Since existing libraries exist, we prefer using libraries made by the community.
+        </p>
+        <p>
+            We also learn about version control systems such as <strong>Git</strong> (<a href="https://git-scm.com/about" target="_blank">git-scm.com/about</a>) so we can save each version of our code and each minor change. If we suddenly break something, we can switch back to an older version — we call this a <strong>Commit</strong>. There are also many more things such as PRs (Pull Requests), Issues, and many more, and we'll go into depth on all of them. Now let's stop overwhelming you and start the course!
+        </p>
+
+        <!-- ===== 1. WHAT IS PROGRAMMING? ===== -->
+        <h2 id="section-1">1. What is Programming?</h2>
+        <p>
+            Programming is the process of creating a set of instructions that tell a computer or other machine how to perform a specific task or solve a problem. We create these instructions using specific programming languages, scripting languages, or commands.
+        </p>
+        <p>
+            A computer or CPU understands binary — code like <span class="inline-code">01010100 01101000 01101001 01110011 00100000 01101001 01110011 00100000 01100001 01101110 00100000 01100101 01111000 01100001 01101101 01110000 01101100 01100101 00100000 01101111 01100110 00100000 01100010 01101001 01101110 01100001 01110010 01111001 00100000 01100011 01101111 01100100 01100101 00101110</span> which translates to <em>"This is an example of binary code."</em>
+        </p>
+        <p>
+            Now, only a psychopath would code like this — and guess what? These types of psychopaths actually existed before, but not anymore!
+        </p>
+
+        <!-- ===== 2. WHAT IS BINARY? ===== -->
+        <h2 id="section-2">2. What is Binary?</h2>
+
+        <!-- ===== IMAGE 1: CPU → Binary → Code ===== -->
+        <div class="clearfix">
+            <div class="image-float-right">
+                <img src="/assets/images/code-compiler-0s-and-1s-cpu.png" alt="CPU to Binary to Code translation process diagram">
+                <div class="caption">Fig 1.1: How human code is translated into machine code for the CPU</div>
+            </div>
+
+            <p>
+                Binary is a number system that uses only two digits — <strong>0</strong> and <strong>1</strong> — to represent all data, text, images, and instructions.
+            </p>
+            <p>
+                These 2 digits can be understood by the CPU. Whenever we write code, a specific software such as a compiler or interpreter converts these human-readable instructions into machine code (0s and 1s), which can be executed and performed by the CPU (Central Processing Unit).
+            </p>
+            <p>
+                <strong>Think of it like this:</strong> Imagine you're giving directions to someone who only knows two words — "left" and "right." You'd have to break down every instruction into those two words. Binary is the same for computers. Every piece of data, from the text on your screen to the colors in a photo, is translated into a massive sequence of 0s and 1s.
+            </p>
+            <p>
+                The binary system is also used in digital circuits, where a 1 represents an "on" state and a 0 represents an "off" state. This is why computers are built with billions of tiny switches (transistors) — each one can be either on or off, representing a 1 or a 0.
+            </p>
+            <p>
+                <strong>Fun fact:</strong> The word "bit" comes from "binary digit." A group of 8 bits is called a <strong>byte</strong>, and bytes are the building blocks of all digital information. For example, the letter 'A' in binary is <span class="inline-code">01000001</span>.
+            </p>
+            <p>
+                Learn more → <a href="https://en.wikipedia.org/wiki/Binary_code" target="_blank">Wikipedia: Binary Code</a>
+            </p>
+        </div>
+
+        <!-- ===== 3. WHY DON'T CPUS UNDERSTAND PROGRAMMING LANGUAGES? ===== -->
+        <h2 id="section-3">3. Why Don't CPUs Understand Programming Languages?</h2>
+        <p>
+            CPUs can't understand programming languages because they are physical pieces of hardware, not thinking minds. They are built out of billions of microscopic electronic switches that can only react to physical electricity. Because of this, English-like code such as <span class="inline-code">if (x > 5)</span> means absolutely nothing to a microchip.
+        </p>
+        <p>
+            To bridge this gap, software tools called <strong>compilers</strong> or <strong>interpreters</strong> act as translators, breaking our human-readable code down into a massive sequence of binary code — the 1s and 0s — that the hardware can actually execute.
+        </p>
+
+        <!-- ===== IMAGE 2: Compiler/Interpreter Flow ===== -->
+        <div class="chapter-image img-centered">
+            <img src="/assets/images/compiler~interpreter.png" alt="Compiler vs Interpreter comparison diagram">
+            <div class="caption">Fig 1.2: Compiler vs Interpreter — two ways to translate code</div>
+        </div>
+
+        <p>
+            When we say a computer <em>reads</em> 0s and 1s, it's actually just a metaphor — there are no numbers inside a chip, only electricity. A <strong>"1"</strong> simply represents high voltage (power on), and a <strong>"0"</strong> represents low voltage (power off). The CPU uses tiny electronic switches called <strong>transistors</strong> to control this power. By turning these switches on and off, the chip routes electricity through pre-wired channels that naturally calculate results, manipulate data, and run your programs based purely on the laws of physics.
+        </p>
+
+        <!-- ===== 4. WHAT IS A PROGRAMMING LANGUAGE? ===== -->
+        <h2 id="section-4">4. What is a Programming Language &amp; How Does It Work?</h2>
+        <p>
+            A programming language is a formal system of rules and syntax that lets you tell a computer what to do. Think of it like a language you speak to a robot — but the robot is extremely literal and cannot understand ambiguity.
+        </p>
+
+        <div class="card">
+            <h3 style="margin-top: 0;">Two Main Types of Programming Languages</h3>
+            <ul>
+                <li><strong>High-Level Languages</strong> (Python, Java, JavaScript): Closer to English, easier for humans, need translation.</li>
+                <li><strong>Low-Level Languages</strong> (Assembly, Machine Code): Closer to binary, harder for humans, faster for machines.</li>
+            </ul>
+        </div>
+
+        <p>
+            To convert your code into something the CPU understands, we use:
+        </p>
+        <ul>
+            <li><strong>Compiler:</strong> Translates the entire program at once (C, C++)</li>
+            <li><strong>Interpreter:</strong> Translates line-by-line as it runs (Python, JavaScript)</li>
+        </ul>
+
+        <!-- ===== 5. PSYCHOPATHS (THE GREAT DEVS) ===== -->
+        <h2 id="section-5">5. Psychopaths (The Great Devs)</h2>
+        <p>
+            Do you know that one compiler or interpreter is made in one language? For example, the C++ compiler was first written in C, and later the compiler compiled itself. But some psychopaths — or great devs, in respect — created the compiler of the very first <strong>assembler</strong> (the tool that processes assembly language) directly in binary (0s and 1s), also known as machine code.
+        </p>
+        <p>
+            These pioneers built the foundation that we all stand on today. Without them writing the first compilers in binary, we wouldn't have the high-level languages we use now. They weren't psychopaths — they were visionaries.
+        </p>
+
+        <!-- ===== VIDEO PLAYER ===== -->
+        <h2>🎥 Watch: Understanding Compiler vs Interpreter</h2>
+        <div class="video-wrapper">
+            <div class="video-stage">
+                <iframe src="https://www.youtube.com/embed/I1f45REi3k4?controls=0&rel=0&modestbranding=1&showinfo=0" title="Understanding Compiler vs Interpreter" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen loading="lazy"></iframe>
+                <!-- ===== ATTRIBUTION OVERLAY ===== -->
+                <div class="attribution-overlay">
+                    <span class="attribution-icon">▶</span>
+                    <span class="attribution-text">
+                        <span class="channel">
+                            <a href="https://www.youtube.com/@codingmentors5310" target="_blank" rel="noopener noreferrer">@codingmentors5310</a>
+                        </span>
+                        <span class="message">
+                            We used this content to support developers to get proper free education and courses. 
+                            If you have any claims, contact us at <span class="email">avaneeshaternos@gmail.com</span>
+                        </span>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== NAVIGATION BUTTONS ===== -->
+        <div class="nav-buttons">
+            <a href="https://avaneesh12012.github.io/New-To-Dev/" class="btn-primary">📑 Table of Contents</a>
+            <a href="https://avaneesh12012.github.io/New-To-Dev/2.html" class="btn-primary">Next Chapter →</a>
+        </div>
+
+        <!-- ===== FOOTER ===== -->
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 3px solid var(--border); text-align: center;">
+            <p style="font-size: 0.85rem; color: var(--color-5); margin-bottom: 0.3rem;">
+                New-To-Dev &bull; Chapter 1 &bull; Built for beginners, by someone who remembers the struggle.
+            </p>
+            <p style="font-size: 0.8rem; color: var(--color-5); margin-bottom: 0.3rem;">
+                💻 Free forever. No ads. No catch.
+            </p>
+            <p style="font-size: 0.7rem; color: var(--color-4);">
+                © 2026 Avaneesh Shahi. This work is licensed under a 
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="font-size: 0.7rem;">
+                    Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+                </a> 
+                International License.
+            </p>
+        </div>
+
+    </div>
+
+    <!-- ===== HAMBURGER MENU (Three Lines Icon) ===== -->
+    <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle table of contents">
+        ☰
+    </button>
+
+    <!-- ===== FLOATING TOC OVERLAY ===== -->
+    <div class="toc-overlay" id="tocOverlay">
+        <div class="toc-title">📑 Jump to Section</div>
+        <ul>
+            <li><a href="#section-1">1️⃣ What is Programming?</a></li>
+            <li><a href="#section-2">2️⃣ What is Binary?</a></li>
+            <li><a href="#section-3">3️⃣ Why Don't CPUs Understand?</a></li>
+            <li><a href="#section-4">4️⃣ Programming Languages</a></li>
+            <li><a href="#section-5">5️⃣ Psychopaths (The Great Devs)</a></li>
+        </ul>
+    </div>
+
+    <!-- ===== JAVASCRIPT ===== -->
+    <script>
+        (function() {
+            "use strict";
+
+            // ========== THEME TOGGLE ==========
+            const toggle = document.getElementById('themeToggle');
+            const label = document.getElementById('themeLabel');
+            const html = document.documentElement;
+
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            html.setAttribute('data-theme', savedTheme);
+            updateLabel(savedTheme);
+
+            toggle.addEventListener('click', function() {
+                const current = html.getAttribute('data-theme');
+                const next = current === 'light' ? 'dark' : 'light';
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                updateLabel(next);
+            });
+
+            toggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    toggle.click();
+                }
+            });
+
+            function updateLabel(theme) {
+                label.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
+            }
+
+            // ========== HAMBURGER MENU ==========
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const tocOverlay = document.getElementById('tocOverlay');
+
+            hamburgerBtn.addEventListener('click', function() {
+                const isOpen = tocOverlay.classList.contains('open');
+                tocOverlay.classList.toggle('open');
+                hamburgerBtn.textContent = isOpen ? '☰' : '✕';
+                hamburgerBtn.setAttribute('aria-expanded', !isOpen);
+            });
+
+            // ========== CLOSE OVERLAY WHEN CLICKING A LINK ==========
+            document.querySelectorAll('.toc-overlay a').forEach(link => {
+                link.addEventListener('click', function() {
+                    tocOverlay.classList.remove('open');
+                    hamburgerBtn.textContent = '☰';
+                    hamburgerBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // ========== CLOSE OVERLAY WHEN CLICKING OUTSIDE ==========
+            document.addEventListener('click', function(e) {
+                if (tocOverlay.classList.contains('open')) {
+                    const isClickInside = tocOverlay.contains(e.target) || hamburgerBtn.contains(e.target);
+                    if (!isClickInside) {
+                        tocOverlay.classList.remove('open');
+                        hamburgerBtn.textContent = '☰';
+                        hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // ========== KEYBOARD ACCESSIBILITY ==========
+            hamburgerBtn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+
+            // ========== SMOOTH SCROLL FOR INTERNAL LINKS ==========
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            if (tocOverlay.classList.contains('open')) {
+                                tocOverlay.classList.remove('open');
+                                hamburgerBtn.textContent = '☰';
+                                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                            }
+                        }
+                    }
+                });
+            });
+
+        })();
+    </script>
+
+</body>
+</html>

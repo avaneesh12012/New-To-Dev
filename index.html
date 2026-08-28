@@ -71,13 +71,11 @@
         }
 
         /* ========== CUSTOM SCROLLBARS ========== */
-        /* Firefox */
         * {
             scrollbar-width: thin;
             scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
         }
 
-        /* Chrome, Edge, Safari */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
@@ -98,7 +96,6 @@
             background: var(--scrollbar-thumb-hover);
         }
 
-        /* For the sidebar specifically */
         .right-sidebar::-webkit-scrollbar {
             width: 6px;
         }
@@ -310,6 +307,7 @@
             display: inline-block;
             text-decoration: none;
             text-align: center;
+            flex: 1;
         }
 
         .btn-primary:hover {
@@ -323,13 +321,16 @@
             transform: scale(0.97);
         }
 
-        .btn-center {
+        .btn-row {
             display: flex;
-            justify-content: flex-start;
             align-items: center;
             gap: 0.75rem;
-            margin: 1.5rem 0 1rem;
-            flex-wrap: wrap;
+            width: 100%;
+            max-width: 380px;
+        }
+
+        .btn-row .btn-primary {
+            flex: 1;
         }
 
         /* ========== DROPDOWN ARROW ========== */
@@ -366,6 +367,13 @@
             transform: rotate(180deg);
         }
 
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+            margin: 1.5rem 0 1rem;
+        }
+
         /* ========== DROPDOWN CONTENT ========== */
         .dropdown-content {
             max-height: 0;
@@ -378,11 +386,11 @@
         .dropdown-content.open {
             max-height: 2000px;
             opacity: 1;
-            margin: 1rem 0;
+            margin: 0.5rem 0 0.75rem 0;
         }
 
-        /* ========== TABLE OF CONTENTS ========== */
-        .toc {
+        /* ========== CONTENT BOX ========== */
+        .content-box {
             background: var(--card-bg);
             border: 2px solid var(--border);
             border-radius: 16px;
@@ -390,7 +398,7 @@
             box-shadow: 0 8px 24px var(--shadow);
         }
 
-        .toc .toc-title {
+        .content-box .content-title {
             font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
             font-weight: 700;
             font-style: italic;
@@ -400,17 +408,17 @@
             padding-bottom: 0.4rem;
         }
 
-        .toc ul {
+        .content-box ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        .toc ul li {
+        .content-box ul li {
             margin-bottom: 0.2rem;
         }
 
-        .toc ul li a {
+        .content-box ul li a {
             display: block;
             padding: 0.4rem 0.7rem;
             border-radius: 8px;
@@ -423,45 +431,14 @@
             font-size: 0.95rem;
         }
 
-        .toc ul li a:hover {
+        .content-box ul li a:hover {
             background: var(--toc-hover);
             border-left-color: var(--color-5);
             text-decoration: none;
         }
 
-        .toc ul li a .emoji {
+        .content-box ul li a .emoji {
             margin-right: 0.4rem;
-        }
-
-        .toc .toc-sub {
-            margin-left: 1.5rem;
-            font-size: 0.9rem;
-        }
-
-        .toc .toc-sub li a {
-            padding: 0.25rem 0.7rem;
-            font-weight: 400;
-            border-left-color: var(--color-4);
-        }
-
-        .toc .toc-sub li a:hover {
-            border-left-color: var(--color-5);
-        }
-
-        .toc .toc-section {
-            margin-top: 0.6rem;
-            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
-            font-weight: 700;
-            font-style: italic;
-            font-size: 1rem;
-            color: var(--color-5);
-            padding: 0.2rem 0.7rem;
-            border-bottom: 1px solid var(--border);
-            margin-bottom: 0.2rem;
-        }
-
-        .toc .toc-section:first-of-type {
-            margin-top: 0;
         }
 
         /* ========== SIDEBAR - CONFUSED SECTION ========== */
@@ -498,6 +475,7 @@
             padding: 0.7rem 2.2rem;
             width: 100%;
             max-width: 280px;
+            flex: none;
         }
 
         .sidebar-divider {
@@ -586,20 +564,13 @@
             h2 {
                 font-size: 1.5rem;
             }
-            .toc {
-                padding: 1.25rem;
-            }
-            .btn-primary {
-                padding: 0.6rem 1.6rem;
-                font-size: 1rem;
+            .btn-row {
+                max-width: 100%;
             }
             .dropdown-btn {
                 width: 40px;
                 height: 40px;
                 font-size: 1rem;
-            }
-            .btn-center {
-                gap: 0.5rem;
             }
             ::-webkit-scrollbar {
                 width: 4px;
@@ -611,7 +582,7 @@
             h1 {
                 font-size: 1.8rem;
             }
-            .toc .toc-title {
+            .content-box .content-title {
                 font-size: 1.1rem;
             }
             .dropdown-btn {
@@ -619,12 +590,16 @@
                 height: 36px;
                 font-size: 0.9rem;
             }
-            .toc ul li a {
+            .content-box ul li a {
                 font-size: 0.85rem;
                 padding: 0.3rem 0.5rem;
             }
-            .toc .toc-sub {
-                margin-left: 1rem;
+            .btn-row {
+                gap: 0.5rem;
+            }
+            .btn-primary {
+                padding: 0.5rem 1rem;
+                font-size: 0.9rem;
             }
         }
     </style>
@@ -650,58 +625,53 @@
                 <span class="sub">Table of Contents</span>
             </h1>
 
-            <!-- ===== BUTTONS WITH DROPDOWN ===== -->
-            <div class="btn-center">
-                <a href="https://avaneesh12012.github.io/New-To-Dev/readme.html" class="btn-primary">
-                    📖 Go to README
-                </a>
-                <button class="dropdown-btn" id="dropdownToggle" aria-label="Toggle Table of Contents">
-                    ▼
-                </button>
-            </div>
+            <!-- ===== BUTTONS WITH INDIVIDUAL DROPDOWNS ===== -->
+            <div class="btn-group">
 
-            <!-- ===== DROPDOWN CONTENT ===== -->
-            <div class="dropdown-content" id="dropdownContent">
+                <!-- README Button + Arrow -->
+                <div class="btn-row">
+                    <a href="https://avaneesh12012.github.io/New-To-Dev/readme.html" class="btn-primary">
+                        📖 Go to README
+                    </a>
+                    <button class="dropdown-btn" id="dropdownReadme" aria-label="Toggle README content">
+                        ▼
+                    </button>
+                </div>
+                <div class="dropdown-content" id="dropdownReadmeContent">
+                    <div class="content-box">
+                        <div class="content-title">📖 README — Contents</div>
+                        <ul>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#why-this-exists"><span class="emoji">💡</span> Why This Exists</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#who-this-is-for"><span class="emoji">🎯</span> Who This Is For</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#the-roadmap"><span class="emoji">🗺️</span> The Roadmap</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#how-to-use-this"><span class="emoji">📖</span> How to Use This</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#contribute"><span class="emoji">🤝</span> Contribute</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#license"><span class="emoji">⚖️</span> License</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#one-last-thing"><span class="emoji">💭</span> One Last Thing</a></li>
+                        </ul>
+                    </div>
+                </div>
 
-                <!-- ===== TABLE OF CONTENTS ===== -->
-                <div class="toc">
-                    <div class="toc-title">📑 Contents</div>
-
-                    <!-- Section 1: About -->
-                    <div class="toc-section">📖 About</div>
-                    <ul>
-                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#why-this-exists"><span class="emoji">💡</span> Why This Exists</a></li>
-                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#who-this-is-for"><span class="emoji">🎯</span> Who This Is For</a></li>
-                    </ul>
-
-                    <!-- Section 2: Course Content -->
-                    <div class="toc-section">📚 Course Content</div>
-                    <ul>
-                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#the-roadmap"><span class="emoji">🗺️</span> The Roadmap</a>
-                            <ul class="toc-sub">
-                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-1">💻 How Computers Work</a></li>
-                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-2">🔧 Hardware Basics</a></li>
-                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-3">📜 History of Computing</a></li>
-                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-4">🌿 Git &amp; Version Control</a></li>
-                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-5">🐍 Python — Zero to Hero</a></li>
-                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-6">🚀 Your First Project</a></li>
-                            </ul>
-                        </li>
-                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#how-to-use-this"><span class="emoji">📖</span> How to Use This</a></li>
-                    </ul>
-
-                    <!-- Section 3: Community -->
-                    <div class="toc-section">🤝 Community</div>
-                    <ul>
-                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#contribute"><span class="emoji">🤝</span> Contribute</a></li>
-                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#license"><span class="emoji">⚖️</span> License</a></li>
-                    </ul>
-
-                    <!-- Section 4: Final -->
-                    <div class="toc-section">💭 Final</div>
-                    <ul>
-                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#one-last-thing"><span class="emoji">💭</span> One Last Thing</a></li>
-                    </ul>
+                <!-- Chapter 1 Button + Arrow -->
+                <div class="btn-row">
+                    <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html" class="btn-primary">
+                        📘 Chapter 1
+                    </a>
+                    <button class="dropdown-btn" id="dropdownChapter1" aria-label="Toggle Chapter 1 content">
+                        ▼
+                    </button>
+                </div>
+                <div class="dropdown-content" id="dropdownChapter1Content">
+                    <div class="content-box">
+                        <div class="content-title">📘 Chapter 1 — Contents</div>
+                        <ul>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html#section-1"><span class="emoji">1️⃣</span> What is Programming?</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html#section-2"><span class="emoji">2️⃣</span> What is Binary?</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html#section-3"><span class="emoji">3️⃣</span> Why Don't CPUs Understand?</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html#section-4"><span class="emoji">4️⃣</span> Programming Languages</a></li>
+                            <li><a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html#section-5"><span class="emoji">5️⃣</span> Psychopaths (The Great Devs)</a></li>
+                        </ul>
+                    </div>
                 </div>
 
             </div>
@@ -740,7 +710,7 @@
                     Start from the very beginning.<br>
                     We'll guide you through everything from absolute zero.
                 </p>
-                <a href="https://avaneesh12012.github.io/New-To-Dev" class="btn-primary">
+                <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html" class="btn-primary">
                     🚀 Start the Course
                 </a>
             </div>
@@ -792,55 +762,42 @@
                 label.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
             }
 
-            // ========== DROPDOWN TOGGLE ==========
-            const dropdownToggle = document.getElementById('dropdownToggle');
-            const dropdownContent = document.getElementById('dropdownContent');
+            // ========== DROPDOWN TOGGLES ==========
+            const dropdowns = [
+                { btn: 'dropdownReadme', content: 'dropdownReadmeContent' },
+                { btn: 'dropdownChapter1', content: 'dropdownChapter1Content' }
+            ];
 
-            dropdownToggle.addEventListener('click', function() {
-                const isOpen = dropdownContent.classList.contains('open');
-                dropdownContent.classList.toggle('open');
-                dropdownToggle.classList.toggle('open');
-                dropdownToggle.textContent = isOpen ? '▼' : '▲';
-                dropdownToggle.setAttribute('aria-expanded', !isOpen);
-            });
+            dropdowns.forEach(function(item) {
+                const btn = document.getElementById(item.btn);
+                const content = document.getElementById(item.content);
 
-            // ========== SMOOTH SCROLL FOR TOC LINKS ==========
-            document.querySelectorAll('.toc a[href^="#"]').forEach(anchor => {
-                anchor.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    const targetId = this.getAttribute('href');
-                    if (targetId === '#') return;
-                    const target = document.querySelector(targetId);
-                    if (target) {
-                        // Close dropdown
-                        dropdownContent.classList.remove('open');
-                        dropdownToggle.classList.remove('open');
-                        dropdownToggle.textContent = '▼';
+                btn.addEventListener('click', function() {
+                    const isOpen = content.classList.contains('open');
+                    // Close all other dropdowns
+                    dropdowns.forEach(function(other) {
+                        if (other.btn !== item.btn) {
+                            const otherContent = document.getElementById(other.content);
+                            const otherBtn = document.getElementById(other.btn);
+                            otherContent.classList.remove('open');
+                            otherBtn.classList.remove('open');
+                            otherBtn.textContent = '▼';
+                        }
+                    });
+                    // Toggle this one
+                    content.classList.toggle('open');
+                    btn.classList.toggle('open');
+                    btn.textContent = isOpen ? '▼' : '▲';
+                    btn.setAttribute('aria-expanded', !isOpen);
+                });
 
-                        // Scroll to target
-                        setTimeout(() => {
-                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }, 300);
+                // Keyboard accessibility
+                btn.addEventListener('keydown', function(e) {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        this.click();
                     }
                 });
-            });
-
-            // ========== EXTERNAL LINKS ==========
-            document.querySelectorAll('.toc a:not([href^="#"])').forEach(link => {
-                link.addEventListener('click', function(e) {
-                    // Close dropdown when clicking external links
-                    dropdownContent.classList.remove('open');
-                    dropdownToggle.classList.remove('open');
-                    dropdownToggle.textContent = '▼';
-                });
-            });
-
-            // ========== KEYBOARD ACCESSIBILITY ==========
-            dropdownToggle.addEventListener('keydown', function(e) {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.click();
-                }
             });
 
         })();

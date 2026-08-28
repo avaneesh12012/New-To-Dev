@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/favicon.png" type="image/png">
-    <title>New-To-Dev — README</title>
+    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
+    <title>New-To-Dev — Table of Contents</title>
     <style>
         /* ========== CSS VARIABLES (10-Shade Palette) ========== */
         :root {
@@ -29,12 +29,19 @@
             --toggle-dot: var(--color-1);
             --shadow: rgba(11, 12, 14, 0.08);
             --accent: var(--color-6);
-            --roadmap-line: var(--color-4);
-            --roadmap-dot: var(--color-6);
             --btn-bg: var(--color-10);
             --btn-text: var(--color-1);
             --btn-hover-bg: var(--color-1);
             --btn-hover-text: var(--color-10);
+            --toc-hover: var(--color-3);
+            --toc-border: var(--color-4);
+            --highlight-bg: var(--color-3);
+            --dropdown-bg: var(--color-2);
+            --dropdown-border: var(--color-4);
+            --sidebar-bg: var(--color-2);
+            --scrollbar-track: var(--color-2);
+            --scrollbar-thumb: var(--color-4);
+            --scrollbar-thumb-hover: var(--color-5);
         }
 
         /* ========== DARK THEME ========== */
@@ -48,12 +55,84 @@
             --toggle-dot: var(--color-10);
             --shadow: rgba(241, 242, 244, 0.04);
             --accent: var(--color-4);
-            --roadmap-line: var(--color-6);
-            --roadmap-dot: var(--color-4);
             --btn-bg: var(--color-1);
             --btn-text: var(--color-10);
             --btn-hover-bg: var(--color-10);
             --btn-hover-text: var(--color-1);
+            --toc-hover: var(--color-8);
+            --toc-border: var(--color-6);
+            --highlight-bg: var(--color-8);
+            --dropdown-bg: var(--color-9);
+            --dropdown-border: var(--color-6);
+            --sidebar-bg: var(--color-9);
+            --scrollbar-track: var(--color-9);
+            --scrollbar-thumb: var(--color-6);
+            --scrollbar-thumb-hover: var(--color-5);
+        }
+
+        /* ========== CUSTOM SCROLLBARS ========== */
+        /* Firefox */
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+        }
+
+        /* Chrome, Edge, Safari */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 10px;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            transition: background 0.3s ease;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+
+        /* For the sidebar specifically */
+        .right-sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .right-sidebar::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 10px;
+        }
+
+        .right-sidebar::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+        }
+
+        .right-sidebar::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+        }
+
+        .left-content::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .left-content::-webkit-scrollbar-track {
+            background: var(--scrollbar-track);
+            border-radius: 10px;
+        }
+
+        .left-content::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+        }
+
+        .left-content::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
         }
 
         /* ========== RESET & BASE ========== */
@@ -61,7 +140,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease, opacity 0.3s ease;
         }
 
         html {
@@ -73,17 +152,41 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.8;
-            padding: 2rem 1.5rem;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
-            align-items: center;
         }
 
-        .container {
-            max-width: 880px;
-            width: 100%;
-            margin: 0 auto;
+        /* ========== MAIN LAYOUT ========== */
+        .main-wrapper {
+            display: flex;
+            flex: 1;
+            min-height: 100vh;
+        }
+
+        /* ========== LEFT CONTENT (60%) ========== */
+        .left-content {
+            flex: 0 0 60%;
+            max-width: 60%;
+            padding: 2rem 1.5rem 2rem 2rem;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        /* ========== RIGHT SIDEBAR (40%) ========== */
+        .right-sidebar {
+            flex: 0 0 40%;
+            max-width: 40%;
+            padding: 2rem 2rem 2rem 1.5rem;
+            background: var(--sidebar-bg);
+            border-left: 2px solid var(--border);
+            position: sticky;
+            top: 0;
+            height: 100vh;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         /* ========== HEADINGS ========== */
@@ -93,22 +196,21 @@
             font-style: italic;
             letter-spacing: -0.02em;
             line-height: 1.2;
-            margin-top: 2.5rem;
-            margin-bottom: 0.75rem;
         }
 
         h1 {
-            font-size: 3.2rem;
+            font-size: 3rem;
             background: linear-gradient(135deg, var(--text), var(--color-5));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             display: inline-block;
             margin-top: 0.5rem;
+            margin-bottom: 0.5rem;
         }
 
         h1 .sub {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-family: 'Comic Sans MS', cursive;
             font-weight: 400;
             font-style: normal;
@@ -120,32 +222,17 @@
         }
 
         h2 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             border-bottom: 3px solid var(--border);
             padding-bottom: 0.4rem;
-            margin-top: 3rem;
-        }
-
-        h2 .emoji {
-            font-family: 'Segoe UI Emoji', 'Apple Color Emoji', sans-serif;
-            font-style: normal;
-        }
-
-        h3 {
-            font-size: 1.4rem;
-            margin-top: 1.8rem;
-        }
-
-        h4 {
-            font-size: 1.1rem;
-            margin-top: 1.2rem;
-            font-weight: 700;
+            margin-top: 2rem;
+            margin-bottom: 1.2rem;
         }
 
         /* ========== PARAGRAPHS & LINKS ========== */
         p {
             margin-bottom: 1rem;
-            font-size: 1.1rem;
+            font-size: 1.05rem;
         }
 
         a {
@@ -160,64 +247,6 @@
 
         a:hover {
             text-decoration-color: var(--text);
-        }
-
-        /* ========== CODE ========== */
-        code, pre {
-            font-family: 'JetBrains Mono', 'Fira Code', monospace;
-            font-weight: 400;
-            font-size: 0.95rem;
-        }
-
-        .inline-code {
-            font-family: 'JetBrains Mono', monospace;
-            background: var(--code-bg);
-            padding: 0.1rem 0.5rem;
-            border-radius: 6px;
-            font-size: 0.9em;
-            border: 1px solid var(--border);
-        }
-
-        .code-block {
-            background: var(--code-bg);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            overflow-x: auto;
-            margin: 1.25rem 0;
-            position: relative;
-        }
-
-        .code-block pre {
-            margin: 0;
-            white-space: pre-wrap;
-            word-break: break-word;
-            color: var(--text);
-        }
-
-        /* ========== CARDS ========== */
-        .card {
-            background: var(--card-bg);
-            border: 2px solid var(--border);
-            border-radius: 16px;
-            padding: 1.75rem 2rem;
-            margin: 1.5rem 0;
-            box-shadow: 0 8px 24px var(--shadow);
-        }
-
-        .card p:last-child,
-        .card ul:last-child {
-            margin-bottom: 0;
-        }
-
-        .card ul {
-            margin-left: 1.5rem;
-            margin-bottom: 0.5rem;
-            font-size: 1.05rem;
-        }
-
-        .card li {
-            margin-bottom: 0.4rem;
         }
 
         /* ========== TOGGLE SWITCH ========== */
@@ -272,9 +301,9 @@
             background: var(--btn-bg);
             color: var(--btn-text);
             border: 2px solid var(--btn-bg);
-            padding: 0.8rem 2.5rem;
+            padding: 0.7rem 2rem;
             border-radius: 40px;
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
@@ -296,152 +325,257 @@
 
         .btn-center {
             display: flex;
-            justify-content: center;
-            margin: 2rem 0 1rem;
+            justify-content: flex-start;
+            align-items: center;
+            gap: 0.75rem;
+            margin: 1.5rem 0 1rem;
+            flex-wrap: wrap;
         }
 
-        /* ========== ROADMAP ========== */
-        .roadmap {
-            position: relative;
-            padding-left: 2.5rem;
-            margin: 1.5rem 0 0.5rem;
-        }
-
-        .roadmap::before {
-            content: '';
-            position: absolute;
-            left: 8px;
-            top: 8px;
-            bottom: 8px;
-            width: 3px;
-            background: var(--roadmap-line);
-            border-radius: 4px;
-        }
-
-        .roadmap-item {
-            position: relative;
-            padding: 0.5rem 0 1.5rem 1.5rem;
-            border-left: 3px solid transparent;
-        }
-
-        .roadmap-item::before {
-            content: '';
-            position: absolute;
-            left: -22px;
-            top: 10px;
-            width: 14px;
-            height: 14px;
+        /* ========== DROPDOWN ARROW ========== */
+        .dropdown-btn {
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 2px solid var(--btn-bg);
             border-radius: 50%;
-            background: var(--roadmap-dot);
-            border: 2px solid var(--bg);
-            box-shadow: 0 0 0 2px var(--roadmap-line);
-        }
-
-        .roadmap-item:last-child {
-            padding-bottom: 0.5rem;
-        }
-
-        .roadmap-item .step {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.75rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            color: var(--color-5);
-            display: block;
-            margin-bottom: 0.1rem;
-        }
-
-        .roadmap-item h4 {
-            margin-top: 0;
-            margin-bottom: 0.2rem;
-        }
-
-        .roadmap-item p {
-            margin-bottom: 0.2rem;
-            font-size: 1rem;
-        }
-
-        /* ========== LICENSE BOX ========== */
-        .license-box {
-            background: var(--code-bg);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 1.25rem 1.5rem;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.85rem;
-            line-height: 1.6;
-            margin: 1rem 0;
-            overflow-x: auto;
-        }
-
-        .license-box .label {
+            width: 44px;
+            height: 44px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
             font-family: 'Comic Sans MS', cursive;
-            font-size: 0.8rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            line-height: 1;
+            flex-shrink: 0;
+        }
+
+        .dropdown-btn:hover {
+            background: var(--btn-hover-bg);
+            color: var(--btn-hover-text);
+            transform: scale(1.05);
+            border-color: var(--border);
+        }
+
+        .dropdown-btn:active {
+            transform: scale(0.95);
+        }
+
+        .dropdown-btn.open {
+            transform: rotate(180deg);
+        }
+
+        /* ========== DROPDOWN CONTENT ========== */
+        .dropdown-content {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.5s ease, opacity 0.4s ease, margin 0.4s ease;
+            margin: 0;
+        }
+
+        .dropdown-content.open {
+            max-height: 2000px;
+            opacity: 1;
+            margin: 1rem 0;
+        }
+
+        /* ========== TABLE OF CONTENTS ========== */
+        .toc {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 1.75rem;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .toc .toc-title {
+            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.4rem;
+        }
+
+        .toc ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc ul li {
+            margin-bottom: 0.2rem;
+        }
+
+        .toc ul li a {
+            display: block;
+            padding: 0.4rem 0.7rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: background 0.2s ease;
+            border-left: 3px solid transparent;
+            cursor: pointer;
+            font-size: 0.95rem;
+        }
+
+        .toc ul li a:hover {
+            background: var(--toc-hover);
+            border-left-color: var(--color-5);
+            text-decoration: none;
+        }
+
+        .toc ul li a .emoji {
+            margin-right: 0.4rem;
+        }
+
+        .toc .toc-sub {
+            margin-left: 1.5rem;
+            font-size: 0.9rem;
+        }
+
+        .toc .toc-sub li a {
+            padding: 0.25rem 0.7rem;
+            font-weight: 400;
+            border-left-color: var(--color-4);
+        }
+
+        .toc .toc-sub li a:hover {
+            border-left-color: var(--color-5);
+        }
+
+        .toc .toc-section {
+            margin-top: 0.6rem;
+            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 1rem;
             color: var(--color-5);
+            padding: 0.2rem 0.7rem;
+            border-bottom: 1px solid var(--border);
+            margin-bottom: 0.2rem;
+        }
+
+        .toc .toc-section:first-of-type {
+            margin-top: 0;
+        }
+
+        /* ========== SIDEBAR - CONFUSED SECTION ========== */
+        .sidebar-confused {
+            text-align: center;
+            padding: 1rem 0.5rem;
+        }
+
+        .sidebar-confused .big-emoji {
+            font-size: 4rem;
             display: block;
             margin-bottom: 0.5rem;
         }
 
-        /* ========== MOTIVATIONAL BLOCK ========== */
-        .motivation {
-            border-left: 4px solid var(--color-5);
-            padding-left: 1.5rem;
-            margin: 2rem 0;
-            font-size: 1.15rem;
+        .sidebar-confused h2 {
+            border-bottom: none;
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.8rem;
+            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
+            font-weight: 700;
             font-style: italic;
         }
 
-        .motivation strong {
-            font-style: normal;
-            font-weight: 700;
-        }
-
-        .motivation .names {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 0.95rem;
-            font-style: normal;
+        .sidebar-confused p {
+            font-size: 1.05rem;
+            margin-bottom: 1.2rem;
             color: var(--color-5);
+            line-height: 1.6;
         }
 
-        /* ========== CONTRIBUTE SECTION ========== */
-        .contribute-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
+        .sidebar-confused .btn-primary {
+            font-size: 1.1rem;
+            padding: 0.7rem 2.2rem;
+            width: 100%;
+            max-width: 280px;
+        }
+
+        .sidebar-divider {
+            border: none;
+            border-top: 2px solid var(--border);
+            margin: 1.5rem 0;
+        }
+
+        /* ========== QUICK NAV ========== */
+        .quick-nav {
+            display: flex;
             gap: 1rem;
-            margin: 1rem 0;
+            flex-wrap: wrap;
+            justify-content: flex-start;
+            margin: 1.5rem 0 0.5rem;
         }
 
-        .contribute-item {
-            background: var(--bg);
-            border: 2px solid var(--border);
-            border-radius: 12px;
-            padding: 1rem 1.25rem;
+        .quick-nav a {
+            font-size: 0.9rem;
+        }
+
+        .quick-nav span {
+            color: var(--color-4);
+        }
+
+        /* ========== FOOTER ========== */
+        .footer {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 3px solid var(--border);
             text-align: center;
         }
 
-        .contribute-item .emoji {
-            font-size: 1.8rem;
-            display: block;
+        .footer p {
+            font-size: 0.85rem;
+            color: var(--color-5);
             margin-bottom: 0.3rem;
         }
 
-        .contribute-item h4 {
-            margin-top: 0;
-            margin-bottom: 0.2rem;
-            font-size: 1rem;
+        .footer .license {
+            font-size: 0.7rem;
+            color: var(--color-4);
         }
 
-        .contribute-item p {
-            font-size: 0.95rem;
-            margin-bottom: 0;
+        .footer .license a {
+            font-size: 0.7rem;
         }
 
         /* ========== RESPONSIVE ========== */
-        @media (max-width: 700px) {
-            body {
-                padding: 1.25rem 0.75rem;
+        @media (max-width: 900px) {
+            .main-wrapper {
+                flex-direction: column;
+            }
+            .left-content {
+                flex: 1 1 100%;
+                max-width: 100%;
+                padding: 1.5rem 1rem;
+                height: auto;
+                overflow-y: visible;
+            }
+            .right-sidebar {
+                flex: 1 1 100%;
+                max-width: 100%;
+                padding: 1.5rem 1rem;
+                position: static;
+                height: auto;
+                border-left: none;
+                border-top: 2px solid var(--border);
+                overflow-y: visible;
+            }
+            .sidebar-confused .big-emoji {
+                font-size: 3rem;
+            }
+            .sidebar-confused h2 {
+                font-size: 1.5rem;
+            }
+            .sidebar-confused .btn-primary {
+                max-width: 100%;
             }
             h1 {
                 font-size: 2.4rem;
@@ -450,28 +584,26 @@
                 font-size: 1rem;
             }
             h2 {
-                font-size: 1.6rem;
+                font-size: 1.5rem;
             }
-            .card {
+            .toc {
                 padding: 1.25rem;
             }
-            .contribute-grid {
-                grid-template-columns: 1fr;
-            }
-            .roadmap {
-                padding-left: 1.8rem;
-            }
-            .roadmap-item {
-                padding-left: 1rem;
-            }
-            .motivation {
-                padding-left: 1rem;
-                font-size: 1rem;
-            }
             .btn-primary {
-                padding: 0.6rem 1.8rem;
+                padding: 0.6rem 1.6rem;
                 font-size: 1rem;
-                width: 100%;
+            }
+            .dropdown-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
+            .btn-center {
+                gap: 0.5rem;
+            }
+            ::-webkit-scrollbar {
+                width: 4px;
+                height: 4px;
             }
         }
 
@@ -479,236 +611,151 @@
             h1 {
                 font-size: 1.8rem;
             }
-            .license-box {
-                font-size: 0.75rem;
-                padding: 0.75rem 1rem;
+            .toc .toc-title {
+                font-size: 1.1rem;
+            }
+            .dropdown-btn {
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
+            .toc ul li a {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.5rem;
+            }
+            .toc .toc-sub {
+                margin-left: 1rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <div class="container">
+    <div class="main-wrapper">
 
-        <!-- ===== THEME TOGGLE ===== -->
-        <div class="theme-toggle-wrapper">
-            <span class="theme-label" id="themeLabel">☀️ Light</span>
-            <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
-                <div class="dot"></div>
-            </div>
-        </div>
+        <!-- ===== LEFT CONTENT (60%) ===== -->
+        <div class="left-content">
 
-        <!-- ===== HEADER ===== -->
-        <h1>
-            New-To-Dev
-            <span class="sub">From Zero to Coder — A Complete Beginner's Journey</span>
-        </h1>
-
-        <!-- ===== START BUTTON ===== -->
-        <div class="btn-center">
-            <a href="https://avaneesh12012.github.io/New-To-Dev" class="btn-primary">
-                🚀 Start the Course
-            </a>
-        </div>
-
-        <!-- ===== WHY THIS EXISTS ===== -->
-        <h2>📖 Why This Exists</h2>
-        <div class="card">
-            <p>
-                When I started learning to code, I was overwhelmed. Too many resources, too much jargon,
-                and no clear path. Every tutorial assumed I already knew things I didn't.
-            </p>
-            <p>
-                <strong>New-To-Dev</strong> is the resource I wish I had. It's a complete,
-                structured journey that takes you from <strong>absolute zero</strong> to building
-                real projects with Python.
-            </p>
-            <p>
-                No shortcuts. No "learn to code in 24 hours." Just a solid, human-written
-                foundation that will serve you for your entire career.
-            </p>
-        </div>
-
-        <!-- ===== WHO IT'S FOR ===== -->
-        <h2>🎯 Who This Is For</h2>
-        <div class="card">
-            <ul>
-                <li><strong>Complete beginners</strong> — no prior coding experience needed</li>
-                <li><strong>Curious minds</strong> — you want to understand how computers actually work</li>
-                <li><strong>Career changers</strong> — you're ready to invest in yourself</li>
-                <li><strong>Students (16+)</strong> — you want a head start before college or bootcamp</li>
-                <li><strong>Anyone who speaks English</strong> — the content is clear and accessible</li>
-            </ul>
-            <p style="margin-top: 0.75rem; color: var(--color-5); font-size: 0.95rem;">
-                ⚡ If you can read this, you're ready.
-            </p>
-        </div>
-
-        <!-- ===== ROADMAP ===== -->
-        <h2>🗺️ The Roadmap</h2>
-        <p>Here's the path we'll take together. Each section builds on the last.</p>
-
-        <div class="roadmap">
-            <div class="roadmap-item">
-                <span class="step">Step 1</span>
-                <h4>💻 How Computers Work</h4>
-                <p>What's inside a computer? How does code become something you can see?</p>
-            </div>
-            <div class="roadmap-item">
-                <span class="step">Step 2</span>
-                <h4>🔧 Hardware Basics</h4>
-                <p>CPU, RAM, storage — what they do and why they matter.</p>
-            </div>
-            <div class="roadmap-item">
-                <span class="step">Step 3</span>
-                <h4>📜 History of Computing</h4>
-                <p>From Charles Babbage to your laptop. The people and ideas that built our world.</p>
-            </div>
-            <div class="roadmap-item">
-                <span class="step">Step 4</span>
-                <h4>🌿 Git & Version Control</h4>
-                <p>The professional way to save, share, and collaborate on code.</p>
-            </div>
-            <div class="roadmap-item">
-                <span class="step">Step 5</span>
-                <h4>🐍 Python — Zero to Hero</h4>
-                <p>Variables, loops, functions, and building real projects. The main event.</p>
-            </div>
-            <div class="roadmap-item" style="padding-bottom: 0;">
-                <span class="step">Step 6</span>
-                <h4>🚀 Your First Project</h4>
-                <p>Bring everything together. Build something you're proud of.</p>
-            </div>
-        </div>
-
-        <!-- ===== HOW TO USE ===== -->
-        <h2>📖 How to Use This</h2>
-        <div class="card">
-            <p>
-                <strong>1. Start at the beginning.</strong> Click the big "Start the Course" button above.
-                Follow each section in order — everything is designed to build on what came before.
-            </p>
-            <p>
-                <strong>2. Read, then practice.</strong> Don't just read — type the code. Break it.
-                Fix it. That's how you learn.
-            </p>
-            <p>
-                <strong>3. Take your time.</strong> There's no deadline. Some concepts take days,
-                others take weeks. That's normal.
-            </p>
-            <p>
-                <strong>4. Bookmark this.</strong> Come back whenever you need to revisit a topic.
-            </p>
-            <p style="margin-bottom: 0; color: var(--color-5); font-size: 0.95rem;">
-                💡 Tip: Use the dark/light toggle at the top for comfortable reading anytime.
-            </p>
-        </div>
-
-        <!-- ===== CONTRIBUTE ===== -->
-        <h2>🤝 Contribute</h2>
-        <div class="card">
-            <p>
-                This is an <strong>open-source</strong> project. If you find a mistake, have a better
-                explanation, or want to add a topic — we welcome your contribution.
-            </p>
-            <div class="contribute-grid">
-                <div class="contribute-item">
-                    <span class="emoji">🐛</span>
-                    <h4>Found a Bug?</h4>
-                    <p>Open an issue with details.</p>
-                </div>
-                <div class="contribute-item">
-                    <span class="emoji">📝</span>
-                    <h4>Improve Content</h4>
-                    <p>Submit a PR with your changes.</p>
-                </div>
-                <div class="contribute-item">
-                    <span class="emoji">💡</span>
-                    <h4>Suggest a Topic</h4>
-                    <p>Open a discussion or issue.</p>
-                </div>
-                <div class="contribute-item">
-                    <span class="emoji">⭐</span>
-                    <h4>Star the Repo</h4>
-                    <p>Helps others find it.</p>
+            <!-- ===== THEME TOGGLE ===== -->
+            <div class="theme-toggle-wrapper">
+                <span class="theme-label" id="themeLabel">☀️ Light</span>
+                <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
+                    <div class="dot"></div>
                 </div>
             </div>
-            <p style="margin-bottom: 0;">
-                <strong>Before contributing:</strong> Please read the license below. All contributions
-                must be compatible with CC BY-NC-ND 4.0.
-            </p>
-        </div>
 
-        <!-- ===== LICENSE ===== -->
-        <h2>⚖️ License</h2>
-        <div class="card">
-            <p>
-                This work is licensed under a
-                <strong>Creative Commons Attribution-NonCommercial-NoDerivatives 4.0</strong>
-                International License.
-            </p>
-            <div class="license-box">
-                <span class="label">📄 CC BY-NC-ND 4.0</span>
-                <strong>You are free to:</strong><br>
-                • Share — copy and redistribute the material in any medium or format<br><br>
-                <strong>Under the following terms:</strong><br>
-                • <strong>Attribution</strong> — You must give appropriate credit<br>
-                • <strong>NonCommercial</strong> — You may not use the material for commercial purposes<br>
-                • <strong>NoDerivatives</strong> — You may not distribute modified material<br><br>
-                Full license: <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">creativecommons.org/licenses/by-nc-nd/4.0/</a>
+            <!-- ===== HEADER ===== -->
+            <h1>
+                New-To-Dev
+                <span class="sub">Table of Contents</span>
+            </h1>
+
+            <!-- ===== BUTTONS WITH DROPDOWN ===== -->
+            <div class="btn-center">
+                <a href="https://avaneesh12012.github.io/New-To-Dev/readme.html" class="btn-primary">
+                    📖 Go to README
+                </a>
+                <button class="dropdown-btn" id="dropdownToggle" aria-label="Toggle Table of Contents">
+                    ▼
+                </button>
             </div>
-            <p style="margin-bottom: 0; font-size: 0.95rem; color: var(--color-5);">
-                This means you can <strong>share this course freely</strong> with anyone, but you
-                <strong>cannot sell it</strong>, host it on commercial platforms, or create modified
-                versions without permission.
-            </p>
+
+            <!-- ===== DROPDOWN CONTENT ===== -->
+            <div class="dropdown-content" id="dropdownContent">
+
+                <!-- ===== TABLE OF CONTENTS ===== -->
+                <div class="toc">
+                    <div class="toc-title">📑 Contents</div>
+
+                    <!-- Section 1: About -->
+                    <div class="toc-section">📖 About</div>
+                    <ul>
+                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#why-this-exists"><span class="emoji">💡</span> Why This Exists</a></li>
+                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#who-this-is-for"><span class="emoji">🎯</span> Who This Is For</a></li>
+                    </ul>
+
+                    <!-- Section 2: Course Content -->
+                    <div class="toc-section">📚 Course Content</div>
+                    <ul>
+                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#the-roadmap"><span class="emoji">🗺️</span> The Roadmap</a>
+                            <ul class="toc-sub">
+                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-1">💻 How Computers Work</a></li>
+                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-2">🔧 Hardware Basics</a></li>
+                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-3">📜 History of Computing</a></li>
+                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-4">🌿 Git &amp; Version Control</a></li>
+                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-5">🐍 Python — Zero to Hero</a></li>
+                                <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#step-6">🚀 Your First Project</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#how-to-use-this"><span class="emoji">📖</span> How to Use This</a></li>
+                    </ul>
+
+                    <!-- Section 3: Community -->
+                    <div class="toc-section">🤝 Community</div>
+                    <ul>
+                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#contribute"><span class="emoji">🤝</span> Contribute</a></li>
+                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#license"><span class="emoji">⚖️</span> License</a></li>
+                    </ul>
+
+                    <!-- Section 4: Final -->
+                    <div class="toc-section">💭 Final</div>
+                    <ul>
+                        <li><a href="https://avaneesh12012.github.io/New-To-Dev/readme.html#one-last-thing"><span class="emoji">💭</span> One Last Thing</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- ===== QUICK NAV ===== -->
+            <div class="quick-nav">
+                <a href="https://avaneesh12012.github.io/New-To-Dev">🏠 Home</a>
+                <span>|</span>
+                <a href="https://avaneesh12012.github.io/New-To-Dev/readme.html">📖 README</a>
+                <span>|</span>
+                <a href="https://github.com/avaneesh12012/New-To-Dev">🐙 GitHub</a>
+            </div>
+
+            <!-- ===== FOOTER ===== -->
+            <div class="footer">
+                <p>New-To-Dev &bull; Built for beginners, by someone who remembers the struggle.</p>
+                <p style="font-size: 0.8rem;">💻 Free forever. No ads. No catch.</p>
+                <p class="license">
+                    © 2026 Avaneesh Shahi. This work is licensed under a 
+                    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+                        Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
+                    </a> 
+                    International License.
+                </p>
+            </div>
+
         </div>
 
-        <!-- ===== MOTIVATIONAL MESSAGE ===== -->
-        <h2>💭 One Last Thing</h2>
-        <div class="motivation">
-            <p>
-                Every great developer — <span class="names">Linus Torvalds, Richard Stallman,
-                Bjarne Stroustrup, Fabrice Bellard</span>, and thousands more —
-                were once in the <strong>exact same position</strong> as you.
-            </p>
-            <p>
-                They were beginners. They were confused. They struggled. They kept going.
-            </p>
-            <p>
-                <strong>There will be only two differences between you and them:</strong>
-            </p>
-            <p>
-                ✅ <strong>If you start and continue</strong> — even in the tough times —
-                <em>that's</em> when you become great.
-            </p>
-            <p>
-                ❌ <strong>If you start, enjoy the beginner's rush, and quit</strong> when it gets hard —
-                you become part of the rest.
-            </p>
-            <p style="font-size: 1.3rem; font-weight: 700; font-style: normal; margin-top: 0.5rem;">
-                The choice is yours. 🚀
-            </p>
+        <!-- ===== RIGHT SIDEBAR (40%) ===== -->
+        <div class="right-sidebar">
+
+            <div class="sidebar-confused">
+                <span class="big-emoji">🤔</span>
+                <h2>Confused?</h2>
+                <p>
+                    Start from the very beginning.<br>
+                    We'll guide you through everything from absolute zero.
+                </p>
+                <a href="https://avaneesh12012.github.io/New-To-Dev" class="btn-primary">
+                    🚀 Start the Course
+                </a>
+            </div>
+
+            <hr class="sidebar-divider">
+
+            <div style="text-align: center; font-size: 0.85rem; color: var(--color-5);">
+                <p style="margin-bottom: 0.3rem;">📚 New to coding?</p>
+                <p style="font-size: 0.8rem; margin-bottom: 0;">
+                    This course takes you from <strong>absolute zero</strong><br>
+                    to building real projects with Python.
+                </p>
+            </div>
+
         </div>
-
-        <!-- ===== FOOTER ===== -->
-        <hr style="border: none; border-top: 3px solid var(--border); margin: 3rem 0 1.5rem;">
-
-        <p style="text-align: center; font-size: 0.9rem; color: var(--color-5);">
-            New-To-Dev &bull; Built for beginners, by someone who remembers the struggle.
-            <br>
-            <span style="font-size: 0.8rem;">
-                💻 Free forever. No ads. No catch.
-            </span>
-            <br><br>
-            <span style="font-size: 0.75rem; color: var(--color-4);">
-                © 2026 Avaneesh Shahi. This work is licensed under a 
-                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="font-size: 0.75rem;">
-                    Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
-                </a> 
-                International License.
-            </span>
-        </p>
 
     </div>
 
@@ -745,18 +792,55 @@
                 label.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
             }
 
-            // ========== SMOOTH SCROLL FOR INTERNAL LINKS ==========
-            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            // ========== DROPDOWN TOGGLE ==========
+            const dropdownToggle = document.getElementById('dropdownToggle');
+            const dropdownContent = document.getElementById('dropdownContent');
+
+            dropdownToggle.addEventListener('click', function() {
+                const isOpen = dropdownContent.classList.contains('open');
+                dropdownContent.classList.toggle('open');
+                dropdownToggle.classList.toggle('open');
+                dropdownToggle.textContent = isOpen ? '▼' : '▲';
+                dropdownToggle.setAttribute('aria-expanded', !isOpen);
+            });
+
+            // ========== SMOOTH SCROLL FOR TOC LINKS ==========
+            document.querySelectorAll('.toc a[href^="#"]').forEach(anchor => {
                 anchor.addEventListener('click', function(e) {
-                    const href = this.getAttribute('href');
-                    if (href !== '#') {
-                        const target = document.querySelector(href);
-                        if (target) {
-                            e.preventDefault();
-                            target.scrollIntoView({ behavior: 'smooth' });
-                        }
+                    e.preventDefault();
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+                    const target = document.querySelector(targetId);
+                    if (target) {
+                        // Close dropdown
+                        dropdownContent.classList.remove('open');
+                        dropdownToggle.classList.remove('open');
+                        dropdownToggle.textContent = '▼';
+
+                        // Scroll to target
+                        setTimeout(() => {
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 300);
                     }
                 });
+            });
+
+            // ========== EXTERNAL LINKS ==========
+            document.querySelectorAll('.toc a:not([href^="#"])').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // Close dropdown when clicking external links
+                    dropdownContent.classList.remove('open');
+                    dropdownToggle.classList.remove('open');
+                    dropdownToggle.textContent = '▼';
+                });
+            });
+
+            // ========== KEYBOARD ACCESSIBILITY ==========
+            dropdownToggle.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
             });
 
         })();

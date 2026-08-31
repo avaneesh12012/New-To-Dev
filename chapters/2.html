@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
-    <title>Coming Soon — Chapter 2 | New-To-Dev</title>
+    <link rel="shortcut icon" href="../assets/favicon2.png" type="image/png">
+    <title>New-To-Dev — Chapter 2: Welcome Inside the Machine</title>
     <style>
         /* ========== CSS VARIABLES (10-Shade Palette) ========== */
         :root {
@@ -37,6 +37,8 @@
             --scrollbar-thumb: var(--color-4);
             --scrollbar-thumb-hover: var(--color-5);
             --toc-hover: var(--color-3);
+            --video-border: var(--color-4);
+            --video-bg: var(--color-9);
         }
 
         /* ========== DARK THEME ========== */
@@ -58,6 +60,8 @@
             --scrollbar-thumb: var(--color-6);
             --scrollbar-thumb-hover: var(--color-5);
             --toc-hover: var(--color-8);
+            --video-border: var(--color-6);
+            --video-bg: var(--color-10);
         }
 
         /* ========== CUSTOM SCROLLBARS ========== */
@@ -108,14 +112,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 880px;
             width: 100%;
             margin: 0 auto;
-            text-align: center;
         }
 
         /* ========== HEADINGS ========== */
@@ -128,18 +130,18 @@
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 2.8rem;
             background: linear-gradient(135deg, var(--text), var(--color-5));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             display: inline-block;
             margin-top: 0.5rem;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
 
         h1 .sub {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-family: 'Comic Sans MS', cursive;
             font-weight: 400;
             font-style: normal;
@@ -150,11 +152,40 @@
             letter-spacing: 0.5px;
         }
 
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--border);
+            padding-bottom: 0.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .chapter-number {
+            font-size: 1rem;
+            color: var(--color-5);
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
         /* ========== PARAGRAPHS & LINKS ========== */
         p {
             margin-bottom: 1rem;
-            font-size: 1.1rem;
-            color: var(--color-5);
+            font-size: 1.05rem;
         }
 
         a {
@@ -171,6 +202,66 @@
             text-decoration-color: var(--text);
         }
 
+        /* ========== CODE ========== */
+        code, pre {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--code-bg);
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border: 1px solid var(--border);
+            word-break: break-all;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: var(--text);
+            font-size: 0.85rem;
+        }
+
+        /* ========== CARDS ========== */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .card p:last-child,
+        .card ul:last-child {
+            margin-bottom: 0;
+        }
+
+        .card ul {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .card li {
+            margin-bottom: 0.4rem;
+        }
+
         /* ========== TOGGLE SWITCH ========== */
         .theme-toggle-wrapper {
             display: flex;
@@ -179,9 +270,6 @@
             gap: 12px;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
         }
 
         .theme-toggle {
@@ -226,17 +314,15 @@
             background: var(--btn-bg);
             color: var(--btn-text);
             border: 2px solid var(--btn-bg);
-            padding: 0.8rem 2.5rem;
+            padding: 0.7rem 2rem;
             border-radius: 40px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
             display: inline-block;
             text-decoration: none;
             text-align: center;
-            margin-top: 0.5rem;
-            min-width: 200px;
         }
 
         .btn-primary:hover {
@@ -250,164 +336,953 @@
             transform: scale(0.97);
         }
 
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-        }
-
-        .btn-group .btn-primary {
-            width: 100%;
-            max-width: 280px;
-        }
-
-        /* ========== COMING SOON ICON ========== */
-        .coming-icon {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        /* ========== FOOTER ========== */
-        .footer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 3px solid var(--border);
+        /* ========== IMAGES ========== */
+        .chapter-image {
+            margin: 1.5rem 0;
             text-align: center;
-            width: 100%;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--code-bg);
+            padding: 0.75rem;
         }
 
-        .footer p {
+        .chapter-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .chapter-image .caption {
             font-size: 0.85rem;
             color: var(--color-5);
-            margin-bottom: 0.3rem;
+            margin-top: 0.5rem;
+            font-style: italic;
         }
 
-        .footer .license {
-            font-size: 0.7rem;
-            color: var(--color-4);
+        /* ===== IMAGE FLOATING RIGHT ===== */
+        .image-float-right {
+            float: right;
+            width: 250px;
+            max-width: 100%;
+            margin: 0 0 1rem 1.5rem;
+            padding: 0;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: transparent;
+            overflow: hidden;
         }
 
-        .footer .license a {
+        .image-float-right img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .image-float-right .caption {
             font-size: 0.7rem;
+            color: var(--color-5);
+            padding: 0.3rem 0.4rem 0.4rem 0.4rem;
+            font-style: italic;
+            text-align: center;
+            background: var(--code-bg);
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* Clearfix for floated images */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* ===== IMAGE CENTERED ===== */
+        .img-centered {
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== NAVIGATION BUTTONS ========== */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 3px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons .btn-primary {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        /* ========== FLOATING TOC OVERLAY ========== */
+        .hamburger-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 2px solid var(--btn-bg);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px var(--shadow);
+            font-family: 'Comic Sans MS', cursive;
+            line-height: 1;
+        }
+
+        .hamburger-menu:hover {
+            background: var(--btn-hover-bg);
+            color: var(--btn-hover-text);
+            transform: scale(1.05);
+            border-color: var(--border);
+        }
+
+        .hamburger-menu:active {
+            transform: scale(0.95);
+        }
+
+        .toc-overlay {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            z-index: 999;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            max-width: 280px;
+            max-height: 60vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px var(--shadow);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Fix scrollbar edges in TOC overlay */
+        .toc-overlay {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) transparent;
+        }
+
+        .toc-overlay::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .toc-overlay::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .toc-overlay::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            border: 2px solid var(--card-bg);
+            background-clip: padding-box;
+        }
+
+        .toc-overlay::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+            border: 2px solid var(--card-bg);
+            background-clip: padding-box;
+        }
+
+        .toc-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .toc-overlay .toc-title {
+            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.3rem;
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            z-index: 2;
+            padding-top: 0.1rem;
+        }
+
+        .toc-overlay ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-overlay ul li {
+            margin-bottom: 0.15rem;
+        }
+
+        .toc-overlay ul li a {
+            display: block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: background 0.2s ease;
+            border-left: 3px solid transparent;
+            font-size: 0.85rem;
+        }
+
+        .toc-overlay ul li a:hover {
+            background: var(--toc-hover);
+            border-left-color: var(--color-5);
+            text-decoration: none;
         }
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 700px) {
             body {
                 padding: 1.25rem 0.75rem;
-                justify-content: flex-start;
-                padding-top: 4rem;
             }
             h1 {
-                font-size: 2.8rem;
+                font-size: 2rem;
             }
             h1 .sub {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
-            .theme-toggle-wrapper {
-                top: 1rem;
-                right: 1rem;
+            h2 {
+                font-size: 1.4rem;
             }
-            .coming-icon {
-                font-size: 3.5rem;
+            .card {
+                padding: 1.25rem;
             }
-            .btn-group .btn-primary {
-                max-width: 100%;
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-buttons .btn-primary {
+                width: 100%;
+            }
+            .hamburger-menu {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+                bottom: 15px;
+                left: 15px;
+            }
+            .toc-overlay {
+                left: 10px;
+                right: 10px;
+                max-width: none;
+                bottom: 70px;
             }
             ::-webkit-scrollbar {
                 width: 4px;
                 height: 4px;
             }
+            .chapter-image {
+                padding: 0.5rem;
+            }
+            .img-centered {
+                max-width: 100%;
+            }
+            .image-float-right {
+                float: none;
+                width: 100%;
+                margin: 1.5rem 0;
+            }
         }
 
         @media (max-width: 400px) {
+            body {
+                padding: 0.75rem;
+            }
             h1 {
-                font-size: 2.2rem;
+                font-size: 1.6rem;
             }
-            h1 .sub {
-                font-size: 0.85rem;
+            .card {
+                padding: 1rem;
             }
-            .coming-icon {
-                font-size: 3rem;
+            .code-block {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
             }
-            .btn-primary {
-                font-size: 0.95rem;
-                padding: 0.6rem 1.5rem;
-                min-width: 160px;
-            }
-            .theme-toggle-wrapper {
-                top: 0.75rem;
-                right: 0.75rem;
-            }
-            .theme-toggle {
-                width: 44px;
-                height: 24px;
-            }
-            .theme-toggle .dot {
-                width: 16px;
-                height: 16px;
-                top: 2px;
-                left: 2px;
-            }
-            [data-theme="dark"] .theme-toggle .dot {
-                transform: translateX(20px);
+            .hamburger-menu {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+                bottom: 12px;
+                left: 12px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== THEME TOGGLE ===== -->
-    <div class="theme-toggle-wrapper">
-        <span class="theme-label" id="themeLabel">☀️ Light</span>
-        <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
-            <div class="dot"></div>
-        </div>
-    </div>
-
     <div class="container">
 
-        <!-- ===== COMING SOON CONTENT ===== -->
-        <span class="coming-icon">🚧</span>
+        <!-- ===== THEME TOGGLE ===== -->
+        <div class="theme-toggle-wrapper">
+            <span class="theme-label" id="themeLabel">☀️ Light</span>
+            <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <!-- ===== HEADER ===== -->
         <h1>
-            Coming Soon
-            <span class="sub">Chapter 2</span>
+            <span class="chapter-number">Chapter 2</span>
+            Welcome Inside the Machine: Understanding Computer Hardware
         </h1>
 
+        <!-- ===== INTRO ===== -->
         <p>
-            We're busy building the next chapter of your learning journey.<br>
-            Check back soon — it's going to be worth the wait!
+            In Chapter 1, we talked about programming. You learned what programming actually means, what binary is, why CPUs don't directly understand languages like Python or C++, and how compilers and interpreters help bridge the gap between human-readable code and the hardware.
+        </p>
+        <p>
+            But there's one huge thing we haven't properly explored yet: <strong>the hardware itself.</strong>
+        </p>
+        <p>
+            You can write the most beautiful program in the world, but eventually that program has to run on a physical machine. That machine has a CPU, memory, storage, a motherboard, a GPU, input and output devices — and underneath all of these are electrical circuits containing billions of tiny transistors.
+        </p>
+        <p>
+            If you've ever looked inside a computer, you might have seen something like this:
+        </p>
+        <ul>
+            <li>CPU</li>
+            <li>RAM</li>
+            <li>GPU</li>
+            <li>SSD</li>
+            <li>Motherboard</li>
+            <li>Power Supply</li>
+        </ul>
+        <p>And thought: <strong>"Okay... but what does each one actually do?"</strong></p>
+        <p>
+            Don't worry. We're going to take the machine apart — not physically, of course — and understand what each major part does. And remember our rule: <strong>One step, not one kilometer.</strong>
         </p>
 
-        <!-- ===== BUTTONS ===== -->
-        <div class="btn-group">
-            <a href="https://avaneesh12012.github.io/New-To-Dev/" class="btn-primary">
-                📑 Table of Contents
-            </a>
-            <a href="https://avaneesh12012.github.io/New-To-Dev/readme.html" class="btn-primary">
-                📖 Go to README
-            </a>
-            <a href="https://github.com/avaneesh12012/New-To-Dev" class="btn-primary" target="_blank">
-                🐙 Go to Repository
-            </a>
+        <!-- ===== 1. WHAT IS COMPUTER HARDWARE? ===== -->
+        <h2 id="section-1">1. What is Computer Hardware?</h2>
+        <p>
+            <strong>Computer hardware is the physical machinery that makes up a computer system.</strong> If you can physically touch it, pick it up, connect it, or break it with a hammer, it's probably hardware.
+        </p>
+        <p>
+            Your laptop, desktop computer, keyboard, mouse, monitor, CPU, RAM, SSD, GPU, and motherboard are all examples of hardware.
+        </p>
+        <p>
+            Software is different. Software is the collection of instructions and programs that tell the hardware what to do.
+        </p>
+        <div class="card">
+            <p><strong>Hardware</strong> is the physical machine.</p>
+            <p><strong>Software</strong> is the instructions running on that machine.</p>
+        </div>
+        <p>
+            Neither one is very useful alone. A computer with hardware but no useful software is just an expensive collection of electronics. And software without hardware has nowhere to run.
+        </p>
+
+        <!-- ===== 2. HARDWARE VS SOFTWARE ===== -->
+        <h2 id="section-2">2. Hardware vs Software</h2>
+        <p>
+            Imagine you have a video game. The game itself — its code, textures, sounds, levels, characters, and logic — is <strong>software</strong>. But the computer running the game is <strong>hardware</strong>.
+        </p>
+        <p>
+            The game tells the hardware what needs to happen. The hardware performs the operations required to make the game work. That's why you can install the same game on two completely different computers — the software can be the same, but the hardware can be completely different.
+        </p>
+
+        <!-- ===== 3. A COMPUTER IS NOT ONE THING ===== -->
+        <h2 id="section-3">3. A Computer Is Not One Thing</h2>
+        <p>
+            When someone says <strong>"My computer is slow,"</strong> they're talking about an entire system. But the computer isn't one single component — it's a collection of components working together.
+        </p>
+        <p>
+            Think of it like a human body. Your brain performs certain tasks. Your heart performs another. Your lungs perform another. Your eyes gather information. Your hands interact with the outside world. The body works because these different systems cooperate.
+        </p>
+        <p>A computer works in a similar way. It has different components with different responsibilities:</p>
+        <ul>
+            <li><strong>🧠 CPU</strong> — Executes instructions.</li>
+            <li><strong>🧮 RAM</strong> — Provides temporary working space for active programs and data.</li>
+            <li><strong>💾 Storage</strong> — Keeps programs and files even when the computer is turned off.</li>
+            <li><strong>🎮 GPU</strong> — Handles graphics and is extremely good at many kinds of parallel computation.</li>
+            <li><strong>🧩 Motherboard</strong> — Provides the main physical platform connecting many components.</li>
+            <li><strong>⌨️ Input devices</strong> — Allow information to enter the computer.</li>
+            <li><strong>🖥️ Output devices</strong> — Allow information to leave the computer.</li>
+        </ul>
+
+        <!-- ===== 4. THE MOTHERBOARD ===== -->
+        <h2 id="section-4">4. The Motherboard — Where Everything Comes Together</h2>
+        <!-- Image: Motherboard -->
+        <div class="chapter-image img-centered">
+            <img src="../assets/images/computer-ports.jpg" alt="Motherboard with ports">
+            <div class="caption">Fig 2.1: A motherboard provides the physical infrastructure that allows components to work together.</div>
+        </div>
+        <p>
+            Open a desktop computer and you'll probably see a large circuit board taking up a significant part of the case. That's the <strong>motherboard</strong>.
+        </p>
+        <p>
+            The motherboard is one of the most important pieces of a computer because it provides connections between many of the system's components. Your CPU needs to communicate with memory. Your storage needs to communicate with the rest of the system. USB devices need a way to communicate with the computer. Expansion cards may need connections.
+        </p>
+        <p>
+            Think of it like a city. The CPU is one important building. RAM is another. Storage is another. The GPU is another. But buildings aren't useful if they're completely isolated. You need roads, electrical infrastructure, communication networks, and connections between them. The motherboard provides much of that infrastructure inside a computer.
+        </p>
+
+        <!-- ===== 5. WHAT'S ACTUALLY ON A MOTHERBOARD? ===== -->
+        <h2 id="section-5">5. What's Actually on a Motherboard?</h2>
+        <p>A motherboard isn't just a giant piece of plastic. It contains many different components and connections:</p>
+        <ul>
+            <li>CPU socket</li>
+            <li>RAM slots</li>
+            <li>Storage connectors</li>
+            <li>USB connections</li>
+            <li>Expansion slots</li>
+            <li>Power connectors</li>
+            <li>Firmware components</li>
+            <li>Controllers</li>
+            <li>Communication pathways</li>
+            <li>Various supporting chips and circuitry</li>
+        </ul>
+        <p>
+            And underneath the visible surface are layers of copper traces. These traces form electrical pathways through which signals and power can travel.
+        </p>
+
+        <!-- ===== 6. THE CPU ===== -->
+        <h2 id="section-6">6. The CPU — The Processor</h2>
+        <!-- Image: CPU -->
+        <div class="clearfix">
+            <div class="image-float-right">
+                <img src="../assets/images/CPU.jpg" alt="Intel Core CPU">
+                <div class="caption">Fig 2.2: A modern CPU — the brain of the computer.</div>
+            </div>
+            <p>
+                Now we reach one of the most famous components in a computer. The <strong>CPU</strong>, or <strong>Central Processing Unit</strong>. If you've ever seen computer specifications, you've probably seen names such as Intel Core i5, AMD Ryzen 5, or Apple M-series.
+            </p>
+            <p>
+                The CPU is responsible for executing instructions. Remember Chapter 1? Your program eventually needs to become instructions that the processor can execute. The CPU repeatedly performs operations according to those instructions. It can:
+            </p>
+            <ul>
+                <li>Perform arithmetic</li>
+                <li>Compare values</li>
+                <li>Move data</li>
+                <li>Make decisions</li>
+                <li>Perform logical operations</li>
+                <li>Control the flow of programs</li>
+            </ul>
+            <p>
+                For example, imagine a program says:
+            </p>
+            <div class="code-block">
+                <pre>x = 10
+y = 20
+z = x + y</pre>
+            </div>
+            <p>
+                A human sees this as a simple calculation. The CPU doesn't see <em>"Ah, the programmer wants to add 10 and 20."</em> Instead, the software is ultimately represented in forms the processor's architecture can execute. The processor performs a sequence of low-level operations that eventually produce the required result.
+            </p>
+        </div>
+
+        <!-- ===== 7. CPU CORES ===== -->
+        <h2 id="section-7">7. CPU Cores</h2>
+        <p>
+            Modern CPUs don't necessarily have just one processing core. They can have multiple. You may have heard terms like 2-core, 4-core, 6-core, 8-core, or 16-core.
+        </p>
+        <p>
+            A <strong>CPU core</strong> is an individual processing unit within a processor. Having multiple cores allows a CPU to work on multiple tasks at the same time. Imagine one person trying to do four jobs. Now imagine four people working on those four jobs. The second situation can potentially get much more work done.
+        </p>
+        <div class="card">
+            <p><strong>More cores ≠ automatically faster at everything.</strong> The architecture, clock speed, workload, software, memory system, and many other factors matter.</p>
+        </div>
+
+        <!-- ===== 8. CLOCK SPEED ===== -->
+        <h2 id="section-8">8. Clock Speed</h2>
+        <p>
+            Another specification you've probably seen is something like <strong>3.5 GHz</strong> or <strong>4.8 GHz</strong>. This refers to a clock frequency. A CPU has an internal timing system that helps coordinate operations. A frequency of 1 GHz means <strong>one billion cycles per second</strong>.
+        </p>
+        <div class="card">
+            <p><strong>"4 GHz CPU is automatically twice as fast as a 2 GHz CPU."</strong> — That's not necessarily true. Modern processors can perform different amounts of work per cycle. Their architectures can be different. They can have different cache systems, instruction execution capabilities, numbers of cores, and many other differences.</p>
+        </div>
+
+        <!-- ===== 9. RAM ===== -->
+        <h2 id="section-9">9. RAM — The Computer's Working Memory</h2>
+        <!-- Image: RAM -->
+        <div class="chapter-image img-centered">
+            <img src="../assets/images/ram.jpg" alt="RAM module">
+            <div class="caption">Fig 2.3: RAM provides fast temporary memory for active programs and data.</div>
+        </div>
+        <p>
+            Imagine you're working at a desk. You have a huge cupboard full of books. That's your long-term storage. But you don't keep walking to the cupboard every five seconds. You take the books you're currently using and put them on your desk. The desk is your temporary workspace.
+        </p>
+        <p>
+            <strong>RAM</strong>, or <strong>Random Access Memory</strong>, is fast temporary memory used by the computer to hold data that programs are actively working with. When you open a program, the computer may load parts of that program and its data into RAM. Why? Because the processor needs fast access to information while the program is running.
+        </p>
+
+        <!-- ===== 10. WHY CAN'T WE JUST USE STORAGE INSTEAD OF RAM? ===== -->
+        <h2 id="section-10">10. Why Can't We Just Use Storage Instead of RAM?</h2>
+        <p>
+            You might now be wondering: <strong>"If an SSD stores my files, why do we need RAM?"</strong>
+        </p>
+        <p>
+            Because storage and RAM are designed for different purposes. Storage is designed to retain information. RAM is designed as fast working memory.
+        </p>
+        <p>
+            For example, imagine you have a game installed on your SSD. You launch it. The computer loads the information it needs into memory. The CPU and other components can then work with that information.
+        </p>
+        <div class="card">
+            <p><strong>SSD</strong> → Long-term storage ↓</p>
+            <p><strong>RAM</strong> → Active working data ↓</p>
+            <p><strong>CPU</strong> → Executes instructions</p>
+        </div>
+
+        <!-- ===== 11. WHAT HAPPENS WHEN YOU TURN OFF THE COMPUTER? ===== -->
+        <h2 id="section-11">11. What Happens When You Turn Off the Computer?</h2>
+        <p>
+            Turn off your computer. Your RAM loses the information it was holding. Turn your computer back on. The RAM starts being used again by the operating system and applications. But your files are still there. Your photos, videos, games, documents, and programs are still stored on your SSD or HDD.
+        </p>
+        <div class="card">
+            <p><strong>RAM is volatile memory.</strong> Storage is designed to retain information even without power.</p>
+        </div>
+
+        <!-- ===== 12. STORAGE ===== -->
+        <h2 id="section-12">12. Storage — Where Your Data Lives</h2>
+        <!-- Image: SSD -->
+        <div class="clearfix">
+            <div class="image-float-right">
+                <img src="../assets/images/ssd.jpg" alt="SSD storage">
+                <div class="caption">Fig 2.4: SSD storage — fast, durable, and no moving parts.</div>
+            </div>
+            <p>
+                Your computer needs somewhere to keep information permanently. That's storage. Two traditional categories you'll hear about are:
+            </p>
+            <ul>
+                <li><strong>HDD</strong> — Hard Disk Drive: uses spinning magnetic disks and moving mechanical parts.</li>
+                <li><strong>SSD</strong> — Solid State Drive: uses semiconductor-based flash memory and has no spinning disk.</li>
+            </ul>
+            <p>
+                This difference gives SSDs major advantages in areas such as access time, responsiveness, size, and resistance to mechanical shock. That's why modern computers increasingly use SSDs as their main storage.
+            </p>
+        </div>
+
+        <!-- ===== 13. YOUR FILES ARE JUST DATA ===== -->
+        <h2 id="section-13">13. Your Files Are Just Data</h2>
+        <p>
+            Think about a photo on your computer. You see a photograph. But the computer doesn't see it the same way you do. The photograph is represented as digital data. The same applies to music, videos, documents, games, and programs.
+        </p>
+        <p>
+            At the lowest level, digital information is represented using bits. Remember Chapter 1? <strong>0 and 1.</strong>
+        </p>
+        <p>
+            A photo isn't literally stored as a tiny printed photograph inside your SSD. It's stored as patterns of data that software interprets as an image. The same storage device can contain completely different kinds of information. It doesn't care whether the bits represent a photograph, a Python program, a video, or a game. It's all digital data.
+        </p>
+
+        <!-- ===== 14. THE GPU ===== -->
+        <h2 id="section-14">14. The GPU — More Than Graphics</h2>
+        <!-- Image: GPU -->
+        <div class="chapter-image img-centered">
+            <img src="../assets/images/nvidia-gpu.jpg" alt="NVIDIA GPU">
+            <div class="caption">Fig 2.5: A dedicated GPU — a highly parallel processor designed for graphics and compute workloads.</div>
+        </div>
+        <p>
+            Now let's talk about another processor. The <strong>GPU</strong>, or <strong>Graphics Processing Unit</strong>. Originally, GPUs became famous for their ability to process graphics. When you're playing a 3D game, the computer needs to perform enormous numbers of calculations to create the image you see.
+        </p>
+        <p>
+            A GPU is designed to handle many operations in parallel. That's one reason GPUs are so powerful for graphics. But modern GPUs aren't useful only for games. They are also widely used for workloads such as:
+        </p>
+        <ul>
+            <li>Machine learning</li>
+            <li>Scientific computing</li>
+            <li>Video processing</li>
+            <li>Simulations</li>
+            <li>Image processing</li>
+            <li>Other highly parallel workloads</li>
+        </ul>
+
+        <!-- ===== 15. INTEGRATED VS DEDICATED GRAPHICS ===== -->
+        <h2 id="section-15">15. Integrated vs Dedicated Graphics</h2>
+        <p>
+            There are different ways a computer can provide graphics processing:
+        </p>
+        <ul>
+            <li><strong>Integrated graphics</strong> — The graphics processor is built into the same processor package or system-on-chip as the CPU. Integrated graphics typically share system resources such as memory.</li>
+            <li><strong>Dedicated GPU</strong> — A separate graphics processor has its own high-performance hardware and typically dedicated graphics memory.</li>
+        </ul>
+        <p>Gaming desktops often use dedicated graphics cards. Laptops can use either integrated graphics, dedicated graphics, or both.</p>
+
+        <!-- ===== 16. INPUT ===== -->
+        <h2 id="section-16">16. Input — How You Talk to the Computer</h2>
+        <p>
+            So far we've talked about the computer processing information. But how does information enter the computer? Through <strong>input</strong>.
+        </p>
+        <p>
+            An input device allows information or commands to enter a computer system. Examples include:
+        </p>
+        <ul>
+            <li><strong>⌨️ Keyboard</strong> — You press a key. The computer receives information about that key.</li>
+            <li><strong>🖱️ Mouse</strong> — You move or click the mouse. The computer receives those actions.</li>
+            <li><strong>🎤 Microphone</strong> — Sound is captured and converted into digital information.</li>
+            <li><strong>📷 Camera</strong> — Light is captured and converted into digital data.</li>
+            <li><strong>🎮 Controller</strong> — Your buttons, triggers, and movements become input information.</li>
+        </ul>
+
+        <!-- ===== 17. OUTPUT ===== -->
+        <h2 id="section-17">17. Output — How the Computer Talks Back</h2>
+        <p>
+            Now the computer needs a way to communicate results to you. That's <strong>output</strong>.
+        </p>
+        <ul>
+            <li><strong>🖥️ Monitor</strong> — Displays text, images, videos, games, and interfaces.</li>
+            <li><strong>🔊 Speakers</strong> — Turn digital audio information into sound.</li>
+            <li><strong>🖨️ Printer</strong> — Turns digital documents or images into physical output.</li>
+        </ul>
+        <div class="card">
+            <p><strong>Input</strong> → information enters</p>
+            <p><strong>Output</strong> → information leaves</p>
+        </div>
+
+        <!-- ===== 18. POWER ===== -->
+        <h2 id="section-18">18. Power — Nothing Works Without It</h2>
+        <p>
+            We've talked about processors, memory, storage, graphics, and input/output. But none of them work without one thing: <strong>power</strong>.
+        </p>
+        <p>
+            A computer needs electrical energy. Desktop computers usually receive power from a <strong>Power Supply Unit</strong>, or <strong>PSU</strong>. The PSU converts incoming electrical power into forms suitable for the computer's components. Laptops work differently because they contain batteries and power-management circuitry.
+        </p>
+        <p>
+            Your computer isn't simply "using electricity." Its components require carefully controlled voltages and currents. And this takes us back to something we discussed in Chapter 1. At the lowest level: <strong>computers are physical electrical systems.</strong>
+        </p>
+
+        <!-- ===== 19. COOLING ===== -->
+        <h2 id="section-19">19. Cooling — Computers Get Hot</h2>
+        <p>
+            There is another problem. Computers perform enormous numbers of operations. Those operations consume energy. Some of that energy ultimately becomes heat. Too much heat can cause problems. So computers need cooling.
+        </p>
+        <p>
+            You may see fans, heatsinks, heat pipes, thermal interfaces, or liquid cooling systems. A heatsink helps move heat away from a component. A fan can then move air across the heatsink and carry heat away.
+        </p>
+        <p>
+            So when your laptop fan suddenly sounds like <strong>"VVVVVVVVVVVVVVVVVVVVVVVVVV"</strong> 😂, it's not necessarily dying. It may simply be trying to get rid of heat.
+        </p>
+
+        <!-- ===== 20. PORTS ===== -->
+        <h2 id="section-20">20. Ports — How the Outside World Connects</h2>
+        <p>
+            Your computer isn't isolated. It needs to communicate with external devices. That's where ports come in. You may have seen USB, HDMI, DisplayPort, Ethernet, Audio connectors, and USB-C.
+        </p>
+        <p>
+            Different ports support different kinds of connections:
+        </p>
+        <ul>
+            <li><strong>USB</strong> — Can connect many types of peripherals and devices.</li>
+            <li><strong>HDMI / DisplayPort</strong> — Commonly used for digital video and audio connections.</li>
+            <li><strong>Ethernet</strong> — Used for wired networking.</li>
+            <li><strong>USB-C</strong> — A connector type that can support several different protocols and capabilities depending on the device and implementation.</li>
+        </ul>
+        <div class="card">
+            <p><strong>A connector shape doesn't always tell you everything the port can do.</strong> Two USB-C ports can support very different capabilities.</p>
+        </div>
+
+        <!-- ===== 21. HOW DOES EVERYTHING WORK TOGETHER? ===== -->
+        <h2 id="section-21">21. How Does Everything Work Together?</h2>
+        <p>
+            Imagine you open a game. What happens?
+        </p>
+        <ul>
+            <li>The game is stored on your <strong>SSD</strong>.</li>
+            <li>The operating system loads the necessary information.</li>
+            <li>That information is placed into <strong>RAM</strong>.</li>
+            <li>The <strong>CPU</strong> executes the game's instructions.</li>
+            <li>The <strong>GPU</strong> processes graphics and generates frames.</li>
+            <li>The <strong>Monitor</strong> displays those frames.</li>
+            <li>Meanwhile, <strong>Keyboard / Mouse / Controller</strong> send your actions into the computer.</li>
+            <li>The CPU and GPU process those actions.</li>
+            <li>The game changes. The GPU produces a new frame. The monitor displays it.</li>
+        </ul>
+        <p>And all of this happens incredibly quickly.</p>
+
+        <!-- ===== 22. A COMPLETE EXAMPLE ===== -->
+        <h2 id="section-22">22. A Complete Example — Opening a Web Browser</h2>
+        <p>You click your browser. Here's what happens:</p>
+        <ol>
+            <li><strong>Input</strong> — Your mouse sends a click.</li>
+            <li><strong>Operating System</strong> — The operating system receives the input and determines what application should respond.</li>
+            <li><strong>Storage</strong> — The browser's program files are stored on your storage device.</li>
+            <li><strong>RAM</strong> — The system loads the information required to run the browser into memory.</li>
+            <li><strong>CPU</strong> — The CPU begins executing instructions.</li>
+            <li><strong>GPU</strong> — If graphics need to be rendered, the GPU may perform graphics-related work.</li>
+            <li><strong>Display</strong> — The resulting interface appears on your monitor.</li>
+        </ol>
+        <p>And you see your browser. All because a bunch of specialized hardware worked together.</p>
+
+        <!-- ===== 23. WHAT ABOUT THE OPERATING SYSTEM? ===== -->
+        <h2 id="section-23">23. What About the Operating System?</h2>
+        <p>
+            An operating system is software. It sits between applications and much of the underlying hardware. For example, your application doesn't normally need to manually control every electrical signal going into your SSD. Instead, it asks the operating system to perform operations.
+        </p>
+        <div class="card">
+            <p><strong>You</strong> ↓</p>
+            <p><strong>Application</strong> ↓</p>
+            <p><strong>Operating System</strong> ↓</p>
+            <p><strong>Hardware</strong></p>
+        </div>
+
+        <!-- ===== 24. HARDWARE HAS LAYERS TOO ===== -->
+        <h2 id="section-24">24. Hardware Has Layers Too</h2>
+        <p>
+            Earlier, we looked at hardware as CPU + RAM + Storage + GPU + motherboard. But we can go deeper. Inside a CPU are many smaller structures. Inside those structures are circuits. Inside those circuits are logic gates. Inside those gates are transistors. And transistors are built from semiconductor materials.
+        </p>
+        <ul>
+            <li>Computer</li>
+            <li>Components</li>
+            <li>Circuits</li>
+            <li>Logic gates</li>
+            <li>Transistors</li>
+            <li>Electrical behavior</li>
+            <li>Physics</li>
+        </ul>
+        <p>
+            That's the fascinating part. The computer sitting on your desk is ultimately built from physical processes. There isn't a tiny person inside the CPU performing your calculations. There are enormous numbers of electronic components interacting according to the laws of physics.
+        </p>
+
+        <!-- ===== 25. FROM TRANSISTORS TO PROGRAMS ===== -->
+        <h2 id="section-25">25. From Transistors to Programs</h2>
+        <p>
+            Remember the binary discussion from Chapter 1? We said computers work with 0s and 1s. Now you can understand a little more of what that means.
+        </p>
+        <ul>
+            <li>Your Python program</li>
+            <li>Programming language</li>
+            <li>Translation / language implementation</li>
+            <li>Machine-level instructions</li>
+            <li>CPU</li>
+            <li>Digital circuits</li>
+            <li>Transistors</li>
+            <li>Electrical behavior</li>
+        </ul>
+        <p>That's the incredible bridge between the code you type and the physical machine underneath it.</p>
+
+        <!-- ===== 26. WHY DO COMPUTERS NEED SO MANY PARTS? ===== -->
+        <h2 id="section-26">26. Why Do Computers Need So Many Parts?</h2>
+        <p>
+            You might ask: <strong>"Why don't we just make one giant chip that does everything?"</strong>
+        </p>
+        <p>
+            Actually, modern systems are moving toward increasingly integrated designs. Many modern processors combine things that used to be separate. But specialization still matters. Different components are optimized for different jobs.
+        </p>
+        <ul>
+            <li>A CPU is designed for general-purpose instruction execution.</li>
+            <li>A GPU is designed for highly parallel workloads.</li>
+            <li>RAM provides fast temporary access.</li>
+            <li>Storage provides persistent data storage.</li>
+            <li>Input devices capture information.</li>
+            <li>Output devices communicate results.</li>
+        </ul>
+        <p>
+            The system becomes powerful because these components cooperate. It's like a company. You don't necessarily want one employee doing accounting + programming + design + customer support + shipping + marketing at the same time. Specialized roles can make the whole organization more effective.
+        </p>
+
+        <!-- ===== 27. YOUR COMPUTER IS BASICALLY A TEAM ===== -->
+        <h2 id="section-27">27. Your Computer Is Basically a Team</h2>
+        <ul>
+            <li><strong>👨‍💼 CPU</strong> — The main worker executing instructions.</li>
+            <li><strong>📝 RAM</strong> — The desk where active information is kept.</li>
+            <li><strong>🗄️ Storage</strong> — The warehouse where information is kept long-term.</li>
+            <li><strong>🖼️ GPU</strong> — A specialist designed for highly parallel visual and computational work.</li>
+            <li><strong>🛣️ Motherboard</strong> — The infrastructure connecting everyone.</li>
+            <li><strong>📥 Input devices</strong> — Ways information enters the company.</li>
+            <li><strong>📤 Output devices</strong> — Ways results leave the company.</li>
+            <li><strong>⚡ Power</strong> — The energy that keeps everything running.</li>
+            <li><strong>❄️ Cooling</strong> — Keeps the machinery from overheating.</li>
+        </ul>
+
+        <!-- ===== 28. HARDWARE IS GETTING INSANELY SMALL ===== -->
+        <h2 id="section-28">28. Hardware Is Getting Insanely Small</h2>
+        <p>
+            Modern processors contain <strong>billions of transistors</strong>. And those transistors are microscopic. Think about that. Your computer might have billions of tiny electronic switches packed into a chip that can fit in your hand. Those switches work together to implement incredibly complex digital systems.
+        </p>
+        <p>
+            The fact that we can manufacture this technology at such a scale is one of the greatest engineering achievements in human history.
+        </p>
+
+        <!-- ===== 29. BUT HARDWARE ISN'T MAGIC ===== -->
+        <h2 id="section-29">29. But Hardware Isn't Magic</h2>
+        <p>
+            It can feel like magic. You press a button. A window appears. You type something. Text appears instantly. You launch a game. Millions of calculations happen. You open a website. Your computer communicates with machines potentially thousands of kilometers away.
+        </p>
+        <p>
+            But none of this violates the rules of physics. It's engineering. Humans have learned how to build extremely complicated systems from relatively simple physical principles. And that's what makes computer science so fascinating.
+        </p>
+
+        <!-- ===== 30. THE COMPUTER IN FRONT OF YOU ===== -->
+        <h2 id="section-30">30. The Computer in Front of You</h2>
+        <p>
+            Take a look at your own computer. Don't just see <strong>"Laptop."</strong> Try seeing the individual systems. There's a processor. There's memory. There's storage. There's a motherboard. There are input devices. There are output devices. There are communication systems. There is power management. There is cooling.
+        </p>
+        <p>
+            And underneath all of it: <strong>electronic circuits.</strong> You are literally sitting in front of a machine containing billions of microscopic components. And you're about to learn how to program it. That's pretty cool.
+        </p>
+
+        <!-- ===== 31. A VERY IMPORTANT DISTINCTION ===== -->
+        <h2 id="section-31">31. A Very Important Distinction</h2>
+        <p>
+            Before we finish, let's make one distinction clear. A computer doesn't have:
+        </p>
+        <ul>
+            <li>CPU = intelligence</li>
+            <li>Everything else = useless</li>
+        </ul>
+        <p>
+            The CPU is important, but performance and capability come from the <strong>entire system</strong>. A powerful CPU with insufficient memory can still have problems. A powerful GPU can't magically fix a slow storage device. A fast SSD doesn't make a weak CPU suddenly powerful. A computer is a system. The components interact. And the performance you experience depends on how those components work together.
+        </p>
+
+        <!-- ===== 32. WHAT HAPPENS WHEN YOU RUN PYTHON? ===== -->
+        <h2 id="section-32">32. What Happens When You Run Python?</h2>
+        <p>
+            Suppose you create:
+        </p>
+        <div class="code-block">
+            <pre>name = "Avaneesh"
+print(name)</pre>
+        </div>
+        <p>
+            You save the file. That file exists as data on your storage. When you run the program, the operating system and Python implementation do work to get the program executing. The required information is loaded into memory. The processor executes the resulting instructions. The computer handles the data. Eventually, the output is sent to the appropriate output system. And you see:
+        </p>
+        <div class="code-block">
+            <pre>Avaneesh</pre>
+        </div>
+        <p>
+            It looks ridiculously simple. But underneath that simple output is an entire computer system working together.
+        </p>
+
+        <!-- ===== 33. WHAT YOU SHOULD REMEMBER ===== -->
+        <h2 id="section-33">33. What You Should Remember From This Chapter</h2>
+        <p>You don't need to memorize every component and specification. You should understand the big picture.</p>
+        <ul>
+            <li><strong>Hardware</strong> — The physical parts of a computer.</li>
+            <li><strong>Software</strong> — Programs and instructions that tell hardware what to do.</li>
+            <li><strong>CPU</strong> — Executes instructions.</li>
+            <li><strong>RAM</strong> — Provides temporary working memory.</li>
+            <li><strong>Storage</strong> — Keeps data persistently.</li>
+            <li><strong>GPU</strong> — Specialized processor particularly good at highly parallel workloads, including graphics.</li>
+            <li><strong>Motherboard</strong> — Connects many components and provides the main hardware platform.</li>
+            <li><strong>Input</strong> — Allows information to enter the computer.</li>
+            <li><strong>Output</strong> — Allows information to leave the computer.</li>
+            <li><strong>Power</strong> — Provides the electrical energy required by the system.</li>
+            <li><strong>Cooling</strong> — Removes heat produced during operation.</li>
+        </ul>
+        <p>And underneath all of these: <strong>electronic circuits and transistors.</strong></p>
+
+        <!-- ===== 34. QUICK CHECK ===== -->
+        <h2 id="section-34">34. Quick Check</h2>
+        <p>Before moving to the next chapter, see if you can answer these without looking back.</p>
+        <ol>
+            <li>What is computer hardware?</li>
+            <li>What is the difference between hardware and software?</li>
+            <li>What is the main job of a CPU?</li>
+            <li>Why does a computer need RAM?</li>
+            <li>What is the difference between RAM and storage?</li>
+            <li>What does a GPU do?</li>
+            <li>What is the motherboard's purpose?</li>
+            <li>What is an input device?</li>
+            <li>What is an output device?</li>
+            <li>Why does a computer need cooling?</li>
+            <li>Why does a computer need a power source?</li>
+            <li>How do the CPU, RAM, and storage work together when running a program?</li>
+            <li>What is the difference between a CPU and a GPU?</li>
+            <li>Why can a computer be considered a system rather than one single component?</li>
+            <li>What are transistors doing at the lowest level?</li>
+        </ol>
+        <p>If you can explain these concepts in your own words, you don't need to memorize the chapter.</p>
+
+        <!-- ===== BIG TAKEAWAY ===== -->
+        <div class="card">
+            <h3 style="margin-top: 0;">🎯 The Big Takeaway</h3>
+            <p>A computer isn't a magical box. It's a collection of physical systems working together. The programs you write don't float around in some invisible digital world. Eventually, they have to run on <strong>real physical hardware</strong>.</p>
+            <p>Your code becomes instructions. Instructions are executed by processors. Processors are built from circuits. Circuits are built from transistors. Transistors operate using physical electrical behavior.</p>
+            <p>And somehow, from all of that complexity, you get: a game, a browser, a video, a Python program, an operating system, or even an AI model.</p>
+            <p>That's the machine you're learning to program.</p>
+            <p style="font-weight: 700; margin-top: 0.5rem;">Next Chapter → The CPU</p>
+        </div>
+
+        <!-- ===== NAVIGATION BUTTONS ===== -->
+        <div class="nav-buttons">
+            <a href="https://avaneesh12012.github.io/New-To-Dev/" class="btn-primary">📑 Table of Contents</a>
+            <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html" class="btn-primary">1 ← Previous Chapter</a>
+            <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/3.html" class="btn-primary">Next Chapter → 2</a>
         </div>
 
         <!-- ===== FOOTER ===== -->
-        <div class="footer">
-            <p>New-To-Dev &bull; Built for beginners, by someone who remembers the struggle.</p>
-            <p style="font-size: 0.8rem;">💻 Free forever. No ads. No catch.</p>
-            <p class="license">
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 3px solid var(--border); text-align: center;">
+            <p style="font-size: 0.85rem; color: var(--color-5); margin-bottom: 0.3rem;">
+                New-To-Dev &bull; Chapter 2 &bull; Built for beginners, by someone who remembers the struggle.
+            </p>
+            <p style="font-size: 0.8rem; color: var(--color-5); margin-bottom: 0.3rem;">
+                💻 Free forever. No ads. No catch.
+            </p>
+            <p style="font-size: 0.7rem; color: var(--color-4);">
                 © 2026 Avaneesh Shahi. This work is licensed under a 
-                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="font-size: 0.7rem;">
                     Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
                 </a> 
                 International License.
             </p>
         </div>
 
+    </div>
+
+    <!-- ===== HAMBURGER MENU (Three Lines Icon) ===== -->
+    <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle table of contents">
+        ☰
+    </button>
+
+    <!-- ===== FLOATING TOC OVERLAY ===== -->
+    <div class="toc-overlay" id="tocOverlay">
+        <div class="toc-title">📑 Jump to Section</div>
+        <ul>
+            <li><a href="#section-1">1️⃣ What is Computer Hardware?</a></li>
+            <li><a href="#section-2">2️⃣ Hardware vs Software</a></li>
+            <li><a href="#section-3">3️⃣ A Computer Is Not One Thing</a></li>
+            <li><a href="#section-4">4️⃣ The Motherboard</a></li>
+            <li><a href="#section-5">5️⃣ What's on a Motherboard?</a></li>
+            <li><a href="#section-6">6️⃣ The CPU</a></li>
+            <li><a href="#section-7">7️⃣ CPU Cores</a></li>
+            <li><a href="#section-8">8️⃣ Clock Speed</a></li>
+            <li><a href="#section-9">9️⃣ RAM</a></li>
+            <li><a href="#section-10">🔟 Why Can't We Just Use Storage?</a></li>
+            <li><a href="#section-11">1️⃣1️⃣ What Happens When You Turn Off?</a></li>
+            <li><a href="#section-12">1️⃣2️⃣ Storage</a></li>
+            <li><a href="#section-13">1️⃣3️⃣ Your Files Are Just Data</a></li>
+            <li><a href="#section-14">1️⃣4️⃣ The GPU</a></li>
+            <li><a href="#section-15">1️⃣5️⃣ Integrated vs Dedicated Graphics</a></li>
+            <li><a href="#section-16">1️⃣6️⃣ Input</a></li>
+            <li><a href="#section-17">1️⃣7️⃣ Output</a></li>
+            <li><a href="#section-18">1️⃣8️⃣ Power</a></li>
+            <li><a href="#section-19">1️⃣9️⃣ Cooling</a></li>
+            <li><a href="#section-20">2️⃣0️⃣ Ports</a></li>
+            <li><a href="#section-21">2️⃣1️⃣ How Does Everything Work Together?</a></li>
+            <li><a href="#section-22">2️⃣2️⃣ Opening a Web Browser</a></li>
+            <li><a href="#section-23">2️⃣3️⃣ Operating System</a></li>
+            <li><a href="#section-24">2️⃣4️⃣ Hardware Has Layers</a></li>
+            <li><a href="#section-25">2️⃣5️⃣ From Transistors to Programs</a></li>
+            <li><a href="#section-26">2️⃣6️⃣ Why So Many Parts?</a></li>
+            <li><a href="#section-27">2️⃣7️⃣ Your Computer Is a Team</a></li>
+            <li><a href="#section-28">2️⃣8️⃣ Hardware Is Getting Small</a></li>
+            <li><a href="#section-29">2️⃣9️⃣ Hardware Isn't Magic</a></li>
+            <li><a href="#section-30">3️⃣0️⃣ The Computer in Front of You</a></li>
+            <li><a href="#section-31">3️⃣1️⃣ Important Distinction</a></li>
+            <li><a href="#section-32">3️⃣2️⃣ Running Python</a></li>
+            <li><a href="#section-33">3️⃣3️⃣ What to Remember</a></li>
+            <li><a href="#section-34">3️⃣4️⃣ Quick Check</a></li>
+        </ul>
     </div>
 
     <!-- ===== JAVASCRIPT ===== -->
@@ -442,6 +1317,65 @@
             function updateLabel(theme) {
                 label.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
             }
+
+            // ========== HAMBURGER MENU ==========
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const tocOverlay = document.getElementById('tocOverlay');
+
+            hamburgerBtn.addEventListener('click', function() {
+                const isOpen = tocOverlay.classList.contains('open');
+                tocOverlay.classList.toggle('open');
+                hamburgerBtn.textContent = isOpen ? '☰' : '✕';
+                hamburgerBtn.setAttribute('aria-expanded', !isOpen);
+            });
+
+            // ========== CLOSE OVERLAY WHEN CLICKING A LINK ==========
+            document.querySelectorAll('.toc-overlay a').forEach(link => {
+                link.addEventListener('click', function() {
+                    tocOverlay.classList.remove('open');
+                    hamburgerBtn.textContent = '☰';
+                    hamburgerBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // ========== CLOSE OVERLAY WHEN CLICKING OUTSIDE ==========
+            document.addEventListener('click', function(e) {
+                if (tocOverlay.classList.contains('open')) {
+                    const isClickInside = tocOverlay.contains(e.target) || hamburgerBtn.contains(e.target);
+                    if (!isClickInside) {
+                        tocOverlay.classList.remove('open');
+                        hamburgerBtn.textContent = '☰';
+                        hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // ========== KEYBOARD ACCESSIBILITY ==========
+            hamburgerBtn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+
+            // ========== SMOOTH SCROLL FOR INTERNAL LINKS ==========
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            if (tocOverlay.classList.contains('open')) {
+                                tocOverlay.classList.remove('open');
+                                hamburgerBtn.textContent = '☰';
+                                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                            }
+                        }
+                    }
+                });
+            });
 
         })();
     </script>

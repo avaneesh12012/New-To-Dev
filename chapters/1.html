@@ -578,6 +578,34 @@
             transition: opacity 0.3s ease;
         }
 
+        /* Fix scrollbar edges in TOC overlay */
+        .toc-overlay {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) transparent;
+        }
+
+        .toc-overlay::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .toc-overlay::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .toc-overlay::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            border: 2px solid var(--card-bg);
+            background-clip: padding-box;
+        }
+
+        .toc-overlay::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+            border: 2px solid var(--card-bg);
+            background-clip: padding-box;
+        }
+
         .toc-overlay.open {
             display: block;
             opacity: 1;
@@ -591,6 +619,11 @@
             margin-bottom: 0.5rem;
             border-bottom: 2px solid var(--border);
             padding-bottom: 0.3rem;
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            z-index: 2;
+            padding-top: 0.1rem;
         }
 
         .toc-overlay ul {
@@ -860,6 +893,7 @@
         <div class="nav-buttons">
             <a href="https://avaneesh12012.github.io/New-To-Dev/" class="btn-primary">📑 Table of Contents</a>
             <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/2.html" class="btn-primary">Next Chapter → 2</a>
+            <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/3.html" class="btn-primary">Next Chapter → 3</a>
         </div>
 
         <!-- ===== FOOTER ===== -->
@@ -873,8 +907,7 @@
             <p style="font-size: 0.7rem; color: var(--color-4);">
                 © 2026 Avaneesh Shahi. This work is licensed under a 
                 <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="font-size: 0.7rem;">
-                    Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
-                </a> 
+                    Creative Commons Attribution-NonCommercial-NoDerivatives 4.0                </a> 
                 International License.
             </p>
         </div>

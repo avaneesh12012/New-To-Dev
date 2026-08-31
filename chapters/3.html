@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
-    <title>Coming Soon — Chapter 2 | New-To-Dev</title>
+    <link rel="shortcut icon" href="../assets/favicon2.png" type="image/png">
+    <title>New-To-Dev — Chapter 3: The CPU — The Machine That Actually Runs Your Code</title>
     <style>
         /* ========== CSS VARIABLES (10-Shade Palette) ========== */
         :root {
@@ -37,6 +37,8 @@
             --scrollbar-thumb: var(--color-4);
             --scrollbar-thumb-hover: var(--color-5);
             --toc-hover: var(--color-3);
+            --video-border: var(--color-4);
+            --video-bg: var(--color-9);
         }
 
         /* ========== DARK THEME ========== */
@@ -58,6 +60,8 @@
             --scrollbar-thumb: var(--color-6);
             --scrollbar-thumb-hover: var(--color-5);
             --toc-hover: var(--color-8);
+            --video-border: var(--color-6);
+            --video-bg: var(--color-10);
         }
 
         /* ========== CUSTOM SCROLLBARS ========== */
@@ -108,14 +112,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 880px;
             width: 100%;
             margin: 0 auto;
-            text-align: center;
         }
 
         /* ========== HEADINGS ========== */
@@ -128,18 +130,18 @@
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 2.8rem;
             background: linear-gradient(135deg, var(--text), var(--color-5));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             display: inline-block;
             margin-top: 0.5rem;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
 
         h1 .sub {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-family: 'Comic Sans MS', cursive;
             font-weight: 400;
             font-style: normal;
@@ -150,11 +152,40 @@
             letter-spacing: 0.5px;
         }
 
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--border);
+            padding-bottom: 0.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .chapter-number {
+            font-size: 1rem;
+            color: var(--color-5);
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
         /* ========== PARAGRAPHS & LINKS ========== */
         p {
             margin-bottom: 1rem;
-            font-size: 1.1rem;
-            color: var(--color-5);
+            font-size: 1.05rem;
         }
 
         a {
@@ -171,6 +202,66 @@
             text-decoration-color: var(--text);
         }
 
+        /* ========== CODE ========== */
+        code, pre {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--code-bg);
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border: 1px solid var(--border);
+            word-break: break-all;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: var(--text);
+            font-size: 0.85rem;
+        }
+
+        /* ========== CARDS ========== */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .card p:last-child,
+        .card ul:last-child {
+            margin-bottom: 0;
+        }
+
+        .card ul {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .card li {
+            margin-bottom: 0.4rem;
+        }
+
         /* ========== TOGGLE SWITCH ========== */
         .theme-toggle-wrapper {
             display: flex;
@@ -179,9 +270,6 @@
             gap: 12px;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
         }
 
         .theme-toggle {
@@ -226,17 +314,15 @@
             background: var(--btn-bg);
             color: var(--btn-text);
             border: 2px solid var(--btn-bg);
-            padding: 0.8rem 2.5rem;
+            padding: 0.7rem 2rem;
             border-radius: 40px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
             display: inline-block;
             text-decoration: none;
             text-align: center;
-            margin-top: 0.5rem;
-            min-width: 200px;
         }
 
         .btn-primary:hover {
@@ -250,164 +336,1091 @@
             transform: scale(0.97);
         }
 
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-        }
-
-        .btn-group .btn-primary {
-            width: 100%;
-            max-width: 280px;
-        }
-
-        /* ========== COMING SOON ICON ========== */
-        .coming-icon {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        /* ========== FOOTER ========== */
-        .footer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 3px solid var(--border);
+        /* ========== IMAGES ========== */
+        .chapter-image {
+            margin: 1.5rem 0;
             text-align: center;
-            width: 100%;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--code-bg);
+            padding: 0.75rem;
         }
 
-        .footer p {
+        .chapter-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .chapter-image .caption {
             font-size: 0.85rem;
             color: var(--color-5);
-            margin-bottom: 0.3rem;
+            margin-top: 0.5rem;
+            font-style: italic;
         }
 
-        .footer .license {
-            font-size: 0.7rem;
-            color: var(--color-4);
+        /* ===== IMAGE FLOATING RIGHT ===== */
+        .image-float-right {
+            float: right;
+            width: 250px;
+            max-width: 100%;
+            margin: 0 0 1rem 1.5rem;
+            padding: 0;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: transparent;
+            overflow: hidden;
         }
 
-        .footer .license a {
+        .image-float-right img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .image-float-right .caption {
             font-size: 0.7rem;
+            color: var(--color-5);
+            padding: 0.3rem 0.4rem 0.4rem 0.4rem;
+            font-style: italic;
+            text-align: center;
+            background: var(--code-bg);
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* Clearfix for floated images */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* ===== IMAGE CENTERED ===== */
+        .img-centered {
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ========== NAVIGATION BUTTONS ========== */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 3px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons .btn-primary {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        /* ========== FLOATING TOC OVERLAY ========== */
+        .hamburger-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 2px solid var(--btn-bg);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px var(--shadow);
+            font-family: 'Comic Sans MS', cursive;
+            line-height: 1;
+        }
+
+        .hamburger-menu:hover {
+            background: var(--btn-hover-bg);
+            color: var(--btn-hover-text);
+            transform: scale(1.05);
+            border-color: var(--border);
+        }
+
+        .hamburger-menu:active {
+            transform: scale(0.95);
+        }
+
+        .toc-overlay {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            z-index: 999;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            max-width: 280px;
+            max-height: 60vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px var(--shadow);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Fix scrollbar edges in TOC overlay */
+        .toc-overlay {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) transparent;
+        }
+
+        .toc-overlay::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .toc-overlay::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .toc-overlay::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            border: 2px solid var(--card-bg);
+            background-clip: padding-box;
+        }
+
+        .toc-overlay::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+            border: 2px solid var(--card-bg);
+            background-clip: padding-box;
+        }
+
+        .toc-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .toc-overlay .toc-title {
+            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.3rem;
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            z-index: 2;
+            padding-top: 0.1rem;
+        }
+
+        .toc-overlay ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-overlay ul li {
+            margin-bottom: 0.15rem;
+        }
+
+        .toc-overlay ul li a {
+            display: block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: background 0.2s ease;
+            border-left: 3px solid transparent;
+            font-size: 0.85rem;
+        }
+
+        .toc-overlay ul li a:hover {
+            background: var(--toc-hover);
+            border-left-color: var(--color-5);
+            text-decoration: none;
         }
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 700px) {
             body {
                 padding: 1.25rem 0.75rem;
-                justify-content: flex-start;
-                padding-top: 4rem;
             }
             h1 {
-                font-size: 2.8rem;
+                font-size: 2rem;
             }
             h1 .sub {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
-            .theme-toggle-wrapper {
-                top: 1rem;
-                right: 1rem;
+            h2 {
+                font-size: 1.4rem;
             }
-            .coming-icon {
-                font-size: 3.5rem;
+            .card {
+                padding: 1.25rem;
             }
-            .btn-group .btn-primary {
-                max-width: 100%;
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-buttons .btn-primary {
+                width: 100%;
+            }
+            .hamburger-menu {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+                bottom: 15px;
+                left: 15px;
+            }
+            .toc-overlay {
+                left: 10px;
+                right: 10px;
+                max-width: none;
+                bottom: 70px;
             }
             ::-webkit-scrollbar {
                 width: 4px;
                 height: 4px;
             }
+            .chapter-image {
+                padding: 0.5rem;
+            }
+            .img-centered {
+                max-width: 100%;
+            }
+            .image-float-right {
+                float: none;
+                width: 100%;
+                margin: 1.5rem 0;
+            }
         }
 
         @media (max-width: 400px) {
+            body {
+                padding: 0.75rem;
+            }
             h1 {
-                font-size: 2.2rem;
+                font-size: 1.6rem;
             }
-            h1 .sub {
-                font-size: 0.85rem;
+            .card {
+                padding: 1rem;
             }
-            .coming-icon {
-                font-size: 3rem;
+            .code-block {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
             }
-            .btn-primary {
-                font-size: 0.95rem;
-                padding: 0.6rem 1.5rem;
-                min-width: 160px;
-            }
-            .theme-toggle-wrapper {
-                top: 0.75rem;
-                right: 0.75rem;
-            }
-            .theme-toggle {
-                width: 44px;
-                height: 24px;
-            }
-            .theme-toggle .dot {
-                width: 16px;
-                height: 16px;
-                top: 2px;
-                left: 2px;
-            }
-            [data-theme="dark"] .theme-toggle .dot {
-                transform: translateX(20px);
+            .hamburger-menu {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+                bottom: 12px;
+                left: 12px;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== THEME TOGGLE ===== -->
-    <div class="theme-toggle-wrapper">
-        <span class="theme-label" id="themeLabel">☀️ Light</span>
-        <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
-            <div class="dot"></div>
-        </div>
-    </div>
-
     <div class="container">
 
-        <!-- ===== COMING SOON CONTENT ===== -->
-        <span class="coming-icon">🚧</span>
+        <!-- ===== THEME TOGGLE ===== -->
+        <div class="theme-toggle-wrapper">
+            <span class="theme-label" id="themeLabel">☀️ Light</span>
+            <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <!-- ===== HEADER ===== -->
         <h1>
-            Coming Soon
-            <span class="sub">Chapter 2</span>
+            <span class="chapter-number">Chapter 3</span>
+            The CPU: The Machine That Actually Runs Your Code
         </h1>
 
+        <!-- ===== INTRO ===== -->
         <p>
-            We're busy building the next chapter of your learning journey.<br>
-            Check back soon — it's going to be worth the wait!
+            In Chapter 2, we looked at the major pieces that make up a computer. We learned that a computer isn't just a single magical box. It is a collection of different components working together — the CPU, RAM, storage, GPU, motherboard, power supply, cooling system, and many others.
+        </p>
+        <p>
+            But there was one component that appeared again and again: <strong>The CPU.</strong>
+        </p>
+        <p>
+            We said that the CPU is responsible for executing instructions. But that probably creates another question: <strong>What does "executing an instruction" actually mean?</strong>
+        </p>
+        <p>
+            If you write:
+        </p>
+        <div class="code-block">
+            <pre>x = 10 + 20</pre>
+        </div>
+        <p>
+            does the CPU see <code>10 + 20</code>? No. Does it understand that <code>x</code> is a variable? No. Does it know what Python is? No. So what is actually happening? How can a tiny piece of silicon sitting inside your computer run something as complicated as a web browser, a game, an operating system, or a Python program?
+        </p>
+        <p>
+            That's what we're going to discover in this chapter. And remember what we said throughout this course: <strong>One step, not one kilometer.</strong> We're going to start with the simple idea and gradually go deeper.
         </p>
 
-        <!-- ===== BUTTONS ===== -->
-        <div class="btn-group">
-            <a href="https://avaneesh12012.github.io/New-To-Dev/" class="btn-primary">
-                📑 Table of Contents
-            </a>
-            <a href="https://avaneesh12012.github.io/New-To-Dev/readme.html" class="btn-primary">
-                📖 Go to README
-            </a>
-            <a href="https://github.com/avaneesh12012/New-To-Dev" class="btn-primary" target="_blank">
-                🐙 Go to Repository
-            </a>
+        <!-- ===== 1. WHAT DOES CPU ACTUALLY MEAN? ===== -->
+        <h2 id="section-1">1. What Does CPU Actually Mean?</h2>
+        <p>
+            CPU stands for: <strong>Central Processing Unit</strong>. It is the general-purpose processor responsible for executing instructions and performing the operations required by software.
+        </p>
+        <p>
+            You can think of the CPU as the part of the computer that is constantly doing work. For example, a program might ask the computer to:
+        </p>
+        <ul>
+            <li>Add two numbers</li>
+            <li>Compare two values</li>
+            <li>Move data from one location to another</li>
+            <li>Store a result</li>
+            <li>Read information from memory</li>
+            <li>Make a decision</li>
+            <li>Repeat an operation</li>
+            <li>Jump to another part of the program</li>
+        </ul>
+        <p>
+            The CPU performs the low-level operations required to make these things happen. But don't make the mistake of thinking: <strong>"The CPU understands my program."</strong> It doesn't. The CPU doesn't know whether the instructions it's executing came from Python, C++, JavaScript, a video game, Windows, Linux, a web browser, or a calculator. The CPU only knows the instructions defined by its processor architecture.
+        </p>
+        <p>
+            This is an important distinction. When you write <code>print("Hello")</code>, you are communicating at a very high level. The CPU is operating at a much lower level. There are many layers between the two. And that's exactly what we'll explore.
+        </p>
+
+        <!-- ===== 2. A CPU IS NOT A BRAIN ===== -->
+        <h2 id="section-2">2. A CPU Is Not a Brain</h2>
+        <p>
+            You've probably heard someone say: <strong>"The CPU is the brain of the computer."</strong> It's a useful analogy, especially when you're first learning computers. But don't take it literally.
+        </p>
+        <p>
+            A CPU doesn't think. It doesn't have ideas. It doesn't understand English. It doesn't understand Python. It doesn't look at your program and decide what you meant. It doesn't say: "Hmm, the programmer probably made a mistake here. Let me fix it." 😂
+        </p>
+        <p>
+            Computers are much more literal than humans. A CPU receives instructions and performs operations according to its design. Imagine a worker who has a giant instruction manual. The manual says: "Take this value. Add this value. Store the result. Compare these values. Go to instruction 50." The worker doesn't need to understand <em>why</em> they're doing those things. They just follow the instructions. That's closer to what a CPU does. The difference is that the CPU performs these operations electronically and incredibly quickly.
+        </p>
+        <div class="card">
+            <p><strong>"The CPU is the brain of the computer."</strong> — It's an analogy, not a literal description.</p>
+        </div>
+
+        <!-- ===== 3. WHAT'S ACTUALLY INSIDE A CPU? ===== -->
+        <h2 id="section-3">3. What's Actually Inside a CPU?</h2>
+        <p>
+            Now we're going to start going deeper. A CPU isn't one giant mysterious object. Inside a modern processor are many different structures working together. You may encounter things such as:
+        </p>
+        <ul>
+            <li>Transistors</li>
+            <li>Logic gates</li>
+            <li>Registers</li>
+            <li>Arithmetic Logic Units</li>
+            <li>Control logic</li>
+            <li>Caches</li>
+            <li>Instruction decoders</li>
+            <li>Execution units</li>
+            <li>Branch prediction hardware</li>
+            <li>Multiple CPU cores</li>
+        </ul>
+        <p>
+            And that's still only scratching the surface. Modern CPU design is an enormous field of engineering. But don't worry. We aren't going to throw every technical term at you and expect you to memorize it. Instead, we're going to build the CPU from the bottom upward. We already learned about transistors in Chapter 1. So let's start there.
+        </p>
+
+        <!-- ===== 4. TRANSISTORS — TINY ELECTRONIC SWITCHES ===== -->
+        <h2 id="section-4">4. Transistors — Tiny Electronic Switches</h2>
+        <p>
+            In Chapter 1, we talked about something extremely important: <strong>Computers don't literally contain tiny numbers 0 and 1.</strong> The 0 and 1 are representations of digital states. Underneath those digital abstractions are physical electrical systems.
+        </p>
+        <p>
+            One of the most important building blocks of modern processors is the: <strong>Transistor</strong>. A transistor is a semiconductor device that can control electrical signals. You can simplify the idea by imagining a tiny electronic switch. Depending on the circuit, the transistor can help represent different electrical states. Those physical states can then be interpreted by digital circuits as <code>0</code> or <code>1</code>.
+        </p>
+        <p>
+            One transistor isn't a computer. It isn't even remotely close. But when enormous numbers of transistors are connected together in carefully designed circuits, something amazing happens. They can form <strong>logic gates</strong>. And logic gates can form <strong>complex digital circuits</strong>. And those circuits can eventually form <strong>processors</strong>.
+        </p>
+        <div class="card">
+            <p><strong>Transistors → Logic Gates → Digital Circuits → Processing Units → CPU</strong></p>
+            <p style="margin-bottom: 0;">That's the physical foundation underneath the software world.</p>
+        </div>
+
+        <!-- ===== 5. FROM TRANSISTORS TO LOGIC GATES ===== -->
+        <h2 id="section-5">5. From Transistors to Logic Gates</h2>
+        <p>
+            A transistor by itself isn't particularly useful for performing complex calculations. The real power comes from combining many transistors into circuits. One of the fundamental building blocks is the: <strong>Logic gate</strong>. Logic gates take one or more inputs and produce an output according to a logical rule.
+        </p>
+        <p>
+            Some common logic gates include: AND, OR, NOT, NAND, NOR, XOR. Let's look at an AND gate. An AND gate has two inputs. It produces <code>1</code> only when <strong>both</strong> inputs are <code>1</code>.
+        </p>
+        <div class="code-block">
+            <pre>A   B   Output
+0   0      0
+0   1      0
+1   0      0
+1   1      1</pre>
+        </div>
+        <p>
+            That's a ridiculously simple rule. But here's the important part: <strong>Computers are built by combining enormous numbers of simple rules.</strong> You can connect logic gates together to create circuits that perform arithmetic. You can create circuits that compare values. You can create circuits that store information. You can create circuits that control other circuits. Eventually, these simple building blocks become incredibly complicated machines.
+        </p>
+        <div class="card">
+            <p><strong>You don't need one magical component that understands everything. You need lots of simple components working together.</strong></p>
+        </div>
+
+        <!-- ===== 6. FROM LOGIC GATES TO USEFUL CIRCUITS ===== -->
+        <h2 id="section-6">6. From Logic Gates to Useful Circuits</h2>
+        <p>
+            Let's take the previous idea one step further. Suppose you have a bunch of logic gates. Individually, they can only perform relatively simple operations. But connect them together in a carefully designed way and you can build circuits that perform arithmetic. For example, digital circuits can be designed to add binary numbers. You can build circuits that determine whether two values are equal. You can build circuits that select between different inputs. You can build circuits that store state. You can build circuits that control the movement of information.
+        </p>
+        <p>
+            Eventually, you can combine all these different circuits into much larger systems. That's how we gradually move from <strong>"A transistor is an electronic switch."</strong> to <strong>"This machine can execute a program."</strong> There isn't one giant leap. There are thousands of layers of engineering between those two statements. And that's a pattern you'll see throughout computer science. Complex systems are often built by combining simpler systems.
+        </p>
+
+        <!-- ===== 7. WHAT IS AN INSTRUCTION? ===== -->
+        <h2 id="section-7">7. What Is an Instruction?</h2>
+        <p>
+            We've talked a lot about hardware. Now let's return to software. The CPU needs something to execute. Those things are called: <strong>Instructions</strong>. An instruction is an encoded operation that tells the processor to perform some action supported by its architecture.
+        </p>
+        <p>
+            For example, a processor may have instructions for:
+        </p>
+        <ul>
+            <li>Adding values</li>
+            <li>Subtracting values</li>
+            <li>Loading data</li>
+            <li>Storing data</li>
+            <li>Comparing values</li>
+            <li>Performing logical operations</li>
+            <li>Moving data</li>
+            <li>Jumping to another location in a program</li>
+        </ul>
+        <p>
+            Notice something important. These aren't instructions like <code>print("Hello")</code>. They're much more fundamental. A CPU doesn't have an instruction called <strong>"Make a website."</strong> It has much lower-level operations. For example, conceptually: "Load a value. Add another value. Store the result. Compare two values. Jump somewhere else." A compiler, interpreter, runtime, or other software layer can turn higher-level programming concepts into sequences of operations that eventually execute on the processor.
+        </p>
+
+        <!-- ===== 8. INSTRUCTION SET ARCHITECTURE — THE CPU'S VOCABULARY ===== -->
+        <h2 id="section-8">8. Instruction Set Architecture — The CPU's Vocabulary</h2>
+        <p>
+            Now we need a new term: <strong>Instruction Set Architecture</strong>, usually shortened to <strong>ISA</strong>. An ISA defines the instructions and programmer-visible behavior that software can use when targeting a processor architecture.
+        </p>
+        <p>
+            Think of it as the vocabulary and rules of communication between software and a processor. Imagine you're talking to someone who only understands five commands: ADD, LOAD, STORE, COMPARE, JUMP. You can't simply invent "MAKE_A_WEBSITE" and expect them to understand it. You have to express the task using the operations they actually know. A CPU works similarly. The processor architecture defines what kinds of instructions are available. Different architectures can have different instruction sets. That's why software has to be built for the architecture it is intended to run on.
+        </p>
+
+        <!-- ===== 9. x86, x86-64, ARM AND RISC-V ===== -->
+        <h2 id="section-9">9. x86, x86-64, ARM and RISC-V</h2>
+        <p>
+            You've probably seen names such as <strong>x86</strong>, <strong>x86-64</strong>, <strong>ARM</strong>, and <strong>RISC-V</strong>. These names become much less mysterious once you understand ISAs. Different processor architectures define different instruction sets and rules.
+        </p>
+        <ul>
+            <li><strong>x86-64</strong> is widely used in desktop and laptop computers.</li>
+            <li><strong>ARM</strong> is extremely common in smartphones, tablets, embedded systems, and many modern computers.</li>
+            <li><strong>RISC-V</strong> is an open-standard ISA designed around the RISC principles and uses a modular approach with a base ISA and optional extensions.</li>
+        </ul>
+        <p>
+            This doesn't mean "ARM is a CPU." An architecture is not necessarily the physical chip itself. A company can design a physical processor that implements an architecture. Think of it like this:
+        </p>
+        <div class="card">
+            <p><strong>ISA</strong> → Rules and instructions</p>
+            <p><strong>CPU design</strong> → Physical implementation</p>
+            <p><strong>Silicon</strong> → Actual manufactured chip</p>
+            <p style="margin-bottom: 0;">The architecture describes an important part of the interface. The implementation is how the processor actually makes it happen.</p>
+        </div>
+        <p>
+            Learn more → <a href="https://docs.riscv.org/reference/home/index.html" target="_blank">RISC-V Specifications</a>
+        </p>
+
+        <!-- ===== 10. REGISTERS — THE CPU'S TINY WORKSPACE ===== -->
+        <h2 id="section-10">10. Registers — The CPU's Tiny Workspace</h2>
+        <p>
+            Now imagine you're doing a calculation on paper. You might write some temporary numbers in a small area beside the calculation. The CPU needs something similar. That's where <strong>registers</strong> come in.
+        </p>
+        <p>
+            Registers are very small storage locations that are part of the processor. They are designed to hold values that the processor needs to work with. For example, conceptually:
+        </p>
+        <div class="code-block">
+            <pre>Register A → 10
+Register B → 20</pre>
+        </div>
+        <p>
+            The CPU can then perform an operation using those values. Registers are extremely important because accessing data that is already available in the processor is much faster than repeatedly going somewhere much farther away in the memory hierarchy. Different architectures define different sets of registers and different rules for using them. For example, ARM architectures define general-purpose and special-purpose registers.
+        </p>
+        <div class="card">
+            <p><strong>Registers are tiny, very fast storage locations used directly by the processor.</strong> Think of them as the CPU's immediate workspace.</p>
+        </div>
+
+        <!-- ===== 11. THE ALU — THE CALCULATOR INSIDE THE CPU ===== -->
+        <h2 id="section-11">11. The ALU — The Calculator Inside the CPU</h2>
+        <p>
+            Now suppose our CPU has <code>10</code> and <code>20</code> and needs to calculate <code>10 + 20</code>. Something needs to perform the operation. One important component involved is the: <strong>ALU</strong>. ALU stands for <strong>Arithmetic Logic Unit</strong>. As the name suggests, it handles arithmetic and logical operations.
+        </p>
+        <p>
+            For example, depending on the processor design, execution hardware can perform operations such as:
+        </p>
+        <div class="code-block">
+            <pre>10 + 20
+10 - 5
+5 AND 3
+7 OR 2
+Compare A and B</pre>
+        </div>
+        <p>
+            A simplified picture would look like:
+        </p>
+        <div class="code-block">
+            <pre>Register A ──→
+              \
+               → ALU → Result
+              /
+Register B ──→</pre>
+        </div>
+        <p>
+            If <code>A = 10</code> and <code>B = 20</code>, the ALU can perform <code>10 + 20</code> and produce <code>30</code>. Of course, modern processors don't have one simple ALU sitting in the middle doing everything. They can contain multiple execution units designed for different kinds of work. But the ALU is an excellent beginner-level concept for understanding where arithmetic and logic operations happen.
+        </p>
+
+        <!-- ===== 12. THE CONTROL UNIT — COORDINATING THE WORK ===== -->
+        <h2 id="section-12">12. The Control Unit — Coordinating the Work</h2>
+        <p>
+            Having an ALU isn't enough. Imagine having a calculator but nobody tells you: "What should I calculate?" You need something coordinating the process. That's where <strong>control logic</strong> comes in. Traditional CPU diagrams often describe a <strong>Control Unit</strong>.
+        </p>
+        <p>
+            The control unit is responsible, in the simplified model, for helping coordinate the execution of instructions. It needs to determine things such as:
+        </p>
+        <ul>
+            <li>What instruction is being executed?</li>
+            <li>What operation is required?</li>
+            <li>Where should the data come from?</li>
+            <li>What hardware needs to be activated?</li>
+            <li>Where should the result go?</li>
+            <li>What should happen next?</li>
+        </ul>
+        <p>
+            Modern processors are significantly more complicated than the classic "control unit + ALU" diagram. There can be instruction decoders, schedulers, execution units, reorder structures, prediction mechanisms, and much more. But the beginner-level idea is simple: <strong>The CPU needs control logic to coordinate the different parts of the processor.</strong>
+        </p>
+
+        <!-- ===== 13. THE PROGRAM COUNTER ===== -->
+        <h2 id="section-13">13. The Program Counter</h2>
+        <p>
+            We're almost ready to execute an actual instruction. But there's a problem. Suppose a program contains thousands of instructions. How does the CPU know which instruction to execute next? It needs to keep track of where it is in the program. One important concept here is the: <strong>Program Counter</strong>, often abbreviated as <strong>PC</strong>.
+        </p>
+        <p>
+            The program counter contains the address associated with the next instruction to fetch in the normal sequential flow of execution. Imagine a list:
+        </p>
+        <div class="code-block">
+            <pre>Instruction 1
+Instruction 2
+Instruction 3
+Instruction 4
+Instruction 5</pre>
+        </div>
+        <p>
+            The CPU needs to know where it currently is. Conceptually: <code>PC → Instruction 3</code>. After executing instruction 3, execution will normally continue to another instruction. But it isn't always simply <code>3 → 4 → 5</code>. Programs contain decisions, loops, functions, and jumps. For example:
+        </p>
+        <div class="code-block">
+            <pre>if score > 50:
+    print("Pass")</pre>
+        </div>
+        <p>
+            The processor needs a way to change where execution continues. That's why control-flow instructions matter. We'll return to this later.
+        </p>
+
+        <!-- ===== 14. THE INSTRUCTION CYCLE — FETCH, DECODE, EXECUTE ===== -->
+        <h2 id="section-14">14. The Instruction Cycle — Fetch, Decode, Execute</h2>
+        <p>
+            Now we can finally answer one of the biggest questions: <strong>How does a CPU execute an instruction?</strong> A simplified model is: <strong>Fetch → Decode → Execute</strong>.
+        </p>
+        <h3>Fetch</h3>
+        <p>The processor gets the next instruction from the memory system. It uses information about where that instruction is located.</p>
+        <h3>Decode</h3>
+        <p>The processor examines the instruction and determines what operation it represents. For example: "This is an addition instruction." or "This is a load instruction."</p>
+        <h3>Execute</h3>
+        <p>The appropriate hardware performs the operation. For an addition, arithmetic hardware may calculate the result. For a memory operation, the processor interacts with the memory system. For a branch, execution may move somewhere else.</p>
+        <p>
+            Then the CPU continues. And again. And again. And again. This basic model is simplified, but it gives us the foundation needed to understand CPU execution.
+        </p>
+
+        <!-- ===== 15. WAIT... DOES A MODERN CPU REALLY DO ONLY ONE THING AT A TIME? ===== -->
+        <h2 id="section-15">15. Wait... Does a Modern CPU Really Do Only One Thing at a Time?</h2>
+        <p>
+            Here's where the simple model starts to break down. If we imagined a CPU literally doing <code>Fetch → Wait → Decode → Wait → Execute → Wait → Next instruction</code>, modern processors would waste a huge amount of potential performance.
+        </p>
+        <p>
+            Modern CPUs are much more complicated. They can use techniques such as:
+        </p>
+        <ul>
+            <li><strong>Pipelining</strong></li>
+            <li><strong>Branch prediction</strong></li>
+            <li><strong>Out-of-order execution</strong></li>
+            <li><strong>Speculative execution</strong></li>
+            <li><strong>Multiple execution units</strong></li>
+            <li><strong>Instruction-level parallelism</strong></li>
+        </ul>
+        <p>
+            For example, while one instruction is being executed, another instruction may already be in a different stage of processing. This is somewhat like an assembly line. Imagine a factory with three stations: <code>Station 1 → Station 2 → Station 3</code>. A product can be at Station 3 while another product is at Station 2 and another is at Station 1. You don't have to wait for the entire factory to finish one product before starting the next. CPU pipelines use a similar principle.
+        </p>
+        <div class="card">
+            <p><strong>Fetch → Decode → Execute is the basic mental model.</strong> Modern CPUs are far more sophisticated implementations of this general idea.</p>
+        </div>
+
+        <!-- ===== 16. THE CPU CLOCK ===== -->
+        <h2 id="section-16">16. The CPU Clock</h2>
+        <p>
+            You've probably seen CPU specifications such as <strong>3.2 GHz</strong>, <strong>4.0 GHz</strong>, or <strong>5.1 GHz</strong>. But what does that actually mean? The <strong>GHz</strong> part stands for <strong>Gigahertz</strong>. One gigahertz represents one billion cycles per second. So a processor with a 4 GHz clock has a clock frequency of approximately <strong>4 billion cycles per second</strong>. That sounds insane. And it is.
+        </p>
+        <div class="card">
+            <p><strong>4 GHz does NOT mean 4 billion instructions per second.</strong> Because an instruction may take multiple cycles, while modern processors can also overlap and execute multiple operations during a cycle. Different CPUs can accomplish different amounts of work at the same clock frequency.</p>
+            <p style="margin-bottom: 0;"><strong>Higher GHz ≠ Automatically faster CPU</strong> — Clock frequency is only one part of processor performance.</p>
+        </div>
+
+        <!-- ===== 17. CPU CORES ===== -->
+        <h2 id="section-17">17. CPU Cores</h2>
+        <p>
+            Now let's talk about something you've definitely seen on CPU specifications: <strong>Cores</strong>. You might see 2 cores, 4 cores, 6 cores, 8 cores, 12 cores, or 16 cores. A CPU core is a processing unit capable of executing instructions. A processor can contain multiple cores.
+        </p>
+        <p>
+            Why? Because multiple cores allow the system to work on multiple streams of computation concurrently. Imagine one person has four tasks: Task A, Task B, Task C, Task D. One person has to work through them. Now imagine four people: Person 1 → Task A, Person 2 → Task B, Person 3 → Task C, Person 4 → Task D. You can potentially get more work done at the same time. That's the basic idea behind multiple cores.
+        </p>
+        <div class="card">
+            <p><strong>More cores don't automatically make every program proportionally faster.</strong> If a program is mostly designed to use one execution thread, throwing sixteen cores at it won't necessarily make it sixteen times faster. The software has to be able to take advantage of parallelism.</p>
+        </div>
+        <p>
+            This is why programmers need to understand things like: Threads, Parallelism, Concurrency. We'll explore these ideas later.
+        </p>
+
+        <!-- ===== 18. WHAT IS A THREAD? ===== -->
+        <h2 id="section-18">18. What Is a Thread?</h2>
+        <p>
+            Now you've probably heard another CPU-related word: <strong>Thread</strong>. A thread is an execution sequence that the operating system can schedule to run. A program can contain one thread or multiple threads.
+        </p>
+        <p>
+            For example, imagine a game. It may have different work happening for: Game logic, Audio, Networking, Rendering preparation, Background tasks. These tasks can potentially be organized into different threads. The operating system schedules threads onto available CPU execution resources.
+        </p>
+        <p>
+            This is where the difference between <strong>Core</strong> and <strong>Thread</strong> becomes important. A physical CPU core is actual processing hardware. A software thread is a sequence of work that needs to execute. Some processors also support hardware multithreading technologies that allow a core to maintain state for multiple hardware threads.
+        </p>
+        <div class="card">
+            <p><strong>2 cores ≠ 2 threads</strong> and <strong>2 threads ≠ 2 physical cores</strong>. These concepts are related, but they are not interchangeable.</p>
+        </div>
+
+        <!-- ===== 19. CPU CACHE — WHY DOESN'T THE CPU JUST USE RAM? ===== -->
+        <h2 id="section-19">19. CPU Cache — Why Doesn't the CPU Just Use RAM?</h2>
+        <p>
+            We've already learned about RAM. So you might wonder: "If RAM stores the data the CPU needs, why does the CPU need cache?" Excellent question.
+        </p>
+        <p>
+            The problem is speed. Modern CPUs can perform operations extremely quickly. If the CPU constantly had to wait for slower memory, a lot of that processing capability would sit idle. So processors use <strong>cache memory</strong>.
+        </p>
+        <p>
+            Cache is very fast memory located close to the processor. You will commonly hear: <strong>L1 cache</strong>, <strong>L2 cache</strong>, <strong>L3 cache</strong>. A simplified way to think about them is:
+        </p>
+        <div class="code-block">
+            <pre>L1 → Very fast, very small
+L2 → Larger, somewhat slower
+L3 → Larger again, generally slower
+RAM → Much larger, generally slower still
+Storage → Much larger again, much slower</pre>
+        </div>
+        <p>
+            The exact design differs between processors. But the principle is extremely important: <strong>Frequently needed information can be kept closer to the CPU so it can be accessed more quickly.</strong>
+        </p>
+
+        <!-- ===== 20. WHY DOES CACHE MATTER SO MUCH? ===== -->
+        <h2 id="section-20">20. Why Does Cache Matter So Much?</h2>
+        <p>
+            Let's use an everyday example. Imagine you're studying. You need your pen.
+        </p>
+        <ul>
+            <li><strong>Situation 1:</strong> The pen is already in your hand. Almost no effort.</li>
+            <li><strong>Situation 2:</strong> The pen is sitting on your desk. You reach for it. Still easy.</li>
+            <li><strong>Situation 3:</strong> The pen is inside your drawer. You have to open the drawer. More work.</li>
+            <li><strong>Situation 4:</strong> The pen is in another room. Now you have to get up.</li>
+            <li><strong>Situation 5:</strong> The pen is in another building. That's going to take much longer.</li>
+        </ul>
+        <p>
+            The information hierarchy in a computer works on a similar principle. Very fast storage is generally <strong>small and expensive</strong> while slower storage is generally <strong>larger and cheaper</strong>. That's why computers use a hierarchy.
+        </p>
+        <div class="card">
+            <p><strong>CPU Registers → L1 Cache → L2 Cache → L3 Cache → RAM → SSD / HDD</strong></p>
+            <p style="margin-bottom: 0;">The farther information is from the CPU in the memory hierarchy, the more expensive waiting for it can become.</p>
+        </div>
+
+        <!-- ===== 21. WHAT HAPPENS WHEN THE CPU ADDS TWO NUMBERS? ===== -->
+        <h2 id="section-21">21. What Happens When the CPU Adds Two Numbers?</h2>
+        <p>
+            Now let's put some of these ideas together. Suppose a program needs <code>10 + 20</code>. At a very simplified level, the CPU needs to obtain the instructions and data required for that calculation. Conceptually:
+        </p>
+        <div class="code-block">
+            <pre>Instruction
+    ↓
+Fetch
+    ↓
+Decode
+    ↓
+Get required values
+    ↓
+ALU
+    ↓
+10 + 20
+    ↓
+30</pre>
+        </div>
+        <p>
+            The actual processor may perform many additional steps behind the scenes. The values may come through registers and the cache/memory hierarchy. The instruction may pass through multiple stages of the processor. The processor may execute other instructions around it. But eventually the required hardware performs the addition. The result is <code>30</code>. And the program can continue.
+        </p>
+        <p>
+            This is an important moment. You started this chapter knowing: "The CPU executes instructions." Now you have a rough idea of what that statement actually means.
+        </p>
+
+        <!-- ===== 22. WHAT HAPPENS WHEN YOU RUN PYTHON? ===== -->
+        <h2 id="section-22">22. What Happens When You Run Python?</h2>
+        <p>
+            Let's connect all of this to the language you're learning. Suppose you write:
+        </p>
+        <div class="code-block">
+            <pre>x = 10
+y = 20
+
+result = x + y
+
+print(result)</pre>
+        </div>
+        <p>
+            You don't write <code>LOAD REGISTER A</code> or <code>ADD A B</code>. You write Python. That's because Python is a high-level programming language. A Python implementation handles the work required to execute your Python program. Depending on the implementation and execution mode, this can involve parsing the source, producing an intermediate representation such as bytecode, and then executing that through a runtime such as the Python virtual machine. Some implementations can use additional compilation techniques.
+        </p>
+        <p>
+            Eventually, however, the physical processor has to perform machine-level operations. So conceptually:
+        </p>
+        <div class="card">
+            <p><strong>Your Python code → Python implementation → Runtime / bytecode / compilation steps → Machine-level execution → CPU → Physical hardware</strong></p>
+            <p style="margin-bottom: 0;">The exact path is more complicated than this diagram. And this is why we're <strong>not</strong> going deep into JVMs, JITs, bytecode, interpreter internals, and language-runtime architecture yet. You'll encounter those topics later when you actually have the foundation needed to understand them. One step. Not one kilometer.</p>
+        </div>
+
+        <!-- ===== 23. ABSTRACTION — HOW CAN YOU PROGRAM WITHOUT KNOWING ALL THIS? ===== -->
+        <h2 id="section-23">23. Abstraction — How Can You Program Without Knowing All This?</h2>
+        <p>
+            This is one of the most important concepts in the entire course: <strong>Abstraction</strong>. Imagine you want to drive a car. Do you need to understand every part of the engine? No. You interact with a relatively simple interface: Steering wheel, Pedals, Gear selector. Behind that interface is an enormous amount of engineering.
+        </p>
+        <p>
+            Programming works similarly. You can write <code>print("Hello")</code> without knowing:
+        </p>
+        <ul>
+            <li>How every transistor works</li>
+            <li>How the ALU is physically implemented</li>
+            <li>How the CPU pipeline is organized</li>
+            <li>How cache lines are physically stored</li>
+            <li>How electrical signals move through the chip</li>
+        </ul>
+        <p>
+            That's because each layer provides an abstraction over the layer beneath it. For example:
+        </p>
+        <div class="code-block">
+            <pre>Your program
+     ↓
+Programming language
+     ↓
+Compiler / interpreter / runtime
+     ↓
+Operating system
+     ↓
+Instruction set
+     ↓
+CPU implementation
+     ↓
+Digital circuits
+     ↓
+Transistors
+     ↓
+Electrical physics</pre>
+        </div>
+        <p>
+            You don't need to understand every layer before writing your first Python program. But understanding that these layers exist makes you a much stronger programmer.
+        </p>
+
+        <!-- ===== 24. THE CPU DOESN'T KNOW WHAT YOUR PROGRAM MEANS ===== -->
+        <h2 id="section-24">24. The CPU Doesn't Know What Your Program Means</h2>
+        <p>
+            Let's say you write:
+        </p>
+        <div class="code-block">
+            <pre>if temperature > 30:
+    print("It's hot!")</pre>
+        </div>
+        <p>
+            You understand what this means. You know: Temperature is being compared to 30. You know that if the temperature is greater than 30, something should happen. The CPU doesn't know what "temperature" means. It doesn't know what "hot" means. It doesn't know whether 30 represents: Degrees Celsius, Dollars, Pixels, Points in a game, or The number of apples. The processor is working with values and operations. The <em>meaning</em> comes from the software and the humans who designed it.
+        </p>
+        <div class="card">
+            <p><strong>Computers don't understand our intentions. They execute defined operations.</strong> That's why programming requires precise instructions.</p>
+        </div>
+
+        <!-- ===== 25. BRANCHES — HOW DOES THE CPU MAKE DECISIONS? ===== -->
+        <h2 id="section-25">25. Branches — How Does the CPU Make Decisions?</h2>
+        <p>
+            Let's continue with <code>if temperature > 30: print("It's hot!")</code>. A computer needs some way to perform conditional behavior. At the machine level, processors provide instructions that can compare values and change the flow of execution. This is generally called <strong>control flow</strong>.
+        </p>
+        <p>
+            Imagine your program as a road. Normally: Instruction 1 → Instruction 2 → Instruction 3 → Instruction 4. But a condition can create a fork:
+        </p>
+        <div class="code-block">
+            <pre>             ┌──→ Instruction A
+             │
+Instruction ─┤
+             │
+             └──→ Instruction B</pre>
+        </div>
+        <p>
+            The processor evaluates the condition and execution continues along the appropriate path. Loops work using similar control-flow mechanisms. For example:
+        </p>
+        <div class="code-block">
+            <pre>while x < 10:
+    x += 1</pre>
+        </div>
+        <p>
+            The program repeatedly moves back to an earlier part of the instruction sequence. This is one reason the program counter matters. The CPU isn't simply walking through a file from top to bottom. It can change where execution goes.
+        </p>
+
+        <!-- ===== 26. WHY MODERN CPUS ARE SO COMPLICATED ===== -->
+        <h2 id="section-26">26. Why Modern CPUs Are So Complicated</h2>
+        <p>
+            At this point you might think: "Couldn't engineers just make a CPU that executes instructions in a simple order?" They could. But we want CPUs to be fast. Very fast. If the processor constantly waited for every operation to finish before beginning the next one, huge amounts of potential performance could be wasted.
+        </p>
+        <p>
+            So modern CPUs use sophisticated techniques. Some include:
+        </p>
+        <ul>
+            <li><strong>Pipelining</strong> — Different instructions can occupy different stages of execution at the same time.</li>
+            <li><strong>Branch Prediction</strong> — The CPU can try to predict which path a program will take.</li>
+            <li><strong>Out-of-Order Execution</strong> — The processor can sometimes execute ready operations in an order different from the original program order while preserving the required architectural behavior.</li>
+            <li><strong>Speculative Execution</strong> — The processor may perform work based on predicted future execution and discard it if the prediction turns out to be wrong.</li>
+            <li><strong>Multiple Execution Units</strong> — Different parts of the processor can work on different types of operations.</li>
+        </ul>
+        <p>
+            These techniques are a huge part of why modern processors are so powerful. But don't worry if you don't understand all of them yet. You aren't supposed to. We've only introduced them so that when you encounter these words later, they won't look like alien technology.
+        </p>
+
+        <!-- ===== 27. WHY ISN'T A 5 GHZ CPU AUTOMATICALLY FASTER? ===== -->
+        <h2 id="section-27">27. Why Isn't a 5 GHz CPU Automatically Faster?</h2>
+        <p>
+            Let's imagine two CPUs: CPU A → 5.0 GHz, CPU B → 4.0 GHz. Which one is faster? You might immediately say: <strong>CPU A.</strong> But that's not necessarily true.
+        </p>
+        <p>
+            There are many factors affecting performance. For example:
+        </p>
+        <ul>
+            <li>Architecture</li>
+            <li>Instructions per cycle</li>
+            <li>Number of cores</li>
+            <li>Cache</li>
+            <li>Memory subsystem</li>
+            <li>Execution units</li>
+            <li>Workload</li>
+            <li>Power limits</li>
+            <li>Thermal limits</li>
+            <li>Software optimization</li>
+            <li>Instruction-set extensions</li>
+        </ul>
+        <p>
+            A newer processor could run at a lower clock speed and still perform more useful work per second than an older processor with a higher clock speed. This is why comparing CPUs using only GHz is misleading. A better question is: <strong>How much useful work can this processor perform for the workload I'm interested in?</strong> That's much more meaningful.
+        </p>
+
+        <!-- ===== 28. WHY DOES THE CPU GET HOT? ===== -->
+        <h2 id="section-28">28. Why Does the CPU Get Hot?</h2>
+        <p>
+            We've learned that CPUs contain enormous numbers of transistors and perform huge amounts of electrical activity. But electrical activity consumes energy. And real physical systems aren't perfectly efficient. Some of the energy becomes heat. That's why your CPU gets warm when it works hard.
+        </p>
+        <p>
+            If you've ever opened a game and heard your laptop fan suddenly become louder, you have experienced this directly. The CPU is working harder. More electrical activity may mean more power consumption. More power consumption can mean more heat. And that heat needs to be removed. That's why computers have cooling systems.
+        </p>
+        <div class="code-block">
+            <pre>CPU
+ ↓
+Heat
+ ↓
+Heatsink / thermal interface
+ ↓
+Fan or other cooling system
+ ↓
+Heat leaves the computer</pre>
+        </div>
+        <p>
+            This connects directly back to Chapter 2. Hardware isn't just about computation. It also has to deal with the physical realities of electricity, heat, materials, and energy.
+        </p>
+
+        <!-- ===== 29. WHAT DOES "64-BIT CPU" ACTUALLY MEAN? ===== -->
+        <h2 id="section-29">29. What Does "64-Bit CPU" Actually Mean?</h2>
+        <p>
+            You've probably heard phrases such as <strong>64-bit processor</strong> or <strong>64-bit operating system</strong>. So what does "64-bit" actually mean?
+        </p>
+        <p>
+            It depends on the specific context. In processor architecture, "64-bit" can refer to aspects such as the width of certain registers or the size of values the architecture handles natively. It also relates to address spaces.
+        </p>
+        <div class="card">
+            <p><strong>"64-bit means the CPU only understands numbers with 64 digits."</strong> — That's not what it means. Similarly, a 64-bit CPU isn't simply "A CPU that does everything 64 times better than a 1-bit CPU."</p>
+            <p style="margin-bottom: 0;">The term describes characteristics of the architecture. For example, modern 64-bit architectures can support much larger address spaces than older 32-bit systems, although the actual usable address space depends on the architecture and implementation.</p>
+        </div>
+        <p>
+            This topic becomes especially important when we later discuss: Memory, Pointers, Data types, Operating systems. So for now, remember: <strong>Bit-width is an architectural concept, not a simple measurement of how powerful a CPU is.</strong>
+        </p>
+
+        <!-- ===== 30. CPU, SOFTWARE AND PHYSICS — PUTTING EVERYTHING TOGETHER ===== -->
+        <h2 id="section-30">30. CPU, Software and Physics — Putting Everything Together</h2>
+        <p>
+            Let's zoom all the way out. At the beginning of this course, we started with programming. You write <code>print("Hello, World!")</code>. That looks simple. But underneath it is an enormous stack of technology.
+        </p>
+        <p>
+            Your code exists at a high level. It gets processed by language tools. Those tools eventually cause machine-level operations to be executed. The processor executes instructions. Those instructions are implemented by hardware. That hardware is made from digital circuits. Those digital circuits are built from logic gates. Logic gates are built from transistors. And transistors operate according to the physical behavior of semiconductor devices and electrical circuits.
+        </p>
+        <p>
+            So you can imagine the entire journey as:
+        </p>
+        <div class="code-block">
+            <pre>Python
+   ↓
+Language implementation
+   ↓
+Runtime / compilation
+   ↓
+Machine-level instructions
+   ↓
+CPU architecture
+   ↓
+CPU implementation
+   ↓
+Digital circuits
+   ↓
+Logic gates
+   ↓
+Transistors
+   ↓
+Electrical behavior
+   ↓
+Physics</pre>
+        </div>
+        <p>
+            That's the incredible thing about programming. When you write a tiny piece of code, you're using the top layer of a gigantic technological stack. And you don't need to control every lower layer manually. That's the power of abstraction.
+        </p>
+
+        <!-- ===== 31. QUICK CHECK & THE BIG TAKEAWAY ===== -->
+        <h2 id="section-31">31. Quick Check & The Big Takeaway</h2>
+        <p>Before leaving the CPU, make sure you can explain these ideas in your own words.</p>
+
+        <h3>Quick Check</h3>
+        <ol>
+            <li>What does CPU stand for?</li>
+            <li>What is the main job of a CPU?</li>
+            <li>Why doesn't a CPU understand Python directly?</li>
+            <li>What is a transistor?</li>
+            <li>How do transistors help create digital circuits?</li>
+            <li>What is a logic gate?</li>
+            <li>What is an instruction?</li>
+            <li>What does ISA stand for?</li>
+            <li>Why do different CPU architectures have different instruction sets?</li>
+            <li>What are registers?</li>
+            <li>What does an ALU do?</li>
+            <li>What is the program counter used for?</li>
+            <li>What are the three basic stages in the simplified instruction cycle?</li>
+            <li>Why doesn't 5 GHz automatically mean "faster CPU"?</li>
+            <li>What is a CPU core?</li>
+            <li>What is a thread?</li>
+            <li>Why does a CPU need cache?</li>
+            <li>Why does a CPU produce heat?</li>
+            <li>What does abstraction mean in programming?</li>
+            <li>Why can a computer execute a program correctly even if the program itself contains incorrect logic?</li>
+        </ol>
+        <p>If you can explain these without simply memorizing definitions, you've understood the important part of this chapter.</p>
+
+        <!-- ===== BIG TAKEAWAY ===== -->
+        <div class="card">
+            <h3 style="margin-top: 0;">🎯 The Big Takeaway</h3>
+            <p>A CPU isn't a magical brain. It is an incredibly complicated electronic machine built from layers upon layers of simpler systems.</p>
+            <p>At the bottom: <strong>Transistors</strong> combine to create <strong>logic gates</strong> which combine to create <strong>digital circuits</strong> which form <strong>registers, execution units, control logic and other processor structures</strong> which together form <strong>CPU cores</strong> which execute <strong>machine-level instructions</strong> which are ultimately used to run <strong>your programs</strong>.</p>
+            <p>And your programs don't need to know every physical detail underneath. That's because abstraction allows us to build one layer on top of another. You can write <code>print("Hello")</code> without knowing how the transistor switching inside your processor works. And that's not a weakness. That's the entire reason modern software development is possible.</p>
+            <p style="margin-bottom: 0;">In Chapter 1, we asked: <strong>"How does human-written code eventually become something a CPU can execute?"</strong> Now you've seen another piece of the answer.</p>
+        </div>
+
+        <div class="card" style="background: var(--code-bg); border-color: var(--color-5);">
+            <h3 style="margin-top: 0;">📚 Further Learning</h3>
+            <p style="margin-bottom: 0.5rem;">Explore official architecture documentation:</p>
+            <ul>
+                <li><a href="https://docs.riscv.org/reference/home/index.html" target="_blank">RISC-V Ratified Specifications</a> — official documentation for the RISC-V instruction-set architecture.</li>
+                <li><a href="https://developer.arm.com/documentation" target="_blank">Arm Instruction Set Architecture</a> — official Arm architecture documentation and learning resources.</li>
+            </ul>
+        </div>
+
+        <p style="font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; text-align: center;">
+            Next Chapter → Memory & Storage
+        </p>
+        <p style="text-align: center; color: var(--color-5);">
+            RAM. Cache. Registers. SSDs. HDDs. Bits. Bytes. Addresses. And most importantly: <strong>How does a computer actually remember something?</strong>
+        </p>
+
+        <!-- ===== NAVIGATION BUTTONS ===== -->
+        <div class="nav-buttons">
+            <a href="https://avaneesh12012.github.io/New-To-Dev/" class="btn-primary">📑 Table of Contents</a>
+            <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/2.html" class="btn-primary">2 ← Previous Chapter</a>
+            <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/4.html" class="btn-primary">Next Chapter → 4</a>
         </div>
 
         <!-- ===== FOOTER ===== -->
-        <div class="footer">
-            <p>New-To-Dev &bull; Built for beginners, by someone who remembers the struggle.</p>
-            <p style="font-size: 0.8rem;">💻 Free forever. No ads. No catch.</p>
-            <p class="license">
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 3px solid var(--border); text-align: center;">
+            <p style="font-size: 0.85rem; color: var(--color-5); margin-bottom: 0.3rem;">
+                New-To-Dev &bull; Chapter 3 &bull; Built for beginners, by someone who remembers the struggle.
+            </p>
+            <p style="font-size: 0.8rem; color: var(--color-5); margin-bottom: 0.3rem;">
+                💻 Free forever. No ads. No catch.
+            </p>
+            <p style="font-size: 0.7rem; color: var(--color-4);">
                 © 2026 Avaneesh Shahi. This work is licensed under a 
-                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="font-size: 0.7rem;">
                     Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
                 </a> 
                 International License.
             </p>
-        </div>
+    </div>
 
+    <!-- ===== HAMBURGER MENU (Three Lines Icon) ===== -->
+    <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle table of contents">
+        ☰
+    </button>
+
+    <!-- ===== FLOATING TOC OVERLAY ===== -->
+    <div class="toc-overlay" id="tocOverlay">
+        <div class="toc-title">📑 Jump to Section</div>
+        <ul>
+            <li><a href="#section-1">1️⃣ What Does CPU Actually Mean?</a></li>
+            <li><a href="#section-2">2️⃣ A CPU Is Not a Brain</a></li>
+            <li><a href="#section-3">3️⃣ What's Actually Inside a CPU?</a></li>
+            <li><a href="#section-4">4️⃣ Transistors — Tiny Electronic Switches</a></li>
+            <li><a href="#section-5">5️⃣ From Transistors to Logic Gates</a></li>
+            <li><a href="#section-6">6️⃣ From Logic Gates to Useful Circuits</a></li>
+            <li><a href="#section-7">7️⃣ What Is an Instruction?</a></li>
+            <li><a href="#section-8">8️⃣ Instruction Set Architecture</a></li>
+            <li><a href="#section-9">9️⃣ x86, x86-64, ARM and RISC-V</a></li>
+            <li><a href="#section-10">🔟 Registers — The CPU's Tiny Workspace</a></li>
+            <li><a href="#section-11">1️⃣1️⃣ The ALU — The Calculator Inside the CPU</a></li>
+            <li><a href="#section-12">1️⃣2️⃣ The Control Unit — Coordinating the Work</a></li>
+            <li><a href="#section-13">1️⃣3️⃣ The Program Counter</a></li>
+            <li><a href="#section-14">1️⃣4️⃣ The Instruction Cycle — Fetch, Decode, Execute</a></li>
+            <li><a href="#section-15">1️⃣5️⃣ Does a Modern CPU Really Do Only One Thing at a Time?</a></li>
+            <li><a href="#section-16">1️⃣6️⃣ The CPU Clock</a></li>
+            <li><a href="#section-17">1️⃣7️⃣ CPU Cores</a></li>
+            <li><a href="#section-18">1️⃣8️⃣ What Is a Thread?</a></li>
+            <li><a href="#section-19">1️⃣9️⃣ CPU Cache — Why Doesn't the CPU Just Use RAM?</a></li>
+            <li><a href="#section-20">2️⃣0️⃣ Why Does Cache Matter So Much?</a></li>
+            <li><a href="#section-21">2️⃣1️⃣ What Happens When the CPU Adds Two Numbers?</a></li>
+            <li><a href="#section-22">2️⃣2️⃣ What Happens When You Run Python?</a></li>
+            <li><a href="#section-23">2️⃣3️⃣ Abstraction — How Can You Program Without Knowing All This?</a></li>
+            <li><a href="#section-24">2️⃣4️⃣ The CPU Doesn't Know What Your Program Means</a></li>
+            <li><a href="#section-25">2️⃣5️⃣ Branches — How Does the CPU Make Decisions?</a></li>
+            <li><a href="#section-26">2️⃣6️⃣ Why Modern CPUs Are So Complicated</a></li>
+            <li><a href="#section-27">2️⃣7️⃣ Why Isn't a 5 GHz CPU Automatically Faster?</a></li>
+            <li><a href="#section-28">2️⃣8️⃣ Why Does the CPU Get Hot?</a></li>
+            <li><a href="#section-29">2️⃣9️⃣ What Does "64-Bit CPU" Actually Mean?</a></li>
+            <li><a href="#section-30">3️⃣0️⃣ CPU, Software and Physics — Putting Everything Together</a></li>
+            <li><a href="#section-31">3️⃣1️⃣ Quick Check & The Big Takeaway</a></li>
+        </ul>
     </div>
 
     <!-- ===== JAVASCRIPT ===== -->
@@ -442,6 +1455,65 @@
             function updateLabel(theme) {
                 label.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
             }
+
+            // ========== HAMBURGER MENU ==========
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const tocOverlay = document.getElementById('tocOverlay');
+
+            hamburgerBtn.addEventListener('click', function() {
+                const isOpen = tocOverlay.classList.contains('open');
+                tocOverlay.classList.toggle('open');
+                hamburgerBtn.textContent = isOpen ? '☰' : '✕';
+                hamburgerBtn.setAttribute('aria-expanded', !isOpen);
+            });
+
+            // ========== CLOSE OVERLAY WHEN CLICKING A LINK ==========
+            document.querySelectorAll('.toc-overlay a').forEach(link => {
+                link.addEventListener('click', function() {
+                    tocOverlay.classList.remove('open');
+                    hamburgerBtn.textContent = '☰';
+                    hamburgerBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // ========== CLOSE OVERLAY WHEN CLICKING OUTSIDE ==========
+            document.addEventListener('click', function(e) {
+                if (tocOverlay.classList.contains('open')) {
+                    const isClickInside = tocOverlay.contains(e.target) || hamburgerBtn.contains(e.target);
+                    if (!isClickInside) {
+                        tocOverlay.classList.remove('open');
+                        hamburgerBtn.textContent = '☰';
+                        hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // ========== KEYBOARD ACCESSIBILITY ==========
+            hamburgerBtn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+
+            // ========== SMOOTH SCROLL FOR INTERNAL LINKS ==========
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            if (tocOverlay.classList.contains('open')) {
+                                tocOverlay.classList.remove('open');
+                                hamburgerBtn.textContent = '☰';
+                                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                            }
+                        }
+                    }
+                });
+            });
 
         })();
     </script>

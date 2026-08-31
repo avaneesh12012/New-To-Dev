@@ -5,7 +5,7 @@
 Hi, this `README` might look ugly because here we tell you some quick information for you to get started.
 
 **👉 Go here:** [avaneesh12012.github.io/New-To-Dev](https://avaneesh12012.github.io/New-To-Dev) to start the course.
-
+> Plz help us translate this code into more languages 
 ---
 
 ## 📚 What This Course Includes
@@ -31,7 +31,7 @@ Hi, this `README` might look ugly because here we tell you some quick informatio
 
 ### 🧠 Mindset & Approach
 - ✅ No shortcuts — real learning takes time
-- ✅ Human-written explanations (not AI-generated fluff)
+- ✅ Human-written explanations (with some content refined with AI)
 - ✅ Practical examples you can actually run
 - ✅ Encouragement to type code, not just read it
 - ✅ Community-driven — open to contributions
@@ -100,22 +100,21 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   │   ├── charles_babbage.jpeg
 │   │   ├── code-compiler-0s-and-1s-cpu.png
 │   │   ├── commit-github-preview.png
-│   │   └── compiler~interpreter.png
+│   │   ├── compiler~interpreter.png
+│   │   ├── computer-ports.jpg
+│   │   ├── CPU.jpg
+│   │   ├── nvidia-gpu.jpg
+│   │   ├── ram.jpg
+│   │   ├── README.md
+│   │   └── ssd.jpg
 │   ├── favicon.png
 │   ├── favicon1.png
 │   ├── favicon2.png
 │   └── README.md
 ├── chapters/
 │   ├── 1.html
-│   ├── 2.html
-│   ├── 3.html
-│   ├── 4.html
-│   ├── 5.html
-│   ├── 6.html
-│   ├── 7.html
-│   ├── 8.html
-│   ├── 9.html
 │   ├── 10.html
+│   ├── 100.html
 │   ├── 11.html
 │   ├── 12.html
 │   ├── 13.html
@@ -125,6 +124,7 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 17.html
 │   ├── 18.html
 │   ├── 19.html
+│   ├── 2.html
 │   ├── 20.html
 │   ├── 21.html
 │   ├── 22.html
@@ -135,6 +135,7 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 27.html
 │   ├── 28.html
 │   ├── 29.html
+│   ├── 3.html
 │   ├── 30.html
 │   ├── 31.html
 │   ├── 32.html
@@ -145,6 +146,7 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 37.html
 │   ├── 38.html
 │   ├── 39.html
+│   ├── 4.html
 │   ├── 40.html
 │   ├── 41.html
 │   ├── 42.html
@@ -155,6 +157,7 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 47.html
 │   ├── 48.html
 │   ├── 49.html
+│   ├── 5.html
 │   ├── 50.html
 │   ├── 51.html
 │   ├── 52.html
@@ -165,6 +168,7 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 57.html
 │   ├── 58.html
 │   ├── 59.html
+│   ├── 6.html
 │   ├── 60.html
 │   ├── 61.html
 │   ├── 62.html
@@ -175,6 +179,7 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 67.html
 │   ├── 68.html
 │   ├── 69.html
+│   ├── 7.html
 │   ├── 70.html
 │   ├── 71.html
 │   ├── 72.html
@@ -185,6 +190,7 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 77.html
 │   ├── 78.html
 │   ├── 79.html
+│   ├── 8.html
 │   ├── 80.html
 │   ├── 81.html
 │   ├── 82.html
@@ -195,6 +201,7 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 87.html
 │   ├── 88.html
 │   ├── 89.html
+│   ├── 9.html
 │   ├── 90.html
 │   ├── 91.html
 │   ├── 92.html
@@ -204,10 +211,13 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 │   ├── 96.html
 │   ├── 97.html
 │   ├── 98.html
-│   ├── 99.html
-│   └── 100.html
+│   └── 99.html
+├── editor/
+│   ├── index.html
+│   └── README.md
 ├── 404.html
 ├── index.html
 ├── LICENSE
 ├── readme.html
 └── README.md
+

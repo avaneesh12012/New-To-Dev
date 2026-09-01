@@ -2,34 +2,73 @@
 
 > From Zero to Coder — A Complete Beginner's Journey
 
+<div align="center">
+
+<!-- Main Stats - Flat Style with Icons -->
+<img src="https://img.shields.io/github/stars/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Stars&color=FFD700" alt="Stars">
+<img src="https://img.shields.io/github/forks/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Forks&color=00BFFF" alt="Forks">
+<img src="https://img.shields.io/github/watchers/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Watchers&color=32CD32" alt="Watchers">
+<img src="https://img.shields.io/github/issues/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Issues&color=FF4444" alt="Issues">
+<img src="https://img.shields.io/github/issues-pr/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Pull%20Requests&color=FF8C00" alt="Pull Requests">
+
+<!-- Status Badges - Flat Rounded -->
+<img src="https://img.shields.io/website-up-down-green-red/https/avaneesh12012.github.io/New-To-Dev?style=flat-square&label=Website&color=6C5CE7" alt="Website">
+<img src="https://img.shields.io/github/last-commit/avaneesh12012/New-To-Dev?style=flat-square&logo=git&label=Last%20Commit&color=FD79A8" alt="Last Commit">
+<img src="https://img.shields.io/github/commit-activity/m/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Monthly%20Commits&color=00CEC9" alt="Commit Activity">
+<img src="https://img.shields.io/github/repo-size/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Repo%20Size&color=FDCB6E" alt="Repo Size">
+
+<!-- Community Badges - Minimal -->
+<img src="https://img.shields.io/badge/Open%20Source-❤️-FC60A8?style=flat-square" alt="Open Source">
+<img src="https://img.shields.io/badge/PRs-Welcome-00B894?style=flat-square&logo=github" alt="PRs Welcome">
+<img src="https://img.shields.io/badge/Contributions-Welcome-FF6B6B?style=flat-square&logo=github" alt="Contributions Welcome">
+<img src="https://img.shields.io/badge/Translate-Add%20Your%20Language-0984E3?style=flat-square&logo=google-translate" alt="Translate">
+
+<!-- Support Badges -->
+<img src="https://img.shields.io/badge/⭐-Star%20Us-FFD93D?style=flat-square" alt="Star Us">
+<img src="https://img.shields.io/badge/🔀-Fork%20Us-6C5CE7?style=flat-square" alt="Fork Us">
+<img src="https://img.shields.io/badge/🐛-Report%20Issues-FF6B6B?style=flat-square" alt="Report Issues">
+
+</div>
+
+---
+
 Hi, this `README` might look ugly because here we tell you some quick information for you to get started.
 
 **👉 Go here:** [avaneesh12012.github.io/New-To-Dev](https://avaneesh12012.github.io/New-To-Dev) to start the course.
-> Plz help us translate this code into more languages 
+
+> Please help us translate this code into more languages 
+
 ---
 
 ## 📚 What This Course Includes
 
 ### 🎯 Core Curriculum
-- ✅ Proper introduction if you are a complete newbie (no prior knowledge needed)
-- ✅ Takes Python as your primary programming language
-- ✅ Makes you solid in Python — from basics to building projects
-- ✅ Teaches you programming fundamentals that apply to **any** language
-- ✅ Covers essential tools: Git, GitHub, and version control
-- ✅ Explains how computers actually work (hardware + software)
-- ✅ History of computing — the people and ideas that shaped our world
-- ✅ Builds real projects you can put on your portfolio
+
+| Category | Description |
+|----------|-------------|
+| **Introduction** | ✅ Proper introduction if you are a complete newbie (no prior knowledge needed) |
+| **Primary Language** | ✅ Takes Python as your primary programming language |
+| **Python Mastery** | ✅ Makes you solid in Python — from basics to building projects |
+| **Programming Fundamentals** | ✅ Teaches you programming fundamentals that apply to **any** language |
+| **Essential Tools** | ✅ Covers essential tools: Git, GitHub, and version control |
+| **Computer Architecture** | ✅ Explains how computers actually work (hardware + software) |
+| **History** | ✅ History of computing — the people and ideas that shaped our world |
+| **Portfolio Projects** | ✅ Builds real projects you can put on your portfolio |
 
 ### 🔧 Skills You'll Gain
-- ✅ Write clean, readable Python code
-- ✅ Debug and fix errors like a pro
-- ✅ Use Git to save and track your work
-- ✅ Collaborate with others on GitHub
-- ✅ Understand the terminal/command line
-- ✅ Think like a programmer — break problems into steps
-- ✅ Build confidence to learn any language next
+
+| Skill | Status |
+|-------|--------|
+| Write clean, readable Python code | ✅ |
+| Debug and fix errors like a pro | ✅ |
+| Use Git to save and track your work | ✅ |
+| Collaborate with others on GitHub | ✅ |
+| Understand the terminal/command line | ✅ |
+| Think like a programmer — break problems into steps | ✅ |
+| Build confidence to learn any language next | ✅ |
 
 ### 🧠 Mindset & Approach
+
 - ✅ No shortcuts — real learning takes time
 - ✅ Human-written explanations (with some content refined with AI)
 - ✅ Practical examples you can actually run
@@ -51,6 +90,16 @@ Hi, this `README` might look ugly because here we tell you some quick informatio
 ## 🤝 Contributing
 
 This is an **open-source** project. Contributions are welcome!
+
+<div align="center">
+
+<img src="https://img.shields.io/github/contributors/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Contributors&color=00B894" alt="Contributors">
+<img src="https://img.shields.io/github/issues-raw/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Open%20Issues&color=FF6B6B" alt="Open Issues">
+<img src="https://img.shields.io/github/issues-closed-raw/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Closed%20Issues&color=00B894" alt="Closed Issues">
+<img src="https://img.shields.io/github/issues-pr-raw/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Open%20PRs&color=FF8C00" alt="Open PRs">
+<img src="https://img.shields.io/github/issues-pr-closed-raw/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Closed%20PRs&color=6C5CE7" alt="Closed PRs">
+
+</div>
 
 ### Ways to contribute:
 - 🐛 Report bugs or errors in the content
@@ -220,4 +269,3 @@ This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDer
 ├── LICENSE
 ├── readme.html
 └── README.md
-

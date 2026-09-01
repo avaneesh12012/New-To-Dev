@@ -1,48 +1,99 @@
-# New-To-Dev
+<!-- ====================================================================== -->
+<!--                         🌟 BEAUTIFUL BANNER 🌟                         -->
+<!-- ====================================================================== -->
 
-> From Zero to Coder — A Complete Beginner's Journey
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=200&section=header&text=🌍%20New-To-Dev&fontSize=60&fontAlignY=35&animation=fadeIn&desc=From%20Zero%20to%20Coder%20%E2%80%94%20A%20Complete%20Beginner's%20Journey&descAlignY=55" width="100%" />
+</p>
 
-<div align="center">
+<!-- ====================================================================== -->
+<!--                          📊 BADGE SECTION                              -->
+<!-- ====================================================================== -->
 
-<!-- Main Stats - Flat Style with Icons -->
-<img src="https://img.shields.io/github/stars/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Stars&color=FFD700" alt="Stars">
-<img src="https://img.shields.io/github/forks/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Forks&color=00BFFF" alt="Forks">
-<img src="https://img.shields.io/github/watchers/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Watchers&color=32CD32" alt="Watchers">
-<img src="https://img.shields.io/github/issues/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Issues&color=FF4444" alt="Issues">
-<img src="https://img.shields.io/github/issues-pr/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Pull%20Requests&color=FF8C00" alt="Pull Requests">
-
-<!-- Status Badges - Flat Rounded -->
-<img src="https://img.shields.io/website-up-down-green-red/https/avaneesh12012.github.io/New-To-Dev?style=flat-square&label=Website&color=6C5CE7" alt="Website">
-<img src="https://img.shields.io/github/last-commit/avaneesh12012/New-To-Dev?style=flat-square&logo=git&label=Last%20Commit&color=FD79A8" alt="Last Commit">
-<img src="https://img.shields.io/github/commit-activity/m/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Monthly%20Commits&color=00CEC9" alt="Commit Activity">
-<img src="https://img.shields.io/github/repo-size/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Repo%20Size&color=FDCB6E" alt="Repo Size">
-
-<!-- Community Badges - Minimal -->
-<img src="https://img.shields.io/badge/Open%20Source-❤️-FC60A8?style=flat-square" alt="Open Source">
-<img src="https://img.shields.io/badge/PRs-Welcome-00B894?style=flat-square&logo=github" alt="PRs Welcome">
-<img src="https://img.shields.io/badge/Contributions-Welcome-FF6B6B?style=flat-square&logo=github" alt="Contributions Welcome">
-<img src="https://img.shields.io/badge/Translate-Add%20Your%20Language-0984E3?style=flat-square&logo=google-translate" alt="Translate">
-
-<!-- Support Badges -->
-<img src="https://img.shields.io/badge/⭐-Star%20Us-FFD93D?style=flat-square" alt="Star Us">
-<img src="https://img.shields.io/badge/🔀-Fork%20Us-6C5CE7?style=flat-square" alt="Fork Us">
-<img src="https://img.shields.io/badge/🐛-Report%20Issues-FF6B6B?style=flat-square" alt="Report Issues">
-
-</div>
+<p align="center">
+  <img src="https://img.shields.io/github/stars/avaneesh12012/New-To-Dev?style=for-the-badge&logo=starship&color=yellow" alt="Stars" />
+  <img src="https://img.shields.io/github/forks/avaneesh12012/New-To-Dev?style=for-the-badge&logo=git&color=blue" alt="Forks" />
+  <img src="https://img.shields.io/github/issues/avaneesh12012/New-To-Dev?style=for-the-badge&logo=github&color=red" alt="Issues" />
+  <img src="https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey?style=for-the-badge&logo=creativecommons&color=red" alt="License" />
+  <img src="https://img.shields.io/badge/PRs-Welcome-brightgreen?style=for-the-badge&logo=githubsponsors" alt="PRs Welcome" />
+  <img src="https://img.shields.io/badge/First%20Timers-Friendly-6C5CE7?style=for-the-badge&logo=github" alt="First Timers" />
+  <img src="https://img.shields.io/badge/Website-Up-green?style=for-the-badge&logo=vercel&color=6C5CE7" alt="Website" />
+  <img src="https://img.shields.io/github/last-commit/avaneesh12012/New-To-Dev?style=for-the-badge&logo=git&color=FD79A8" alt="Last Commit" />
+</p>
 
 ---
 
-Hi, this `README` might look ugly because here we tell you some quick information for you to get started.
+<!-- ====================================================================== -->
+<!--                         📖 WHY THIS EXISTS                            -->
+<!-- ====================================================================== -->
 
-**👉 Go here:** [avaneesh12012.github.io/New-To-Dev](https://avaneesh12012.github.io/New-To-Dev) to start the course.
+## 📖 Why This Exists
 
-> Please help us translate this code into more languages 
+> **"Learning Computer Science shouldn't feel like deciphering an ancient secret. It should feel like opening a door to endless possibilities."**
+
+When I started learning to code, I was overwhelmed. Too many resources, too much jargon, and no clear path. Every tutorial assumed I already knew things I didn't.
+
+**New-To-Dev** is the resource I wish I had. It's a complete, structured journey that takes you from **absolute zero** to building real projects with Python.
+
+No shortcuts. No "learn to code in 24 hours." Just a solid foundation that will serve you for your entire career.
 
 ---
+
+<!-- ====================================================================== -->
+<!--                      🚀 START THE COURSE                              -->
+<!-- ====================================================================== -->
+
+<p align="center">
+  <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/1.html">
+    <img src="https://img.shields.io/badge/🚀%20Start%20the%20Course-FF6B6B?style=for-the-badge&logo=github&logoColor=white" alt="Start the Course" />
+  </a>
+  <a href="https://avaneesh12012.github.io/New-To-Dev/readme.html">
+    <img src="https://img.shields.io/badge/📖%20Full%20README-6C5CE7?style=for-the-badge&logo=github&logoColor=white" alt="Full README" />
+  </a>
+</p>
+
+---
+
+<!-- ====================================================================== -->
+<!--                      🎯 WHO THIS IS FOR                               -->
+<!-- ====================================================================== -->
+
+## 🎯 Who This Is For
+
+| ✅ | Description |
+|:---:|:---|
+| **Complete beginners** | No prior coding experience needed |
+| **Curious minds** | Understand how computers actually work |
+| **Career changers** | Ready to invest in yourself |
+| **Students (16+)** | Head start before college or bootcamp |
+| **Anyone who speaks English** | Content is clear and accessible |
+
+> ⚡ If you can read this, you're ready.
+
+---
+
+<!-- ====================================================================== -->
+<!--                      🗺️ THE ROADMAP                                  -->
+<!-- ====================================================================== -->
+
+## 🗺️ The Roadmap
+
+| Step | Topic | Description |
+|:---:|:---|:---|
+| **1** | 💻 How Computers Work | What's inside a computer? How does code become something you can see? |
+| **2** | 🔧 Hardware Basics | CPU, RAM, storage — what they do and why they matter. |
+| **3** | 📜 History of Computing | From Charles Babbage to your laptop. The people and ideas that built our world. |
+| **4** | 🌿 Git & Version Control | The professional way to save, share, and collaborate on code. |
+| **5** | 🐍 Python — Zero to Hero | Variables, loops, functions, and building real projects. The main event. |
+| **6** | 🚀 Your First Project | Bring everything together. Build something you're proud of. |
+
+---
+
+<!-- ====================================================================== -->
+<!--                      📚 WHAT THIS COURSE INCLUDES                     -->
+<!-- ====================================================================== -->
 
 ## 📚 What This Course Includes
-
-### 🎯 Core Curriculum
 
 | Category | Description |
 |----------|-------------|
@@ -55,7 +106,13 @@ Hi, this `README` might look ugly because here we tell you some quick informatio
 | **History** | ✅ History of computing — the people and ideas that shaped our world |
 | **Portfolio Projects** | ✅ Builds real projects you can put on your portfolio |
 
-### 🔧 Skills You'll Gain
+---
+
+<!-- ====================================================================== -->
+<!--                      🔧 SKILLS YOU'LL GAIN                            -->
+<!-- ====================================================================== -->
+
+## 🔧 Skills You'll Gain
 
 | Skill | Status |
 |-------|--------|
@@ -67,39 +124,36 @@ Hi, this `README` might look ugly because here we tell you some quick informatio
 | Think like a programmer — break problems into steps | ✅ |
 | Build confidence to learn any language next | ✅ |
 
-### 🧠 Mindset & Approach
+---
 
-- ✅ No shortcuts — real learning takes time
-- ✅ Human-written explanations (with some content refined with AI)
-- ✅ Practical examples you can actually run
-- ✅ Encouragement to type code, not just read it
-- ✅ Community-driven — open to contributions
+<!-- ====================================================================== -->
+<!--                      📖 HOW TO USE THIS                               -->
+<!-- ====================================================================== -->
+
+## 📖 How to Use This
+
+1. **Start at the beginning.** Follow each section in order — everything builds on what came before.
+2. **Read, then practice.** Don't just read — type the code. Break it. Fix it. That's how you learn.
+3. **Take your time.** There's no deadline. Some concepts take days, others take weeks. That's normal.
+4. **Bookmark this.** Come back whenever you need to revisit a topic.
+
+> 💡 Tip: Use the dark/light toggle on the website for comfortable reading anytime.
 
 ---
 
-## 📖 How to Use This Repo
-
-1. **Start at the beginning** — follow the order, don't skip around
-2. **Type the code yourself** — copying isn't learning
-3. **Break things on purpose** — that's how you understand
-4. **Revisit topics** — come back when you need a refresher
-5. **Ask questions** — open an issue if something is unclear
-
----
+<!-- ====================================================================== -->
+<!--                      🤝 CONTRIBUTING                                  -->
+<!-- ====================================================================== -->
 
 ## 🤝 Contributing
 
 This is an **open-source** project. Contributions are welcome!
 
-<div align="center">
-
-<img src="https://img.shields.io/github/contributors/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Contributors&color=00B894" alt="Contributors">
-<img src="https://img.shields.io/github/issues-raw/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Open%20Issues&color=FF6B6B" alt="Open Issues">
-<img src="https://img.shields.io/github/issues-closed-raw/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Closed%20Issues&color=00B894" alt="Closed Issues">
-<img src="https://img.shields.io/github/issues-pr-raw/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Open%20PRs&color=FF8C00" alt="Open PRs">
-<img src="https://img.shields.io/github/issues-pr-closed-raw/avaneesh12012/New-To-Dev?style=flat-square&logo=github&label=Closed%20PRs&color=6C5CE7" alt="Closed PRs">
-
-</div>
+<p align="center">
+  <img src="https://img.shields.io/github/contributors/avaneesh12012/New-To-Dev?style=for-the-badge&logo=github&label=Contributors&color=00B894" alt="Contributors" />
+  <img src="https://img.shields.io/github/issues-raw/avaneesh12012/New-To-Dev?style=for-the-badge&logo=github&label=Open%20Issues&color=FF6B6B" alt="Open Issues" />
+  <img src="https://img.shields.io/github/issues-pr-raw/avaneesh12012/New-To-Dev?style=for-the-badge&logo=github&label=Open%20PRs&color=FF8C00" alt="Open PRs" />
+</p>
 
 ### Ways to contribute:
 - 🐛 Report bugs or errors in the content
@@ -118,154 +172,83 @@ Please make sure your contributions are compatible with the license below.
 
 ---
 
+<!-- ====================================================================== -->
+<!--                      ⚖️ LICENSE                                      -->
+<!-- ====================================================================== -->
+
 ## ⚖️ License
 
-This work is licensed under a **Creative Commons Attribution-NonCommercial-NoDerivatives 4.0 International License**.
+This work is licensed under a **Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License**.
 
 ### You are **free** to:
 - ✅ **Share** — copy and redistribute the material in any medium or format
+- ✅ **Adapt** — remix, transform, and build upon the material
 
 ### Under these terms:
 - **Attribution** — You must give appropriate credit to the original creator
-- **NonCommercial** — You **may not** use the material for commercial purposes
-- **NoDerivatives** — You may **not** distribute modified material
+- **NonCommercial** — You may **not** use the material for commercial purposes
+- **ShareAlike** — If you remix, transform, or build upon the material, you must distribute your contributions under the **same license**
 
 ### This means:
 - ✅ You can share this course with friends, classmates, or anyone who needs it
 - ✅ You can use it to learn, teach, or study
+- ✅ You can create modified versions and share them (under the same license)
 - ❌ You **cannot** sell access to this course
 - ❌ You **cannot** host it on commercial platforms (Udemy, Coursera, etc.)
-- ❌ You **cannot** create a modified version and claim it as your own
 
-> Full license: [creativecommons.org/licenses/by-nc-nd/4.0/](https://creativecommons.org/licenses/by-nc-nd/4.0/)
+> Full license: [creativecommons.org/licenses/by-nc-sa/4.0/](https://creativecommons.org/licenses/by-nc-sa/4.0/)
 
 ---
 
-## 📂 Repo Structure
+<!-- ====================================================================== -->
+<!--                      💭 ONE LAST THING                                -->
+<!-- ====================================================================== -->
 
-```text
-├── assets/
-│   ├── images/
-│   │   ├── charles_babbage.jpeg
-│   │   ├── code-compiler-0s-and-1s-cpu.png
-│   │   ├── commit-github-preview.png
-│   │   ├── compiler~interpreter.png
-│   │   ├── computer-ports.jpg
-│   │   ├── CPU.jpg
-│   │   ├── nvidia-gpu.jpg
-│   │   ├── ram.jpg
-│   │   ├── README.md
-│   │   └── ssd.jpg
-│   ├── favicon.png
-│   ├── favicon1.png
-│   ├── favicon2.png
-│   └── README.md
-├── chapters/
-│   ├── 1.html
-│   ├── 10.html
-│   ├── 100.html
-│   ├── 11.html
-│   ├── 12.html
-│   ├── 13.html
-│   ├── 14.html
-│   ├── 15.html
-│   ├── 16.html
-│   ├── 17.html
-│   ├── 18.html
-│   ├── 19.html
-│   ├── 2.html
-│   ├── 20.html
-│   ├── 21.html
-│   ├── 22.html
-│   ├── 23.html
-│   ├── 24.html
-│   ├── 25.html
-│   ├── 26.html
-│   ├── 27.html
-│   ├── 28.html
-│   ├── 29.html
-│   ├── 3.html
-│   ├── 30.html
-│   ├── 31.html
-│   ├── 32.html
-│   ├── 33.html
-│   ├── 34.html
-│   ├── 35.html
-│   ├── 36.html
-│   ├── 37.html
-│   ├── 38.html
-│   ├── 39.html
-│   ├── 4.html
-│   ├── 40.html
-│   ├── 41.html
-│   ├── 42.html
-│   ├── 43.html
-│   ├── 44.html
-│   ├── 45.html
-│   ├── 46.html
-│   ├── 47.html
-│   ├── 48.html
-│   ├── 49.html
-│   ├── 5.html
-│   ├── 50.html
-│   ├── 51.html
-│   ├── 52.html
-│   ├── 53.html
-│   ├── 54.html
-│   ├── 55.html
-│   ├── 56.html
-│   ├── 57.html
-│   ├── 58.html
-│   ├── 59.html
-│   ├── 6.html
-│   ├── 60.html
-│   ├── 61.html
-│   ├── 62.html
-│   ├── 63.html
-│   ├── 64.html
-│   ├── 65.html
-│   ├── 66.html
-│   ├── 67.html
-│   ├── 68.html
-│   ├── 69.html
-│   ├── 7.html
-│   ├── 70.html
-│   ├── 71.html
-│   ├── 72.html
-│   ├── 73.html
-│   ├── 74.html
-│   ├── 75.html
-│   ├── 76.html
-│   ├── 77.html
-│   ├── 78.html
-│   ├── 79.html
-│   ├── 8.html
-│   ├── 80.html
-│   ├── 81.html
-│   ├── 82.html
-│   ├── 83.html
-│   ├── 84.html
-│   ├── 85.html
-│   ├── 86.html
-│   ├── 87.html
-│   ├── 88.html
-│   ├── 89.html
-│   ├── 9.html
-│   ├── 90.html
-│   ├── 91.html
-│   ├── 92.html
-│   ├── 93.html
-│   ├── 94.html
-│   ├── 95.html
-│   ├── 96.html
-│   ├── 97.html
-│   ├── 98.html
-│   └── 99.html
-├── editor/
-│   ├── index.html
-│   └── README.md
-├── 404.html
-├── index.html
-├── LICENSE
-├── readme.html
-└── README.md
+## 💭 One Last Thing
+
+Every great developer — **Linus Torvalds, Richard Stallman, Bjarne Stroustrup, Fabrice Bellard**, and thousands more — were once in the **exact same position** as you.
+
+They were beginners. They were confused. They struggled. They kept going.
+
+**There will be only two differences between you and them:**
+
+✅ **If you start and continue** — even in the tough times — *that's* when you become great.
+
+❌ **If you start, enjoy the beginner's rush, and quit** when it gets hard — you become part of the rest.
+
+**The choice is yours. 🚀**
+
+---
+
+<!-- ====================================================================== -->
+<!--                      📫 CONTACT                                       -->
+<!-- ====================================================================== -->
+
+## 📫 Contact
+
+<p align="center">
+  <strong>📧 Email:</strong> <a href="mailto:avaneeshaternos@gmail.com">avaneeshaternos@gmail.com</a>
+</p>
+
+<p align="center">
+  <em>💬 Feel free to reach out with any questions, suggestions, or feedback!</em>
+</p>
+
+---
+
+<!-- ====================================================================== -->
+<!--                      🏁 FOOTER                                        -->
+<!-- ====================================================================== -->
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=gradient&height=120&section=footer" width="100%" />
+</p>
+
+<p align="center">
+  <strong>Made with 💖 by the New-To-Dev Community</strong><br />
+  <sub>Open Source for Everyone, Everywhere 🌍</sub>
+</p>
+
+<p align="center">
+  <sub>© 2026 Avaneesh Shahi. Licensed under CC BY-NC-SA 4.0</sub>
+</p>

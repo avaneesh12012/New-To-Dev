@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="./assets/favicon.png" type="image/x-icon">
-    <title>Coming Soon — Chapter 4 | New-To-Dev</title>
+    <link rel="shortcut icon" href="../assets/favicon2.png" type="image/png">
+    <title>New-To-Dev — Chapter 4: How Computers Remember Things</title>
     <style>
         /* ========== CSS VARIABLES (10-Shade Palette) ========== */
         :root {
@@ -37,6 +37,9 @@
             --scrollbar-thumb: var(--color-4);
             --scrollbar-thumb-hover: var(--color-5);
             --toc-hover: var(--color-3);
+            --video-border: var(--color-4);
+            --video-bg: var(--color-9);
+            --memory-diagram-bg: var(--color-2);
         }
 
         /* ========== DARK THEME ========== */
@@ -58,6 +61,9 @@
             --scrollbar-thumb: var(--color-6);
             --scrollbar-thumb-hover: var(--color-5);
             --toc-hover: var(--color-8);
+            --video-border: var(--color-6);
+            --video-bg: var(--color-10);
+            --memory-diagram-bg: var(--color-8);
         }
 
         /* ========== CUSTOM SCROLLBARS ========== */
@@ -108,14 +114,12 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
         }
 
         .container {
-            max-width: 700px;
+            max-width: 880px;
             width: 100%;
             margin: 0 auto;
-            text-align: center;
         }
 
         /* ========== HEADINGS ========== */
@@ -128,18 +132,18 @@
         }
 
         h1 {
-            font-size: 4rem;
+            font-size: 2.8rem;
             background: linear-gradient(135deg, var(--text), var(--color-5));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
             display: inline-block;
             margin-top: 0.5rem;
-            margin-bottom: 0.2rem;
+            margin-bottom: 0.3rem;
         }
 
         h1 .sub {
-            font-size: 1.2rem;
+            font-size: 1.1rem;
             font-family: 'Comic Sans MS', cursive;
             font-weight: 400;
             font-style: normal;
@@ -150,11 +154,40 @@
             letter-spacing: 0.5px;
         }
 
+        h2 {
+            font-size: 1.8rem;
+            border-bottom: 3px solid var(--border);
+            padding-bottom: 0.4rem;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        h3 {
+            font-size: 1.3rem;
+            margin-top: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+
+        h4 {
+            font-size: 1.1rem;
+            margin-top: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .chapter-number {
+            font-size: 1rem;
+            color: var(--color-5);
+            font-family: 'JetBrains Mono', monospace;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
         /* ========== PARAGRAPHS & LINKS ========== */
         p {
             margin-bottom: 1rem;
-            font-size: 1.1rem;
-            color: var(--color-5);
+            font-size: 1.05rem;
         }
 
         a {
@@ -171,6 +204,66 @@
             text-decoration-color: var(--text);
         }
 
+        /* ========== CODE ========== */
+        code, pre {
+            font-family: 'JetBrains Mono', 'Fira Code', monospace;
+            font-weight: 400;
+            font-size: 0.9rem;
+        }
+
+        .inline-code {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--code-bg);
+            padding: 0.1rem 0.5rem;
+            border-radius: 6px;
+            font-size: 0.9em;
+            border: 1px solid var(--border);
+            word-break: break-all;
+        }
+
+        .code-block {
+            background: var(--code-bg);
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            padding: 1.25rem 1.5rem;
+            overflow-x: auto;
+            margin: 1.25rem 0;
+            position: relative;
+        }
+
+        .code-block pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-break: break-word;
+            color: var(--text);
+            font-size: 0.85rem;
+        }
+
+        /* ========== CARDS ========== */
+        .card {
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            box-shadow: 0 8px 24px var(--shadow);
+        }
+
+        .card p:last-child,
+        .card ul:last-child {
+            margin-bottom: 0;
+        }
+
+        .card ul {
+            margin-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            font-size: 1.05rem;
+        }
+
+        .card li {
+            margin-bottom: 0.4rem;
+        }
+
         /* ========== TOGGLE SWITCH ========== */
         .theme-toggle-wrapper {
             display: flex;
@@ -179,9 +272,6 @@
             gap: 12px;
             margin-bottom: 1.5rem;
             font-size: 0.9rem;
-            position: absolute;
-            top: 2rem;
-            right: 2rem;
         }
 
         .theme-toggle {
@@ -226,17 +316,15 @@
             background: var(--btn-bg);
             color: var(--btn-text);
             border: 2px solid var(--btn-bg);
-            padding: 0.8rem 2.5rem;
+            padding: 0.7rem 2rem;
             border-radius: 40px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.25s ease;
             display: inline-block;
             text-decoration: none;
             text-align: center;
-            margin-top: 0.5rem;
-            min-width: 200px;
         }
 
         .btn-primary:hover {
@@ -250,164 +338,1144 @@
             transform: scale(0.97);
         }
 
-        .btn-group {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.75rem;
-            margin-top: 1.5rem;
-        }
-
-        .btn-group .btn-primary {
-            width: 100%;
-            max-width: 280px;
-        }
-
-        /* ========== COMING SOON ICON ========== */
-        .coming-icon {
-            font-size: 5rem;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        /* ========== FOOTER ========== */
-        .footer {
-            margin-top: 3rem;
-            padding-top: 1.5rem;
-            border-top: 3px solid var(--border);
+        /* ========== IMAGES ========== */
+        .chapter-image {
+            margin: 1.5rem 0;
             text-align: center;
-            width: 100%;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            background: var(--code-bg);
+            padding: 0.75rem;
         }
 
-        .footer p {
+        .chapter-image img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            margin: 0 auto;
+        }
+
+        .chapter-image .caption {
             font-size: 0.85rem;
             color: var(--color-5);
-            margin-bottom: 0.3rem;
+            margin-top: 0.5rem;
+            font-style: italic;
         }
 
-        .footer .license {
-            font-size: 0.7rem;
-            color: var(--color-4);
+        /* ===== IMAGE FLOATING RIGHT ===== */
+        .image-float-right {
+            float: right;
+            width: 250px;
+            max-width: 100%;
+            margin: 0 0 1rem 1.5rem;
+            padding: 0;
+            border: 2px solid var(--border);
+            border-radius: 12px;
+            background: transparent;
+            overflow: hidden;
         }
 
-        .footer .license a {
+        .image-float-right img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 0;
+            margin: 0;
+        }
+
+        .image-float-right .caption {
             font-size: 0.7rem;
+            color: var(--color-5);
+            padding: 0.3rem 0.4rem 0.4rem 0.4rem;
+            font-style: italic;
+            text-align: center;
+            background: var(--code-bg);
+            border-top: 1px solid var(--border);
+            margin: 0;
+        }
+
+        /* Clearfix for floated images */
+        .clearfix::after {
+            content: "";
+            display: table;
+            clear: both;
+        }
+
+        /* ===== IMAGE CENTERED ===== */
+        .img-centered {
+            max-width: 620px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* ===== MEMORY HIERARCHY DIAGRAM ===== */
+        .memory-hierarchy {
+            background: var(--memory-diagram-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem 2rem;
+            margin: 1.5rem 0;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.9rem;
+        }
+
+        .memory-hierarchy .level {
+            padding: 0.5rem 1rem;
+            margin: 0.25rem 0;
+            border-radius: 8px;
+            border-left: 4px solid var(--color-5);
+            background: var(--card-bg);
+        }
+
+        .memory-hierarchy .level.fastest {
+            border-left-color: #4CAF50;
+        }
+        .memory-hierarchy .level.slower {
+            border-left-color: #FF9800;
+        }
+        .memory-hierarchy .level.slowest {
+            border-left-color: #f44336;
+        }
+
+        /* ========== TABLE ========== */
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 2px solid var(--border);
+            padding: 0.6rem 1rem;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: var(--code-bg);
+            font-weight: 700;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: var(--code-bg);
+        }
+
+        /* ========== NAVIGATION BUTTONS ========== */
+        .nav-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: space-between;
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 3px solid var(--border);
+            flex-wrap: wrap;
+        }
+
+        .nav-buttons .btn-primary {
+            flex: 1;
+            min-width: 140px;
+            text-align: center;
+        }
+
+        /* ========== FLOATING TOC OVERLAY (LEFT SIDE) ========== */
+        .hamburger-menu {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 1000;
+            background: var(--btn-bg);
+            color: var(--btn-text);
+            border: 2px solid var(--btn-bg);
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 16px var(--shadow);
+            font-family: 'Comic Sans MS', cursive;
+            line-height: 1;
+        }
+
+        .hamburger-menu:hover {
+            background: var(--btn-hover-bg);
+            color: var(--btn-hover-text);
+            transform: scale(1.05);
+            border-color: var(--border);
+        }
+
+        .hamburger-menu:active {
+            transform: scale(0.95);
+        }
+
+        .toc-overlay {
+            position: fixed;
+            bottom: 80px;
+            left: 20px;
+            z-index: 999;
+            background: var(--card-bg);
+            border: 2px solid var(--border);
+            border-radius: 16px;
+            padding: 1.25rem 1.5rem;
+            max-width: 280px;
+            max-height: 60vh;
+            overflow-y: auto;
+            box-shadow: 0 8px 32px var(--shadow);
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        /* Fix scrollbar edges in TOC overlay */
+        .toc-overlay {
+            scrollbar-width: thin;
+            scrollbar-color: var(--scrollbar-thumb) transparent;
+        }
+
+        .toc-overlay::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .toc-overlay::-webkit-scrollbar-track {
+            background: transparent;
+            border-radius: 0 16px 16px 0;
+        }
+
+        .toc-overlay::-webkit-scrollbar-thumb {
+            background: var(--scrollbar-thumb);
+            border-radius: 10px;
+            border: 2px solid var(--card-bg);
+            background-clip: padding-box;
+        }
+
+        .toc-overlay::-webkit-scrollbar-thumb:hover {
+            background: var(--scrollbar-thumb-hover);
+            border: 2px solid var(--card-bg);
+            background-clip: padding-box;
+        }
+
+        .toc-overlay.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .toc-overlay .toc-title {
+            font-family: 'Constantia', 'Georgia', 'Times New Roman', serif;
+            font-weight: 700;
+            font-style: italic;
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            border-bottom: 2px solid var(--border);
+            padding-bottom: 0.3rem;
+            position: sticky;
+            top: 0;
+            background: var(--card-bg);
+            z-index: 2;
+            padding-top: 0.1rem;
+        }
+
+        .toc-overlay ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .toc-overlay ul li {
+            margin-bottom: 0.15rem;
+        }
+
+        .toc-overlay ul li a {
+            display: block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 6px;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 500;
+            transition: background 0.2s ease;
+            border-left: 3px solid transparent;
+            font-size: 0.85rem;
+        }
+
+        .toc-overlay ul li a:hover {
+            background: var(--toc-hover);
+            border-left-color: var(--color-5);
+            text-decoration: none;
         }
 
         /* ========== RESPONSIVE ========== */
         @media (max-width: 700px) {
             body {
                 padding: 1.25rem 0.75rem;
-                justify-content: flex-start;
-                padding-top: 4rem;
             }
             h1 {
-                font-size: 2.8rem;
+                font-size: 2rem;
             }
             h1 .sub {
-                font-size: 1rem;
+                font-size: 0.9rem;
             }
-            .theme-toggle-wrapper {
-                top: 1rem;
-                right: 1rem;
+            h2 {
+                font-size: 1.4rem;
             }
-            .coming-icon {
-                font-size: 3.5rem;
+            .card {
+                padding: 1.25rem;
             }
-            .btn-group .btn-primary {
-                max-width: 100%;
+            .nav-buttons {
+                flex-direction: column;
+            }
+            .nav-buttons .btn-primary {
+                width: 100%;
+            }
+            .hamburger-menu {
+                width: 44px;
+                height: 44px;
+                font-size: 1.2rem;
+                bottom: 15px;
+                left: 15px;
+            }
+            .toc-overlay {
+                left: 10px;
+                right: 10px;
+                max-width: none;
+                bottom: 70px;
             }
             ::-webkit-scrollbar {
                 width: 4px;
                 height: 4px;
             }
+            .chapter-image {
+                padding: 0.5rem;
+            }
+            .img-centered {
+                max-width: 100%;
+            }
+            .image-float-right {
+                float: none;
+                width: 100%;
+                margin: 1.5rem 0;
+            }
+            .comparison-table {
+                font-size: 0.8rem;
+            }
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.4rem 0.6rem;
+            }
+            .memory-hierarchy {
+                padding: 1rem;
+                font-size: 0.8rem;
+            }
         }
 
         @media (max-width: 400px) {
+            body {
+                padding: 0.75rem;
+            }
             h1 {
-                font-size: 2.2rem;
+                font-size: 1.6rem;
             }
-            h1 .sub {
-                font-size: 0.85rem;
+            .card {
+                padding: 1rem;
             }
-            .coming-icon {
-                font-size: 3rem;
+            .code-block {
+                padding: 0.75rem 1rem;
+                font-size: 0.8rem;
             }
-            .btn-primary {
-                font-size: 0.95rem;
-                padding: 0.6rem 1.5rem;
-                min-width: 160px;
+            .hamburger-menu {
+                width: 38px;
+                height: 38px;
+                font-size: 1rem;
+                bottom: 12px;
+                left: 12px;
             }
-            .theme-toggle-wrapper {
-                top: 0.75rem;
-                right: 0.75rem;
+            .comparison-table {
+                font-size: 0.7rem;
             }
-            .theme-toggle {
-                width: 44px;
-                height: 24px;
-            }
-            .theme-toggle .dot {
-                width: 16px;
-                height: 16px;
-                top: 2px;
-                left: 2px;
-            }
-            [data-theme="dark"] .theme-toggle .dot {
-                transform: translateX(20px);
+            .comparison-table th,
+            .comparison-table td {
+                padding: 0.3rem 0.4rem;
             }
         }
     </style>
 </head>
 <body>
 
-    <!-- ===== THEME TOGGLE ===== -->
-    <div class="theme-toggle-wrapper">
-        <span class="theme-label" id="themeLabel">☀️ Light</span>
-        <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
-            <div class="dot"></div>
-        </div>
-    </div>
-
     <div class="container">
 
-        <!-- ===== COMING SOON CONTENT ===== -->
-        <span class="coming-icon">🚧</span>
+        <!-- ===== THEME TOGGLE ===== -->
+        <div class="theme-toggle-wrapper">
+            <span class="theme-label" id="themeLabel">☀️ Light</span>
+            <div class="theme-toggle" id="themeToggle" role="button" tabindex="0" aria-label="Toggle theme">
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <!-- ===== HEADER ===== -->
         <h1>
-            Coming Soon
-            <span class="sub">Chapter 4</span>
+            <span class="chapter-number">Chapter 4</span>
+            How Computers Remember Things
         </h1>
 
+        <!-- ===== INTRO ===== -->
         <p>
-            We're busy building the next chapter of your learning journey.<br>
-            Check back soon — it's going to be worth the wait!
+            In the previous chapter, we went inside the CPU. We learned that the CPU is responsible for executing instructions, that it contains things such as registers and execution units, that it works with instructions defined by an instruction set architecture, and that modern processors use caches and multiple cores to get work done efficiently.
+        </p>
+        <p>
+            But there is one huge problem. The CPU needs information to work. Imagine you're doing a calculation: <code>25 + 75</code>. The CPU needs the numbers <code>25</code> and <code>75</code>.
+        </p>
+        <p>
+            If you're running a game, the CPU needs information about: your character, the position of enemies, your health, the current level, game physics, textures and other resources. If you're opening a web browser, the computer needs to keep track of: the browser's program, open tabs, web pages, images, JavaScript data, user input, temporary information.
+        </p>
+        <p>
+            So where does all of this information go? Does the CPU itself permanently remember everything? No. The CPU has extremely small amounts of very fast storage inside it, but computers need much larger places to hold information. That's where <strong>memory and storage</strong> come in.
+        </p>
+        <p>
+            And before we start, remember our rule: <strong>One step, not one kilometer.</strong> We're going to start with the smallest possible idea and build our way up.
         </p>
 
-        <!-- ===== BUTTONS ===== -->
-        <div class="btn-group">
-            <a href="https://avaneesh12012.github.io/New-To-Dev/" class="btn-primary">
-                📑 Table of Contents
-            </a>
-            <a href="https://avaneesh12012.github.io/New-To-Dev/readme.html" class="btn-primary">
-                📖 Go to README
-            </a>
-            <a href="https://github.com/avaneesh12012/New-To-Dev" class="btn-primary" target="_blank">
-                🐙 Go to Repository
-            </a>
+        <!-- ===== 1. WHAT DOES IT MEAN FOR A COMPUTER TO "REMEMBER" SOMETHING? ===== -->
+        <h2 id="section-1">1. What Does It Mean for a Computer to "Remember" Something?</h2>
+        <p>
+            When we say <strong>"The computer remembers something,"</strong> we don't mean that the computer has a brain or memories like a human. We mean that the computer has a physical system capable of representing and retaining information.
+        </p>
+        <p>
+            For example, a computer might need to remember: <code>Player Health = 87</code> or <code>Score = 1250</code> or <code>Username = Avaneesh</code> or even an entire photograph. All of these things ultimately have to be represented using physical states inside the computer.
+        </p>
+        <p>
+            At the lowest level, digital computers work with binary states. Those states can be represented physically using things such as electrical charge, voltage levels, magnetic states, or other physical properties depending on the technology being used.
+        </p>
+        <div class="card">
+            <p><strong>"The computer stored 87"</strong> really means: Some physical system was placed into a state that represents the information needed to represent the value 87. That's what computer memory fundamentally is — a system for <strong>representing and retaining information</strong>.</p>
+        </div>
+
+        <!-- ===== 2. BITS — THE SMALLEST UNIT ===== -->
+        <h2 id="section-2">2. Bits — The Smallest Unit of Digital Information</h2>
+        <p>
+            In Chapter 1, we introduced the word: <strong>Bit</strong>. A bit is short for <strong>Binary digit</strong>. A bit can represent one of two possible values: <code>0</code> or <code>1</code>.
+        </p>
+        <p>
+            One bit doesn't have enough possibilities to represent a huge amount of information. But it is incredibly important because computers can combine many bits together. For example:
+        </p>
+        <div class="code-block">
+            <pre>1 bit  →  2 possible states
+2 bits →  4 possible states
+3 bits →  8 possible states
+4 bits →  16 possible states</pre>
+        </div>
+        <p>
+            The number of possible combinations doubles every time we add another bit. With 8 bits: <code>2⁸ = 256</code> possible combinations exist. Those combinations can represent values from <code>0</code> through <code>255</code> when interpreted as an unsigned 8-bit number. That's why 8 bits became such an important grouping in computing.
+        </p>
+
+        <!-- ===== 3. BYTES — GROUPS OF BITS ===== -->
+        <h2 id="section-3">3. Bytes — Groups of Bits</h2>
+        <p>
+            A group of 8 bits is called a <strong>Byte</strong>. So <code>1 byte = 8 bits</code>. For example, <code>01000001</code> is one byte. Depending on the encoding, that particular byte can represent the character <code>A</code>.
+        </p>
+        <p>
+            This is where things start becoming interesting. A byte doesn't inherently mean "A". It is simply a pattern of bits. Software decides how that pattern should be interpreted. The same bits could represent: a number, part of a text character, part of an image, part of an instruction, part of a sound file, or part of some other data.
+        </p>
+        <div class="card">
+            <p><strong>Bits don't have meaning by themselves.</strong> Meaning comes from how software and hardware interpret them.</p>
+        </div>
+
+        <!-- ===== 4. WHY CAN COMPUTERS STORE PICTURES USING ONLY 0s AND 1s? ===== -->
+        <h2 id="section-4">4. Why Can Computers Store Pictures Using Only 0s and 1s?</h2>
+        <p>
+            You might wonder: "How can a photograph possibly be represented using only 0 and 1?" After all, a photograph contains millions of colors. The trick is that computers don't need a special "photo language." They represent the information numerically.
+        </p>
+        <p>
+            For example, an image can be represented as a grid of pixels. Each pixel can have numerical values representing its color. A simple RGB pixel might contain: Red, Green, Blue. Each component can be represented using numbers. For example: <code>R = 255, G = 0, B = 0</code> can represent bright red in a typical RGB representation. Those numbers themselves are stored as binary.
+        </p>
+        <div class="code-block">
+            <pre>Photo
+ ↓
+Pixels
+ ↓
+Color values
+ ↓
+Numbers
+ ↓
+Binary data
+ ↓
+Physical storage states</pre>
+        </div>
+        <p>
+            The computer doesn't need to "understand a photograph." It only needs to store and process the data representing it.
+        </p>
+
+        <!-- ===== 5. EVERYTHING BECOMES DATA ===== -->
+        <h2 id="section-5">5. Everything Becomes Data</h2>
+        <p>
+            This idea becomes even more powerful when you realize that computers can represent almost everything digitally. Text? Data. Music? Data. Video? Data. A Python program? Data. A game? Data. A photograph? Data. Your operating system? Data. A PDF? Data.
+        </p>
+        <p>
+            At the hardware level, all of these are represented using patterns of bits. But don't misunderstand this as "Everything is just a random pile of 0s and 1s." There is structure. A file format tells software how those bits should be interpreted.
+        </p>
+        <div class="card">
+            <p><strong>The bits are the raw representation. The format gives them meaning.</strong></p>
+        </div>
+
+        <!-- ===== 6. MEMORY IS NOT THE SAME THING AS STORAGE ===== -->
+        <h2 id="section-6">6. Memory Is Not the Same Thing as Storage</h2>
+        <p>
+            This is one of the most important distinctions you'll learn in this chapter. People often say: "My computer has 16 GB of memory." Sometimes they mean RAM. Other times people casually use "memory" to mean storage. Technically, these aren't the same thing.
+        </p>
+        <p>
+            A computer can have <code>16 GB RAM</code> and <code>512 GB SSD</code>. Those numbers describe completely different resources. RAM is primarily used as working memory while programs are running. An SSD is persistent storage used to retain data even when the computer is powered off.
+        </p>
+        <div class="card">
+            <p><strong>RAM</strong> is somewhat like a desk where you're currently working.</p>
+            <p><strong>Storage</strong> is somewhat like a cupboard where you keep things when you aren't actively using them.</p>
+            <p style="margin-bottom: 0;">The analogy isn't perfect, but it gives you the right starting point.</p>
+        </div>
+
+        <!-- ===== 7. RAM — THE COMPUTER'S WORKING MEMORY ===== -->
+        <h2 id="section-7">7. RAM — The Computer's Working Memory</h2>
+        <!-- Image: RAM - Wikimedia Commons -->
+        <div class="chapter-image img-centered">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Random_Access_Memory_HyperX.jpg/330px-Random_Access_Memory_HyperX.jpg" alt="RAM module">
+            <div class="caption">Fig 4.1: RAM provides the computer with working space for active programs and data.</div>
+        </div>
+        <p>
+            RAM stands for <strong>Random Access Memory</strong>. RAM is a type of memory that provides the computer with working space for active programs and data.
+        </p>
+        <p>
+            Suppose you launch a game. The game is stored on your SSD. But the CPU doesn't simply execute the entire game directly from the SSD. The operating system and other software load the required information into memory.
+        </p>
+        <div class="code-block">
+            <pre>SSD
+ ↓
+RAM
+ ↓
+CPU</pre>
+        </div>
+        <p>
+            The CPU then works with data made available through the memory system. For example, while your game is running, RAM may contain information related to: game code, current game state, objects, variables, loaded assets, operating-system data, and other active programs. This is why having more RAM can allow a computer to keep more active data available without constantly moving information elsewhere.
+        </p>
+
+        <!-- ===== 8. WHY IS RAM CALLED "RANDOM ACCESS" MEMORY? ===== -->
+        <h2 id="section-8">8. Why Is RAM Called "Random Access" Memory?</h2>
+        <p>
+            The word <strong>random</strong> here doesn't mean "The computer accesses random data." It means that the computer can access individual memory locations without having to read everything before them sequentially.
+        </p>
+        <p>
+            Imagine a huge apartment building. If someone tells you: "Go to apartment 850." you don't necessarily need to visit apartments 1 through 849 first. You can go directly to the relevant location. RAM works conceptually like this. Memory is organized into addressable locations. The processor can request data associated with a particular address.
+        </p>
+        <div class="card">
+            <p><strong>Memory locations can be addressed individually.</strong> That's what makes random access useful.</p>
+        </div>
+
+        <!-- ===== 9. MEMORY ADDRESSES — GIVING DATA A LOCATION ===== -->
+        <h2 id="section-9">9. Memory Addresses — Giving Data a Location</h2>
+        <p>
+            If RAM contains billions of bytes, how does the computer know where something is? Each addressable location has an <strong>Address</strong>. Think of memory like a gigantic row of numbered boxes.
+        </p>
+        <div class="code-block">
+            <pre>Address       Data
+
+1000          42
+1001          17
+1002          91
+1003          5
+1004          200</pre>
+        </div>
+        <p>
+            If the CPU needs the data at address <code>1002</code>, it can request that location. The numbers above are just an illustration. Real systems use much larger address values and specific addressing rules.
+        </p>
+        <div class="card">
+            <p><strong>Address → Where</strong></p>
+            <p style="margin-bottom: 0;"><strong>Data → What</strong></p>
+        </div>
+        <p>
+            This concept becomes extremely important when you later learn about <strong>pointers</strong>. A pointer is, roughly speaking, a value that can represent an address or location relevant to accessing data. We'll spend much more time on pointers when we reach programming fundamentals.
+        </p>
+
+        <!-- ===== 10. WHAT DOES "RANDOM ACCESS" LOOK LIKE IN PRACTICE? ===== -->
+        <h2 id="section-10">10. What Does "Random Access" Look Like in Practice?</h2>
+        <p>
+            Imagine memory containing: <code>A, B, C, D, E, F, G, H</code>. Suppose the CPU wants <code>F</code>. It doesn't need to read <code>A, B, C, D, E</code> before reaching <code>F</code>. It can address the location containing <code>F</code>. That's the basic idea behind random access.
+        </p>
+        <p>
+            This is different from some forms of sequential access, where reaching a later piece of information requires moving through earlier information first. The distinction is useful because it helps explain why different storage technologies behave differently. Different technologies have different access characteristics. And those differences matter to software performance.
+        </p>
+
+        <!-- ===== 11. RAM IS VOLATILE ===== -->
+        <h2 id="section-11">11. RAM Is Volatile</h2>
+        <p>
+            Here's an important property of traditional system RAM: <strong>It is volatile memory.</strong> That means its contents normally disappear when power is removed.
+        </p>
+        <p>
+            Imagine opening a game and changing your character's position. That information can exist in RAM while the game is running. Then you shut the computer down. The contents of RAM are no longer retained in the same way. But the game itself is still installed. Why? Because the game was stored on persistent storage such as an SSD.
+        </p>
+        <div class="card">
+            <p><strong>RAM</strong> → Temporary working memory</p>
+            <p style="margin-bottom: 0;"><strong>SSD</strong> → Persistent storage</p>
+        </div>
+        <p>
+            This distinction is incredibly important. RAM is designed for active work. Storage is designed to retain information.
+        </p>
+
+        <!-- ===== 12. WHAT HAPPENS WHEN YOU TURN OFF YOUR COMPUTER? ===== -->
+        <h2 id="section-12">12. What Happens When You Turn Off Your Computer?</h2>
+        <p>
+            Let's follow the journey. Suppose you've installed a game. The game is stored on your SSD. You turn on the computer. The operating system starts. You launch the game. The system reads the required information from storage and places relevant data into memory.
+        </p>
+        <div class="code-block">
+            <pre>SSD
+ ↓
+RAM
+ ↓
+CPU</pre>
+        </div>
+        <p>
+            While you play, the CPU constantly processes data. The game state changes. Your character moves. Enemies move. The score changes. New data gets created. Some data gets removed. Some data gets written back to storage. Then you close the game. If the game saves your progress, information is written to persistent storage. Then you shut down the computer. RAM loses its contents. But the saved game remains on the SSD.
+        </p>
+
+        <!-- ===== 13. REGISTERS VS RAM ===== -->
+        <h2 id="section-13">13. Registers vs RAM</h2>
+        <p>
+            We already learned about registers in Chapter 3. So now let's compare them. Registers are extremely small storage locations directly associated with CPU execution. RAM is much larger system memory used to hold active programs and data.
+        </p>
+        <div class="card">
+            <p><strong>Registers</strong> → Extremely fast, Extremely small, Inside the processor</p>
+            <p style="margin-bottom: 0;"><strong>RAM</strong> → Much larger, Slower than registers, Main working memory</p>
+        </div>
+        <p>
+            Imagine you're solving a math problem. The numbers you're currently using are written directly on the paper in front of you. That's somewhat like registers. The textbooks sitting on your desk are somewhat like RAM. And the books stored in another room are somewhat like persistent storage. The closer the information is to your immediate work, the faster it can generally be accessed—but the available capacity tends to be smaller.
+        </p>
+
+        <!-- ===== 14. CACHE — THE MIDDLE GROUND ===== -->
+        <h2 id="section-14">14. Cache — The Middle Ground</h2>
+        <p>
+            Between registers and RAM, modern processors use caches. We introduced cache in Chapter 3. Now we can understand why it exists. Suppose the CPU repeatedly needs the same data. It would be inefficient to constantly retrieve it from farther-away memory if it can keep a copy closer to the processor. That's where cache helps.
+        </p>
+        <div class="memory-hierarchy">
+            <div class="level fastest">Registers ⚡ Fastest, Smallest</div>
+            <div class="level fastest">L1 Cache</div>
+            <div class="level faster">L2 Cache</div>
+            <div class="level faster">L3 Cache</div>
+            <div class="level slower">RAM</div>
+            <div class="level slowest">SSD / HDD 🐢 Largest, Slowest</div>
+        </div>
+        <p>
+            Generally: <strong>Closer to the CPU = faster but smaller</strong> and <strong>Farther away = larger but slower</strong>. This is not a perfect rule for every detail of modern systems, but it is a useful mental model. The cache system tries to keep useful data close to where it will be needed.
+        </p>
+
+        <!-- ===== 15. CACHE HITS AND CACHE MISSES ===== -->
+        <h2 id="section-15">15. Cache Hits and Cache Misses</h2>
+        <p>
+            Now let's introduce two important terms: <strong>Cache hit</strong> and <strong>Cache miss</strong>.
+        </p>
+        <p>
+            Suppose the CPU needs some data. If the data is already available in the relevant cache: <strong>Cache hit.</strong> Great. The processor can access it without going farther down the memory hierarchy. But if the data isn't there: <strong>Cache miss.</strong> The system has to look farther away.
+        </p>
+        <div class="code-block">
+            <pre>CPU asks for data
+       ↓
+Is it in cache?
+   ↙       ↘
+ YES       NO
+ ↓          ↓
+Use it    Look farther</pre>
+        </div>
+        <p>
+            This is one reason programs with good memory-access patterns can sometimes perform much better than programs that constantly jump around in memory. And yes, programmers can eventually learn how their code interacts with these systems. You don't need to optimize every Python program around cache behavior. But when you eventually work with lower-level languages and performance-sensitive code, this becomes extremely important.
+        </p>
+
+        <!-- ===== 16. SSD — PERSISTENT FLASH STORAGE ===== -->
+        <h2 id="section-16">16. SSD — Persistent Flash Storage</h2>
+        <!-- Image: SSD - Wikimedia Commons -->
+        <div class="clearfix">
+            <div class="image-float-right">
+                <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/7/75/Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg/330px-Samsung_980_PRO_PCIe_4.0_NVMe_SSD_1TB-top_PNr%C2%B00915.jpg" alt="SSD storage">
+                <div class="caption">Fig 4.2: SSD storage — fast, durable, and no moving parts.</div>
+            </div>
+            <p>
+                Now let's move farther away from the CPU. An SSD stands for <strong>Solid-State Drive</strong>. Modern SSDs commonly use <strong>flash memory</strong> to store information persistently.
+            </p>
+            <p>
+                Unlike RAM, flash storage retains information when the computer is powered off. This makes SSDs suitable for storing: operating systems, applications, games, photos, videos, documents, projects, and other files.
+            </p>
+            <p>
+                When you save a Python project, for example:
+            </p>
+            <div class="code-block">
+                <pre>my_project/
+    main.py
+    calculator.py
+    README.md</pre>
+            </div>
+            <p>
+                those files can be stored on your SSD. When you turn the computer off: <strong>They're still there.</strong> That's the key difference between persistent storage and volatile working memory.
+            </p>
+        </div>
+
+        <!-- ===== 17. HOW IS AN SSD DIFFERENT FROM RAM? ===== -->
+        <h2 id="section-17">17. How Is an SSD Different From RAM?</h2>
+        <p>
+            Both RAM and SSDs store digital information. So why not use only one? Because they are designed for different jobs. RAM is optimized for fast working access during program execution. SSD storage is designed to retain large amounts of information persistently.
+        </p>
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th></th>
+                    <th>RAM</th>
+                    <th>SSD</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Purpose</strong></td>
+                    <td>Working memory</td>
+                    <td>Persistent storage</td>
+                </tr>
+                <tr>
+                    <td><strong>Keeps data without power</strong></td>
+                    <td>No</td>
+                    <td>Yes</td>
+                </tr>
+                <tr>
+                    <td><strong>Typical capacity</strong></td>
+                    <td>Smaller</td>
+                    <td>Larger</td>
+                </tr>
+                <tr>
+                    <td><strong>Speed</strong></td>
+                    <td>Very fast</td>
+                    <td>Slower than RAM</td>
+                </tr>
+                <tr>
+                    <td><strong>Used while programs run</strong></td>
+                    <td>Yes</td>
+                    <td>Yes, but mainly for loading/saving</td>
+                </tr>
+            </tbody>
+        </table>
+        <p>
+            This is why a computer can have <code>8 GB RAM</code> and <code>512 GB SSD</code> and there's no contradiction. The 8 GB and 512 GB are serving different purposes.
+        </p>
+
+        <!-- ===== 18. HDD — THE OLDER STORAGE TECHNOLOGY ===== -->
+        <h2 id="section-18">18. HDD — The Older Storage Technology</h2>
+        <!-- Image: HDD - Wikimedia Commons -->
+        <div class="chapter-image img-centered">
+            <img src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/35-Desktop-Hard-Drive.jpg/330px-35-Desktop-Hard-Drive.jpg" alt="Hard Disk Drive">
+            <div class="caption">Fig 4.3: An HDD stores data using magnetic material on spinning platters.</div>
+        </div>
+        <p>
+            Before SSDs became common, many computers used <strong>Hard Disk Drives</strong> or <strong>HDDs</strong>. An HDD stores data using magnetic material on spinning platters. A mechanical read/write head moves over the surface of the platters to access data. That means an HDD contains moving mechanical parts.
+        </p>
+        <p>
+            An SSD, by contrast, has no spinning disk or moving read/write head. This difference has major consequences. HDDs can offer large capacities at relatively low cost, but they generally have much higher access latency than SSDs.
+        </p>
+        <ul>
+            <li><strong>SSD</strong> → Faster, Quieter, More resistant to mechanical shock, Smaller, More responsive</li>
+            <li><strong>HDD</strong> → Larger capacities at lower cost, Slower, Mechanical parts can fail</li>
+        </ul>
+        <p>
+            But SSDs aren't simply "RAM but slower." They use fundamentally different storage technology and have different performance and endurance characteristics.
+        </p>
+
+        <!-- ===== 19. WHY DOES AN SSD FEEL SO MUCH FASTER? ===== -->
+        <h2 id="section-19">19. Why Does an SSD Feel So Much Faster?</h2>
+        <p>
+            Imagine opening a large application. With an HDD, the system may need to move mechanical components to access different areas of the disk. With an SSD, there are no spinning platters or mechanical heads to position. This dramatically reduces access latency.
+        </p>
+        <p>
+            That's why upgrading from an HDD to an SSD can make an older computer feel dramatically more responsive. For example: launching an application, opening files, booting an operating system, loading a game, and searching through files can all benefit significantly from the lower latency of SSD storage.
+        </p>
+        <div class="card">
+            <p><strong>Storage speed</strong> is not the same as <strong>CPU speed</strong>. A computer is a system. Performance depends on many components and on what the workload is actually doing.</p>
+        </div>
+
+        <!-- ===== 20. WHY CAN'T WE JUST MAKE RAM AS LARGE AS AN SSD? ===== -->
+        <h2 id="section-20">20. Why Can't We Just Make RAM As Large As an SSD?</h2>
+        <p>
+            This is a great question. You might think: "If RAM is faster, why not just put 2 TB of RAM in every computer?" There are several reasons. One is cost. Another is physical design. Different memory technologies have different characteristics involving: speed, density, cost, power, persistence, and manufacturing complexity.
+        </p>
+        <p>
+            Computers therefore use a hierarchy instead of one giant type of memory. You don't want every byte of data stored in the fastest possible memory. That would be enormously expensive and inefficient. Instead, computers keep the most immediately useful information in faster layers and larger amounts of information in slower layers. This is the same fundamental idea we saw with cache.
+        </p>
+
+        <!-- ===== 21. THE MEMORY HIERARCHY ===== -->
+        <h2 id="section-21">21. The Memory Hierarchy</h2>
+        <p>
+            Now we can finally see the larger picture. A simplified memory hierarchy looks like:
+        </p>
+        <div class="memory-hierarchy">
+            <div class="level fastest">⚡ Registers — Fastest, Smallest</div>
+            <div class="level fastest">⚡ L1 Cache</div>
+            <div class="level faster">⚡ L2 Cache</div>
+            <div class="level faster">⚡ L3 Cache</div>
+            <div class="level slower">RAM</div>
+            <div class="level slowest">SSD</div>
+            <div class="level slowest">HDD — Largest, Slowest 🐢</div>
+        </div>
+        <p>
+            As we move downward:
+        </p>
+        <ul>
+            <li>Capacity generally increases.</li>
+            <li>Cost per bit generally decreases.</li>
+            <li>Access generally becomes slower.</li>
+            <li>Persistence changes depending on the technology.</li>
+        </ul>
+        <p>
+            Again, this is a simplified model. Real systems can have additional levels and complicated interactions. But this hierarchy explains a huge amount about how computers are designed.
+        </p>
+        <div class="card">
+            <p><strong>Instead of asking:</strong> "Why doesn't the computer use one giant super-fast memory?"</p>
+            <p style="margin-bottom: 0;"><strong>You can now answer:</strong> "Because speed, capacity, cost, power, and persistence involve trade-offs." Computer engineering is full of trade-offs.</p>
+        </div>
+
+        <!-- ===== 22. WHAT IS VIRTUAL MEMORY? ===== -->
+        <h2 id="section-22">22. What Is Virtual Memory?</h2>
+        <p>
+            Now things get a little more interesting. Suppose your computer has <code>8 GB RAM</code> but your programs collectively need more memory than is currently available. What happens? Modern operating systems can use a system called <strong>Virtual memory</strong>.
+        </p>
+        <p>
+            Virtual memory gives programs an abstraction of memory that is managed by the operating system and hardware. A program can operate within its own virtual address space rather than directly managing physical RAM addresses. The operating system and processor's memory-management hardware work together to translate virtual addresses into physical memory locations.
+        </p>
+        <p>
+            This gives the operating system much more control over memory. For example, one program generally shouldn't be able to simply access another program's memory whenever it wants. Virtual memory helps provide <strong>isolation</strong> and <strong>protection</strong> as well as enabling memory-management techniques that can use storage as backing when necessary.
+        </p>
+
+        <!-- ===== 23. DOES VIRTUAL MEMORY MEAN "RAM ON THE SSD"? ===== -->
+        <h2 id="section-23">23. Does Virtual Memory Mean "RAM on the SSD"?</h2>
+        <p>
+            People sometimes explain virtual memory as: "Using your SSD as extra RAM." That's a useful beginner shortcut, but it isn't the full story. Virtual memory is primarily an abstraction and memory-management system.
+        </p>
+        <p>
+            One of its mechanisms can involve moving memory pages between physical RAM and storage. When memory pressure becomes high, the operating system may write less-active pages to storage and later bring them back when needed. This is much slower than accessing RAM.
+        </p>
+        <div class="card">
+            <p>If your computer is constantly relying heavily on storage because physical RAM is insufficient, performance can become very poor. You might notice:</p>
+            <ul style="margin-bottom: 0;">
+                <li>Applications becoming extremely slow</li>
+                <li>Disk activity becoming very high</li>
+                <li>The computer feeling unresponsive</li>
+            </ul>
+            <p style="margin-top: 0.5rem; margin-bottom: 0;">That's one reason having enough RAM matters.</p>
+        </div>
+
+        <!-- ===== 24. WHAT IS A PAGE? ===== -->
+        <h2 id="section-24">24. What Is a Page?</h2>
+        <p>
+            Virtual memory is often managed in chunks called <strong>Pages</strong>. Instead of thinking about memory as one enormous continuous block that the operating system moves around one byte at a time, imagine dividing it into many fixed-size pieces.
+        </p>
+        <div class="code-block">
+            <pre>Page 1
+Page 2
+Page 3
+Page 4
+Page 5
+...</pre>
+        </div>
+        <p>
+            The operating system can manage these pages independently. A virtual address belongs to a virtual memory space. The hardware and operating system cooperate to determine where the corresponding physical data resides. Some pages may be in RAM. Some may be temporarily backed by storage. The details are more advanced, but this gives you the basic idea. This is one of the foundations behind memory management in modern operating systems.
+        </p>
+
+        <!-- ===== 25. MEMORY PROTECTION ===== -->
+        <h2 id="section-25">25. Memory Protection — Why Can't Every Program Read Everything?</h2>
+        <p>
+            Imagine you open <code>Calculator</code> and <code>Browser</code> at the same time. You don't want the calculator program to freely read the browser's private memory. You also don't want a random application to simply overwrite important operating-system memory. That would be a disaster.
+        </p>
+        <p>
+            Modern systems therefore use hardware and operating-system mechanisms to enforce memory protection and isolation. Each process typically receives its own virtual address space. This means that two programs can use the same virtual address value while those addresses refer to different physical memory.
+        </p>
+        <div class="code-block">
+            <pre>Program A
+Virtual address 1000
+       ↓
+Physical memory location X
+
+Program B
+Virtual address 1000
+       ↓
+Physical memory location Y</pre>
+        </div>
+        <p>
+            The number <code>1000</code> doesn't necessarily mean the same physical location for both programs. The translation system handles the difference. This is a huge part of why modern multitasking operating systems can safely run many programs simultaneously.
+        </p>
+
+        <!-- ===== 26. WHAT IS A POINTER? ===== -->
+        <h2 id="section-26">26. What Is a Pointer?</h2>
+        <p>
+            Now we're going to connect all of this to programming. Suppose your program has <code>x = 42</code>. At the programming-language level, you can think of <code>x</code> as a variable containing the value <code>42</code>. But somewhere underneath, the computer has to represent that value in memory or in another storage location used by the runtime.
+        </p>
+        <p>
+            In languages such as C and C++, programmers can explicitly work with addresses using <strong>Pointers</strong>. For example, conceptually:
+        </p>
+        <div class="code-block">
+            <pre>int x = 42;
+int* p = &amp;x;</pre>
+        </div>
+        <p>
+            Here: <code>x</code> contains the value <code>42</code> while <code>p</code> contains an address associated with <code>x</code>. This is why understanding memory addresses matters. A pointer isn't simply "another variable." It represents a location relevant to accessing data.
+        </p>
+        <p>
+            Python hides most of these low-level details from you. And that's intentional. Python gives you a much higher-level abstraction. But eventually, understanding what's happening underneath will help explain why lower-level languages expose these concepts more directly.
+        </p>
+
+        <!-- ===== 27. WHY DOES PYTHON HIDE SO MUCH MEMORY MANAGEMENT? ===== -->
+        <h2 id="section-27">27. Why Does Python Hide So Much Memory Management?</h2>
+        <p>
+            Consider this Python code:
+        </p>
+        <div class="code-block">
+            <pre>numbers = [10, 20, 30, 40]</pre>
+        </div>
+        <p>
+            You don't manually say: "Give me 32 bytes of memory." You don't manually calculate every address. You don't manually free the memory when you're done. Python handles a huge amount of this work through its runtime and memory-management system.
+        </p>
+        <p>
+            This is another example of abstraction. Python lets you think: "I have a list." instead of: "I have a particular arrangement of objects in memory with specific addresses and metadata." That makes Python easier to use.
+        </p>
+        <div class="card">
+            <p>Python programmers sometimes don't see the underlying costs immediately. For example, objects can consume more memory than a simple raw array of machine integers might. That's one reason learning the fundamentals underneath high-level languages is useful.</p>
+        </div>
+
+        <!-- ===== 28. WHAT HAPPENS WHEN YOU OPEN A PROGRAM? ===== -->
+        <h2 id="section-28">28. What Happens When You Open a Program?</h2>
+        <p>
+            Let's put everything together. Suppose you double-click your Python editor. Where is the program? It is stored on persistent storage.
+        </p>
+        <div class="code-block">
+            <pre>SSD
+ ↓
+Application files</pre>
+        </div>
+        <p>
+            You launch it. The operating system loads the required parts into RAM.
+        </p>
+        <div class="code-block">
+            <pre>SSD
+ ↓
+RAM</pre>
+        </div>
+        <p>
+            The CPU then fetches instructions and accesses data through the memory hierarchy.
+        </p>
+        <div class="code-block">
+            <pre>RAM
+ ↓
+Cache
+ ↓
+Registers / execution hardware
+ ↓
+CPU</pre>
+        </div>
+        <p>
+            As the program runs, it creates and modifies data. Some of that data lives in memory. Some information may be read from storage. Some data may eventually be saved back to storage.
+        </p>
+
+        <!-- ===== 29. WHAT HAPPENS WHEN YOU SAVE A FILE? ===== -->
+        <h2 id="section-29">29. What Happens When You Save a File?</h2>
+        <p>
+            Let's say you've been writing your first Python program:
+        </p>
+        <div class="code-block">
+            <pre>print("Hello, World!")</pre>
+        </div>
+        <p>
+            While you're editing it, the program and editor are using memory. Your changes exist in the computer's working state. When you click <strong>Save</strong>, the editor writes the file to persistent storage.
+        </p>
+        <div class="code-block">
+            <pre>Your changes
+     ↓
+RAM
+     ↓
+Operating system
+     ↓
+File system
+     ↓
+SSD</pre>
+        </div>
+        <p>
+            Now the file exists persistently. You can shut down the computer. Turn it on tomorrow. Open the file. The information can be loaded from storage again. This tiny action—clicking Save—is actually another example of the entire computer system working together.
+        </p>
+
+        <!-- ===== 30. CPU + MEMORY + STORAGE — THE BIG PICTURE ===== -->
+        <h2 id="section-30">30. CPU + Memory + Storage — The Big Picture</h2>
+        <p>
+            We've now covered three of the most important parts of a computer:
+        </p>
+        <div class="card">
+            <p><strong>CPU</strong> — Processes instructions and performs calculations.</p>
+            <p><strong>Memory</strong> — Provides fast working space for programs and the data they are currently using.</p>
+            <p style="margin-bottom: 0;"><strong>Storage</strong> — Keeps programs and files even when the computer is turned off.</p>
+        </div>
+        <p>
+            A simplified picture looks like this:
+        </p>
+        <div class="code-block">
+            <pre>                 PROGRAM
+                    ↓
+                 STORAGE
+                    ↓
+              ┌───────────┐
+              │    RAM    │
+              └─────┬─────┘
+                    ↓
+              ┌───────────┐
+              │   CACHE   │
+              └─────┬─────┘
+                    ↓
+              ┌───────────┐
+              │ REGISTERS │
+              └─────┬─────┘
+                    ↓
+              ┌───────────┐
+              │    CPU    │
+              └─────┬─────┘
+                    ↓
+               PROCESSING
+                    ↓
+             RESULT / DATA</pre>
+        </div>
+        <p>
+            This is obviously a simplified model. Real computers contain many more components and layers. But this model gives you an important foundation.
+        </p>
+        <p>
+            When you run a program, its files are stored somewhere on persistent storage. The operating system loads the required parts into memory, the CPU works with that information, caches keep frequently needed data closer to the processor, and the results can eventually be written back to memory or storage.
+        </p>
+        <p>
+            So when you write something as simple as <code>print("Hello, World!")</code>, there is a huge amount of hardware working underneath that one line. You don't need to understand every transistor or memory cell yet. The important thing is that you now understand the basic relationship:
+        </p>
+        <div class="card">
+            <p style="font-size: 1.2rem; text-align: center; margin-bottom: 0;"><strong>Storage → Memory → CPU → Result</strong></p>
+        </div>
+        <p>
+            And this brings us to an interesting question. <strong>How did humans even get here?</strong> The computer sitting on your desk contains billions of transistors, multiple CPU cores, gigabytes of RAM, and enormous amounts of storage. But computers didn't start like this.
+        </p>
+        <p>
+            The first computers weren't thin laptops. They weren't smartphones. They didn't have colorful operating systems. Some weren't even electronic. So how did we go from simple mechanical calculating devices to the computers we use today? To answer that, we need to go backwards.
+        </p>
+
+        <!-- ===== 31. QUICK CHECK & THE BIG TAKEAWAY ===== -->
+        <h2 id="section-31">31. Quick Check & The Big Takeaway</h2>
+        <p>Before moving forward, make sure you understand the major ideas from this chapter.</p>
+
+        <h3>Quick Check</h3>
+        <ol>
+            <li>What is a bit?</li>
+            <li>How many bits are in a byte?</li>
+            <li>What is the difference between RAM and storage?</li>
+            <li>Why is RAM called volatile memory?</li>
+            <li>What is a memory address?</li>
+            <li>Why does the CPU use cache?</li>
+            <li>What is a cache hit?</li>
+            <li>What is a cache miss?</li>
+            <li>What is an SSD?</li>
+            <li>How is an HDD different from an SSD?</li>
+            <li>Why can't we simply make every type of memory extremely large and extremely fast?</li>
+            <li>What is virtual memory?</li>
+            <li>Why does an operating system need to manage memory?</li>
+            <li>What is a pointer?</li>
+            <li>What happens when you open a program stored on your SSD?</li>
+        </ol>
+        <p>If you can explain these ideas in your own words, you've understood the important part of this chapter.</p>
+
+        <!-- ===== BIG TAKEAWAY ===== -->
+        <div class="card">
+            <h3 style="margin-top: 0;">🎯 The Big Takeaway</h3>
+            <p>A computer doesn't have one magical place called "memory." It uses a hierarchy of technologies, each designed for a different purpose.</p>
+            <div class="memory-hierarchy" style="margin: 1rem 0;">
+                <div class="level fastest">⚡ Registers — Fastest</div>
+                <div class="level fastest">⚡ CPU caches</div>
+                <div class="level slower">RAM</div>
+                <div class="level slowest">SSD / HDD — Largest, Slowest</div>
+            </div>
+            <p>The closer something is to the CPU, the faster it can generally be accessed, but the available capacity is usually smaller and more expensive. The farther away it is, the more information we can generally store, but access becomes slower.</p>
+            <p style="margin-bottom: 0;">And all of these technologies exist because computers are built around trade-offs. You now understand another important layer of the machine you're programming on.</p>
+        </div>
+
+        <p style="font-weight: 700; font-size: 1.1rem; margin-top: 1.5rem; text-align: center;">
+            Next Chapter → A Journey Through the History of Computing
+        </p>
+        <p style="text-align: center; color: var(--color-5);">
+            Before we write our first serious programs, let's meet the people and inventions<br>
+            that helped create the world we're about to enter.
+        </p>
+
+        <!-- ===== NAVIGATION BUTTONS ===== -->
+        <div class="nav-buttons">
+            <a href="https://avaneesh12012.github.io/New-To-Dev/" class="btn-primary">📑 Table of Contents</a>
+            <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/3.html" class="btn-primary">3 ← Previous Chapter</a>
+            <a href="https://avaneesh12012.github.io/New-To-Dev/chapters/5.html" class="btn-primary">Next Chapter → 5</a>
         </div>
 
         <!-- ===== FOOTER ===== -->
-        <div class="footer">
-            <p>New-To-Dev &bull; Built for beginners, by someone who remembers the struggle.</p>
-            <p style="font-size: 0.8rem;">💻 Free forever. No ads. No catch.</p>
-            <p class="license">
+        <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 3px solid var(--border); text-align: center;">
+            <p style="font-size: 0.85rem; color: var(--color-5); margin-bottom: 0.3rem;">
+                New-To-Dev &bull; Chapter 4 &bull; Built for beginners, by someone who remembers the struggle.
+            </p>
+            <p style="font-size: 0.8rem; color: var(--color-5); margin-bottom: 0.3rem;">
+                💻 Free forever. No ads. No catch.
+            </p>
+            <p style="font-size: 0.7rem; color: var(--color-4);">
                 © 2026 Avaneesh Shahi. This work is licensed under a 
-                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank">
+                <a href="https://creativecommons.org/licenses/by-nc-nd/4.0/" target="_blank" style="font-size: 0.7rem;">
                     Creative Commons Attribution-NonCommercial-NoDerivatives 4.0
                 </a> 
                 International License.
             </p>
+            <p style="font-size: 0.7rem; color: var(--color-4);">
+                Images sourced from Wikimedia Commons for educational purposes. 
+                If you are the copyright owner and wish to have them removed or properly credited, 
+                please contact us at <a href="mailto:avaneeshaternos@gmail.com" style="font-size: 0.7rem;">avaneeshaternos@gmail.com</a>
+            </p>
         </div>
 
+    </div>
+
+    <!-- ===== HAMBURGER MENU (Left Side - Like Chapters 1-3) ===== -->
+    <button class="hamburger-menu" id="hamburgerBtn" aria-label="Toggle table of contents">
+        ☰
+    </button>
+
+    <!-- ===== FLOATING TOC OVERLAY ===== -->
+    <div class="toc-overlay" id="tocOverlay">
+        <div class="toc-title">📑 Jump to Section</div>
+        <ul>
+            <li><a href="#section-1">1️⃣ What Does It Mean for a Computer to "Remember" Something?</a></li>
+            <li><a href="#section-2">2️⃣ Bits — The Smallest Unit</a></li>
+            <li><a href="#section-3">3️⃣ Bytes — Groups of Bits</a></li>
+            <li><a href="#section-4">4️⃣ Why Can Computers Store Pictures Using Only 0s and 1s?</a></li>
+            <li><a href="#section-5">5️⃣ Everything Becomes Data</a></li>
+            <li><a href="#section-6">6️⃣ Memory Is Not the Same Thing as Storage</a></li>
+            <li><a href="#section-7">7️⃣ RAM — The Computer's Working Memory</a></li>
+            <li><a href="#section-8">8️⃣ Why Is RAM Called "Random Access" Memory?</a></li>
+            <li><a href="#section-9">9️⃣ Memory Addresses — Giving Data a Location</a></li>
+            <li><a href="#section-10">🔟 What Does "Random Access" Look Like?</a></li>
+            <li><a href="#section-11">1️⃣1️⃣ RAM Is Volatile</a></li>
+            <li><a href="#section-12">1️⃣2️⃣ What Happens When You Turn Off?</a></li>
+            <li><a href="#section-13">1️⃣3️⃣ Registers vs RAM</a></li>
+            <li><a href="#section-14">1️⃣4️⃣ Cache — The Middle Ground</a></li>
+            <li><a href="#section-15">1️⃣5️⃣ Cache Hits and Cache Misses</a></li>
+            <li><a href="#section-16">1️⃣6️⃣ SSD — Persistent Flash Storage</a></li>
+            <li><a href="#section-17">1️⃣7️⃣ How Is an SSD Different From RAM?</a></li>
+            <li><a href="#section-18">1️⃣8️⃣ HDD — The Older Storage Technology</a></li>
+            <li><a href="#section-19">1️⃣9️⃣ Why Does an SSD Feel So Much Faster?</a></li>
+            <li><a href="#section-20">2️⃣0️⃣ Why Can't We Just Make RAM As Large As an SSD?</a></li>
+            <li><a href="#section-21">2️⃣1️⃣ The Memory Hierarchy</a></li>
+            <li><a href="#section-22">2️⃣2️⃣ What Is Virtual Memory?</a></li>
+            <li><a href="#section-23">2️⃣3️⃣ Does Virtual Memory Mean "RAM on the SSD"?</a></li>
+            <li><a href="#section-24">2️⃣4️⃣ What Is a Page?</a></li>
+            <li><a href="#section-25">2️⃣5️⃣ Memory Protection</a></li>
+            <li><a href="#section-26">2️⃣6️⃣ What Is a Pointer?</a></li>
+            <li><a href="#section-27">2️⃣7️⃣ Why Does Python Hide So Much Memory Management?</a></li>
+            <li><a href="#section-28">2️⃣8️⃣ What Happens When You Open a Program?</a></li>
+            <li><a href="#section-29">2️⃣9️⃣ What Happens When You Save a File?</a></li>
+            <li><a href="#section-30">3️⃣0️⃣ CPU + Memory + Storage — The Big Picture</a></li>
+            <li><a href="#section-31">3️⃣1️⃣ Quick Check & The Big Takeaway</a></li>
+        </ul>
     </div>
 
     <!-- ===== JAVASCRIPT ===== -->
@@ -442,6 +1510,65 @@
             function updateLabel(theme) {
                 label.textContent = theme === 'light' ? '☀️ Light' : '🌙 Dark';
             }
+
+            // ========== HAMBURGER MENU (Left Side) ==========
+            const hamburgerBtn = document.getElementById('hamburgerBtn');
+            const tocOverlay = document.getElementById('tocOverlay');
+
+            hamburgerBtn.addEventListener('click', function() {
+                const isOpen = tocOverlay.classList.contains('open');
+                tocOverlay.classList.toggle('open');
+                hamburgerBtn.textContent = isOpen ? '☰' : '✕';
+                hamburgerBtn.setAttribute('aria-expanded', !isOpen);
+            });
+
+            // ========== CLOSE OVERLAY WHEN CLICKING A LINK ==========
+            document.querySelectorAll('.toc-overlay a').forEach(link => {
+                link.addEventListener('click', function() {
+                    tocOverlay.classList.remove('open');
+                    hamburgerBtn.textContent = '☰';
+                    hamburgerBtn.setAttribute('aria-expanded', 'false');
+                });
+            });
+
+            // ========== CLOSE OVERLAY WHEN CLICKING OUTSIDE ==========
+            document.addEventListener('click', function(e) {
+                if (tocOverlay.classList.contains('open')) {
+                    const isClickInside = tocOverlay.contains(e.target) || hamburgerBtn.contains(e.target);
+                    if (!isClickInside) {
+                        tocOverlay.classList.remove('open');
+                        hamburgerBtn.textContent = '☰';
+                        hamburgerBtn.setAttribute('aria-expanded', 'false');
+                    }
+                }
+            });
+
+            // ========== KEYBOARD ACCESSIBILITY ==========
+            hamburgerBtn.addEventListener('keydown', function(e) {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    this.click();
+                }
+            });
+
+            // ========== SMOOTH SCROLL FOR INTERNAL LINKS ==========
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href !== '#') {
+                        const target = document.querySelector(href);
+                        if (target) {
+                            e.preventDefault();
+                            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                            if (tocOverlay.classList.contains('open')) {
+                                tocOverlay.classList.remove('open');
+                                hamburgerBtn.textContent = '☰';
+                                hamburgerBtn.setAttribute('aria-expanded', 'false');
+                            }
+                        }
+                    }
+                });
+            });
 
         })();
     </script>
